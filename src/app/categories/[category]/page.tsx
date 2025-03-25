@@ -4,24 +4,7 @@ import { notFound } from "next/navigation";
 import { getAllCategories, getPostsByCategory } from "@/lib/posts";
 
 // 分类信息
-const categoryData = {
-  tech: {
-    name: "技术",
-    description: "关于技术、编程和开发的文章",
-  },
-  life: {
-    name: "生活",
-    description: "关于日常生活和个人感悟的文章",
-  },
-  reading: {
-    name: "读书",
-    description: "书籍推荐和读书心得",
-  },
-  travel: {
-    name: "旅行",
-    description: "旅行经历和旅行攻略分享",
-  },
-};
+const categoryData: Record<string, { name: string; description: string }> = {};
 
 type Props = {
   params: { category: string };
@@ -30,7 +13,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const category = params.category;
-  const categoryInfo = categoryData[category as keyof typeof categoryData];
+  const categoryInfo = categoryData[category];
   
   if (!categoryInfo) {
     return {
@@ -46,11 +29,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params, searchParams }: Props) {
   const category = params.category;
-  const categoryInfo = categoryData[category as keyof typeof categoryData];
+  const categoryInfo = categoryData[category];
   
-  if (!categoryInfo) {
+  // 如果在硬编码分类中没找到，尝试从动态分类中查找
+  const allCategories = await getAllCategories();
+  const dynamicCategory = allCategories.find(cat => cat.id === category);
+  
+  if (!categoryInfo && !dynamicCategory) {
     notFound();
   }
+  
+  const categoryName = categoryInfo?.name || dynamicCategory?.name || category;
+  const categoryDescription = categoryInfo?.description || dynamicCategory?.description || `关于${category}的文章`;
   
   // 获取该分类下的文章
   let posts = await getPostsByCategory(category);
@@ -69,8 +59,8 @@ export default async function CategoryPage({ params, searchParams }: Props) {
   
   return (
     <main className="container mx-auto px-6 py-10">
-      <h1 className="text-3xl font-calligraphy mb-3 text-ink-900 dark:text-ink-100">{categoryInfo.name}</h1>
-      <p className="text-ink-600 dark:text-ink-300 mb-6">{categoryInfo.description}</p>
+      <h1 className="text-3xl font-calligraphy mb-3 text-ink-900 dark:text-ink-100">{categoryName}</h1>
+      <p className="text-ink-600 dark:text-ink-300 mb-6">{categoryDescription}</p>
       
       <div className="mb-8 flex justify-end">
         <div className="flex items-center">

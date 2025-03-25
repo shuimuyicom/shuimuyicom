@@ -4,12 +4,7 @@ import { notFound } from "next/navigation";
 import { getPostById, getAllPostIds } from "@/lib/posts";
 
 // 分类名称映射
-const categoryNames: Record<string, string> = {
-  'tech': '技术',
-  'life': '生活',
-  'reading': '读书',
-  'travel': '旅行',
-};
+const categoryNames: Record<string, string> = {};
 
 type Props = {
   params: { id: string };

@@ -4,44 +4,51 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
-// 博客文章目录路径
+// 内容目录路径
 const postsDirectory = path.join(process.cwd(), 'src/content/posts');
 
-// 获取所有文章的元数据
+// 分类描述
+export const categoryDescriptions: Record<string, string> = {};
+
+// 获取所有文章数据
 export async function getAllPosts() {
-  // 获取/posts目录中的所有文件名
+  // 确保目录存在
+  if (!fs.existsSync(postsDirectory)) {
+    fs.mkdirSync(postsDirectory, { recursive: true });
+    return [];
+  }
+
   const fileNames = fs.readdirSync(postsDirectory);
-  
-  // 获取所有文章数据
   const allPostsData = await Promise.all(
     fileNames
       .filter(fileName => fileName.endsWith('.md'))
-      .map(async (fileName) => {
-        // 读取markdown文件内容
+      .map(async fileName => {
+        // 从文件名中获取ID
+        const id = fileName.replace(/\.md$/, '');
+        
+        // 读取markdown文件
         const fullPath = path.join(postsDirectory, fileName);
         const fileContents = fs.readFileSync(fullPath, 'utf8');
         
-        // 使用gray-matter解析文章元数据
+        // 使用gray-matter解析markdown文件的元数据
         const matterResult = matter(fileContents);
         
-        // 确保元数据中有id，如果没有就用文件名（去掉.md）
-        const id = matterResult.data.id || fileName.replace(/\.md$/, '');
+        // 使用remark将markdown转换为HTML
+        const processedContent = await remark()
+          .use(html)
+          .process(matterResult.content);
+        const contentHtml = processedContent.toString();
         
-        // 返回带有id和元数据的对象
+        // 组合数据
         return {
           id,
-          ...matterResult.data,
-        } as {
-          id: string;
-          title: string;
-          date: string;
-          category: string;
-          excerpt: string;
+          contentHtml,
+          ...(matterResult.data as { title: string; date: string; category: string; excerpt: string })
         };
       })
   );
   
-  // 按日期排序（最新的文章排在前面）
+  // 按日期排序
   return allPostsData.sort((a, b) => {
     if (a.date < b.date) {
       return 1;
@@ -52,104 +59,88 @@ export async function getAllPosts() {
 }
 
 // 获取所有文章ID
-export function getAllPostIds() {
+export async function getAllPostIds() {
+  // 确保目录存在
+  if (!fs.existsSync(postsDirectory)) {
+    fs.mkdirSync(postsDirectory, { recursive: true });
+    return [];
+  }
+
   const fileNames = fs.readdirSync(postsDirectory);
   
-  return fileNames.map(fileName => {
-    // 读取文件内容获取id
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const matterResult = matter(fileContents);
-    
-    // 使用元数据中的id或文件名
-    return matterResult.data.id || fileName.replace(/\.md$/, '');
-  });
+  return fileNames
+    .filter(fileName => fileName.endsWith('.md'))
+    .map(fileName => {
+      return {
+        id: fileName.replace(/\.md$/, '')
+      };
+    });
 }
 
-// 根据ID获取文章完整数据
+// 获取指定ID的文章数据
 export async function getPostById(id: string) {
-  // 查找匹配id的文件
-  const fileNames = fs.readdirSync(postsDirectory);
-  let postFile = null;
-  
-  // 首先尝试通过元数据中的id匹配
-  for (const fileName of fileNames) {
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const matterResult = matter(fileContents);
-    
-    if (matterResult.data.id === id || fileName.replace(/\.md$/, '') === id) {
-      postFile = { path: fullPath, contents: fileContents };
-      break;
-    }
+  // 确保目录存在
+  if (!fs.existsSync(postsDirectory)) {
+    return null;
   }
+
+  const fullPath = path.join(postsDirectory, `${id}.md`);
   
-  if (!postFile) {
+  // 检查文件是否存在
+  if (!fs.existsSync(fullPath)) {
     return null;
   }
   
-  // 解析元数据和内容
-  const matterResult = matter(postFile.contents);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
   
-  // 将markdown转换为HTML
+  // 使用gray-matter解析markdown文件的元数据
+  const matterResult = matter(fileContents);
+  
+  // 使用remark将markdown转换为HTML
   const processedContent = await remark()
     .use(html)
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
   
-  // 返回带有id、内容和元数据的文章
+  // 组合数据
   return {
     id,
     contentHtml,
-    ...matterResult.data,
-  } as {
-    id: string;
-    contentHtml: string;
-    title: string;
-    date: string;
-    category: { id: string; name: string };
-    excerpt: string;
+    ...(matterResult.data as { title: string; date: string; category: string; excerpt: string })
   };
 }
 
-// 按分类获取文章
+// 获取指定分类的文章
 export async function getPostsByCategory(category: string) {
   const allPosts = await getAllPosts();
-  return allPosts.filter(post => post.category === category);
+  
+  return allPosts.filter(post => {
+    if (typeof post.category === 'object' && post.category !== null) {
+      return (post.category as any).id === category;
+    }
+    return post.category === category;
+  });
 }
 
 // 获取所有分类
 export async function getAllCategories() {
   const allPosts = await getAllPosts();
-  const categories = new Set<string>();
+  const categoriesSet = new Set<string>();
   
   allPosts.forEach(post => {
-    categories.add(post.category);
+    if (typeof post.category === 'object' && post.category !== null) {
+      categoriesSet.add((post.category as any).id);
+    } else {
+      categoriesSet.add(post.category);
+    }
   });
   
-  // 分类名称映射
-  const categoryNames: Record<string, string> = {
-    'tech': '技术',
-    'life': '生活',
-    'reading': '读书',
-    'travel': '旅行',
-  };
-  
-  return Array.from(categories).map(categoryId => ({
-    id: categoryId,
-    name: categoryNames[categoryId] || categoryId,
-    description: getCategoryDescription(categoryId)
-  }));
+  return Array.from(categoriesSet);
 }
 
 // 获取分类描述
 function getCategoryDescription(categoryId: string): string {
-  const descriptions: Record<string, string> = {
-    'tech': '关于技术、编程和开发的文章',
-    'life': '关于日常生活和个人感悟的文章',
-    'reading': '书籍推荐和读书心得',
-    'travel': '旅行经历和旅行攻略分享',
-  };
+  const descriptions: Record<string, string> = {};
   
   return descriptions[categoryId] || `关于${categoryId}的文章`;
 } 

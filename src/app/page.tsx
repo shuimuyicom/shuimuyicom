@@ -8,12 +8,7 @@ export const metadata: Metadata = {
 };
 
 // 分类名称映射
-const categoryNames: Record<string, string> = {
-  'tech': '技术',
-  'life': '生活',
-  'reading': '读书',
-  'travel': '旅行',
-};
+const categoryNames: Record<string, string> = {};
 
 export default async function Home() {
   // 获取最新文章
@@ -63,35 +58,41 @@ export default async function Home() {
           </Link>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {latestPosts.map((post) => (
-            <article 
-              key={post.id} 
-              className="bg-white dark:bg-ink-800 border border-ink-200 dark:border-ink-700 overflow-hidden transition-all duration-300 hover:shadow-md"
-            >
-              <div className="p-6">
-                <Link href={`/categories/${post.category}`}>
-                  <span className="inline-block text-ink-600 dark:text-ink-300 text-xs border border-ink-400 dark:border-ink-500 px-2 py-1 mb-3 font-calligraphy">
-                    {categoryNames[post.category] || post.category}
-                  </span>
-                </Link>
-                <Link href={`/posts/${post.id}`}>
-                  <h3 className="text-xl font-calligraphy mb-2 text-ink-800 dark:text-ink-100 hover:text-ink-600 dark:hover:text-ink-300 transition-colors">
-                    {post.title}
-                  </h3>
-                </Link>
-                <time className="text-sm text-ink-500 dark:text-ink-400 mb-3 block">{post.date}</time>
-                <p className="text-ink-600 dark:text-ink-300 mb-4 line-clamp-2">{post.excerpt}</p>
-                <Link 
-                  href={`/posts/${post.id}`} 
-                  className="text-ink-800 dark:text-ink-100 hover:text-ink-600 dark:hover:text-ink-300 font-medium inline-flex items-center"
-                >
-                  阅读全文 <span className="ml-1">·</span>
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+        {latestPosts.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {latestPosts.map((post) => (
+              <article 
+                key={post.id} 
+                className="bg-white dark:bg-ink-800 border border-ink-200 dark:border-ink-700 overflow-hidden transition-all duration-300 hover:shadow-md"
+              >
+                <div className="p-6">
+                  <Link href={`/categories/${post.category}`}>
+                    <span className="inline-block text-ink-600 dark:text-ink-300 text-xs border border-ink-400 dark:border-ink-500 px-2 py-1 mb-3 font-calligraphy">
+                      {categoryNames[post.category] || post.category}
+                    </span>
+                  </Link>
+                  <Link href={`/posts/${post.id}`}>
+                    <h3 className="text-xl font-calligraphy mb-2 text-ink-800 dark:text-ink-100 hover:text-ink-600 dark:hover:text-ink-300 transition-colors">
+                      {post.title}
+                    </h3>
+                  </Link>
+                  <time className="text-sm text-ink-500 dark:text-ink-400 mb-3 block">{post.date}</time>
+                  <p className="text-ink-600 dark:text-ink-300 mb-4 line-clamp-2">{post.excerpt}</p>
+                  <Link 
+                    href={`/posts/${post.id}`} 
+                    className="text-ink-800 dark:text-ink-100 hover:text-ink-600 dark:hover:text-ink-300 font-medium inline-flex items-center"
+                  >
+                    阅读全文 <span className="ml-1">·</span>
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-16 border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-800">
+            <p className="text-ink-500 dark:text-ink-400">暂无文章，请先创建文章内容</p>
+          </div>
+        )}
       </section>
     </div>
   );
