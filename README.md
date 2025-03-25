@@ -1,24 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 水木易博客
 
-## Getting Started
+这是一个使用Next.js 15和Tailwind CSS构建的个人博客网站。
 
-First, run the development server:
+## 功能特点
+
+- 响应式设计，适配各种设备
+- 博主信息展示
+- 文章发布和展示
+- 文章分类功能
+- 关于页面
+
+## 页面结构
+
+- **首页**：上半部分是博主信息展示，下半部分是最新文章列表
+- **文章页面**：显示完整文章内容
+- **分类页面**：按类别展示文章
+- **关于页面**：详细介绍博客和作者
+
+## 技术栈
+
+- Next.js 15 (App Router)
+- TypeScript
+- Tailwind CSS
+
+## 开发指南
+
+首先，运行开发服务器：
 
 ```bash
 npm run dev
-# or
+# 或
 yarn dev
-# or
+# 或
 pnpm dev
-# or
+# 或
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+在浏览器中打开 [http://localhost:3000](http://localhost:3000) 查看结果。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 部署
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+该项目配置为可以直接部署到Vercel平台。
+
+```bash
+npm run build
+npm run start
+```
 
 ## Learn More
 
