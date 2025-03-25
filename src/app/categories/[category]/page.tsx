@@ -48,8 +48,13 @@ const postsByCategory = {
   ],
 };
 
-/* eslint-disable */
-export function generateMetadata({ params }: { params: { category: string } }): Metadata {
+type CategoryParams = {
+  params: {
+    category: string;
+  }
+}
+
+export function generateMetadata({ params }: CategoryParams): Metadata {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
   
@@ -64,10 +69,8 @@ export function generateMetadata({ params }: { params: { category: string } }): 
     description: categoryInfo.description,
   };
 }
-/* eslint-enable */
 
-export default function CategoryPage(props: { params: { category: string } }) {
-  const { params } = props;
+export default function CategoryPage({ params }: CategoryParams) {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
   const posts = postsByCategory[category as keyof typeof postsByCategory] || [];
