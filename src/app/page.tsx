@@ -1,22 +1,25 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { getAllPosts } from "@/lib/posts";
 
 export const metadata: Metadata = {
   title: "水木易 | 分享知识，记录生活",
   description: "水木易的个人博客，分享技术、生活和读书心得",
 };
 
-// 临时最新文章数据
-const latestPosts = [
-  { id: "1", title: "Next.js 15新特性介绍", date: "2024-03-25", category: { id: "tech", name: "技术" }, excerpt: "探索Next.js 15带来的新特性和改进..." },
-  { id: "6", title: "在家工作的心得体会", date: "2024-03-22", category: { id: "life", name: "生活" }, excerpt: "分享远程工作的经验和挑战..." },
-  { id: "11", title: "杭州西湖游记", date: "2024-03-23", category: { id: "travel", name: "旅行" }, excerpt: "记录杭州西湖的旅行经历和美景..." },
-  { id: "9", title: "《原子习惯》读书笔记", date: "2024-03-19", category: { id: "reading", name: "读书" }, excerpt: "记录阅读《原子习惯》一书的心得体会..." },
-  { id: "2", title: "React Server Components详解", date: "2024-03-20", category: { id: "tech", name: "技术" }, excerpt: "深入了解React Server Components的工作原理..." },
-  { id: "12", title: "成都美食攻略", date: "2024-03-18", category: { id: "travel", name: "旅行" }, excerpt: "分享成都的特色美食和推荐餐厅..." },
-];
+// 分类名称映射
+const categoryNames: Record<string, string> = {
+  'tech': '技术',
+  'life': '生活',
+  'reading': '读书',
+  'travel': '旅行',
+};
 
-export default function Home() {
+export default async function Home() {
+  // 获取最新文章
+  const posts = await getAllPosts();
+  const latestPosts = posts.slice(0, 6); // 获取最新的6篇文章
+  
   return (
     <div className="container mx-auto px-6 py-12">
       {/* 博主信息部分 */}
@@ -67,9 +70,9 @@ export default function Home() {
               className="bg-white dark:bg-ink-800 border border-ink-200 dark:border-ink-700 overflow-hidden transition-all duration-300 hover:shadow-md"
             >
               <div className="p-6">
-                <Link href={`/categories/${post.category.id}`}>
+                <Link href={`/categories/${post.category}`}>
                   <span className="inline-block text-ink-600 dark:text-ink-300 text-xs border border-ink-400 dark:border-ink-500 px-2 py-1 mb-3 font-calligraphy">
-                    {post.category.name}
+                    {categoryNames[post.category] || post.category}
                   </span>
                 </Link>
                 <Link href={`/posts/${post.id}`}>
