@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -48,11 +48,14 @@ const postsByCategory = {
   ],
 };
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { category: string }
-}): Promise<Metadata> {
+interface PageProps {
+  params: {
+    category: string;
+  };
+  searchParams: Record<string, string | string[] | undefined>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
   
@@ -68,11 +71,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: { category: string }
-}) {
+export default async function CategoryPage({ params, searchParams }: PageProps) {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
   const posts = postsByCategory[category as keyof typeof postsByCategory] || [];
