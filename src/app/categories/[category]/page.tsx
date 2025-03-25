@@ -48,14 +48,10 @@ const postsByCategory = {
   ],
 };
 
-type CategoryParams = {
-  category: string;
-};
-
 export async function generateMetadata(
-  { params }: { params: CategoryParams }
+  props: { params: { category: string } }
 ): Promise<Metadata> {
-  const category = params.category;
+  const category = props.params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
   
   if (!categoryInfo) {
@@ -70,12 +66,11 @@ export async function generateMetadata(
   };
 }
 
-export default async function CategoryPage(
-  { params, searchParams }: { 
-    params: CategoryParams; 
-    searchParams: Record<string, string | string[] | undefined>;
-  }
-) {
+export default function CategoryPage(props: {
+  params: { category: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const { params, searchParams } = props;
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
   let posts = postsByCategory[category as keyof typeof postsByCategory] || [];
