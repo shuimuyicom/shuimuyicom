@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // 设置合理的构建选项
-  swcMinify: true,
   reactStrictMode: true,
   poweredByHeader: false,
   

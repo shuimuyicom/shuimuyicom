@@ -54,7 +54,7 @@ type CategoryParams = {
   }
 }
 
-export function generateMetadata({ params }: CategoryParams): Metadata {
+export async function generateMetadata({ params }: CategoryParams): Promise<Metadata> {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
   
@@ -70,7 +70,7 @@ export function generateMetadata({ params }: CategoryParams): Metadata {
   };
 }
 
-export default function CategoryPage({ params }: CategoryParams) {
+export default async function CategoryPage({ params }: CategoryParams) {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
   const posts = postsByCategory[category as keyof typeof postsByCategory] || [];

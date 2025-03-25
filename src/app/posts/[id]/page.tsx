@@ -78,7 +78,7 @@ type PostParams = {
   }
 }
 
-export function generateMetadata({ params }: PostParams): Metadata {
+export async function generateMetadata({ params }: PostParams): Promise<Metadata> {
   const id = params.id;
   const post = posts[id as keyof typeof posts];
   
@@ -94,7 +94,7 @@ export function generateMetadata({ params }: PostParams): Metadata {
   };
 }
 
-export default function PostPage({ params }: PostParams) {
+export default async function PostPage({ params }: PostParams) {
   const id = params.id;
   const post = posts[id as keyof typeof posts];
   
