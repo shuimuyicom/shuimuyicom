@@ -84,12 +84,12 @@ export function generateMetadata({ params }: PostParams): Metadata {
   
   if (!post) {
     return {
-      title: "文章不存在 | 水木易博客",
+      title: "文章不存在 | 水木易",
     };
   }
   
   return {
-    title: `${post.title} | 水木易博客`,
+    title: `${post.title} | 水木易`,
     description: post.title,
   };
 }

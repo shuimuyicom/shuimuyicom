@@ -60,12 +60,12 @@ export function generateMetadata({ params }: CategoryParams): Metadata {
   
   if (!categoryInfo) {
     return {
-      title: "分类不存在 | 水木易博客",
+      title: "分类不存在 | 水木易",
     };
   }
   
   return {
-    title: `${categoryInfo.name} | 水木易博客`,
+    title: `${categoryInfo.name} | 水木易`,
     description: categoryInfo.description,
   };
 }

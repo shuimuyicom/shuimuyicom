@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "关于 | 水木易博客",
-  description: "了解关于水木易博客和博主的更多信息",
+  title: "关于 | 水木易",
+  description: "了解关于水木易和博主的更多信息",
 };
 
 export default function AboutPage() {

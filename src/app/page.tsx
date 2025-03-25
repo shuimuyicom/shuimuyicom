@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "水木易博客 | 分享知识，记录生活",
+  title: "水木易 | 分享知识，记录生活",
   description: "水木易的个人博客，分享技术、生活和读书心得",
 };
 

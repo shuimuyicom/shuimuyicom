@@ -12,7 +12,7 @@ export default function Footer() {
               <div className="h-6 w-6 mr-2 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold">
                 水
               </div>
-              <span className="text-gray-700 dark:text-gray-300 font-semibold">水木易博客</span>
+              <span className="text-gray-700 dark:text-gray-300 font-semibold">水木易</span>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
               分享知识，记录生活
@@ -66,7 +66,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-gray-200 dark:border-gray-700 mt-8 pt-6 text-center text-sm text-gray-600 dark:text-gray-400">
-          <p>© {currentYear} 水木易博客. 保留所有权利.</p>
+          <p>© {currentYear} 水木易. 保留所有权利.</p>
           <p className="mt-2">
             使用 Next.js 和 Tailwind CSS 构建
           </p>

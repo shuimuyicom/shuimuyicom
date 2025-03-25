@@ -48,7 +48,7 @@ export default function Header() {
             <div className="h-8 w-8 mr-2 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
               水
             </div>
-            <span className="text-xl font-bold dark:text-white">水木易博客</span>
+            <span className="text-xl font-bold dark:text-white">水木易</span>
           </Link>
 
           {/* 桌面导航 */}

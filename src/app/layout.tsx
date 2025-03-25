@@ -10,8 +10,8 @@ const geist = Geist({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | 水木易博客",
-    default: "水木易博客 | 分享知识，记录生活",
+    template: "%s | 水木易",
+    default: "水木易 | 分享知识，记录生活",
   },
   description: "水木易的个人博客，分享技术、生活和读书心得",
   authors: [{ name: "水木易" }],

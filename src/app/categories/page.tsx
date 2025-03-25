@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "分类 | 水木易博客",
-  description: "浏览水木易博客中的各个分类文章",
+  title: "分类 | 水木易",
+  description: "浏览水木易中的各个分类文章",
 };
 
 // 临时分类数据，后续可以从API或数据库获取
