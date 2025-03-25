@@ -48,7 +48,6 @@ const postsByCategory = {
   ],
 };
 
-// @ts-ignore: Next.js 15类型兼容性问题
 export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
