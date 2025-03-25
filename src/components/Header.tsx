@@ -40,7 +40,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-white dark:bg-black shadow-sm sticky top-0 z-10">
+    <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-10">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -60,7 +60,7 @@ export default function Header() {
                 className={`${
                   pathname === link.href
                     ? "text-blue-600 dark:text-blue-400"
-                    : "text-black dark:text-white hover:text-blue-600 dark:hover:text-blue-400"
+                    : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
                 } transition-colors`}
               >
                 {link.label}
@@ -72,7 +72,7 @@ export default function Header() {
             {/* 主题切换按钮 */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full text-black dark:text-white hover:bg-blue-100 dark:hover:bg-blue-900 focus:outline-none"
+              className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none"
               aria-label={darkMode ? "切换到浅色模式" : "切换到深色模式"}
             >
               {darkMode ? (
@@ -103,7 +103,7 @@ export default function Header() {
             {/* 移动端菜单按钮 */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="ml-4 md:hidden p-2 rounded-md text-black dark:text-white hover:bg-blue-100 dark:hover:bg-blue-900 focus:outline-none"
+              className="ml-4 md:hidden p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none"
               aria-label="打开菜单"
             >
               <svg
@@ -135,7 +135,7 @@ export default function Header() {
                   className={`${
                     pathname === link.href
                       ? "text-blue-600 dark:text-blue-400"
-                      : "text-black dark:text-white hover:text-blue-600 dark:hover:text-blue-400"
+                      : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
                   } px-2 py-1 rounded transition-colors`}
                   onClick={() => setIsOpen(false)}
                 >

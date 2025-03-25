@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" className="h-full">
-      <body className={`${geist.className} antialiased min-h-screen flex flex-col bg-white dark:bg-black text-black dark:text-white`}>
+      <body className={`${geist.className} antialiased min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100`}>
         <Header />
         <main className="flex-grow">
           {children}
