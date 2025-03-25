@@ -107,86 +107,73 @@ export default function PostPage(props: {
   const isReadable = readingMode === 'readable';
   
   const mainClasses = isReadable 
-    ? "bg-[rgb(var(--shoji-cream))] dark:bg-[rgb(var(--washi-white))] min-h-screen py-8" 
-    : "bg-[rgb(var(--background-start-rgb))] py-8";
+    ? "container mx-auto px-4 py-8 bg-amber-50 dark:bg-gray-900 min-h-screen" 
+    : "container mx-auto px-4 py-8";
   
-  const containerClasses = isReadable 
-    ? "max-w-3xl mx-auto px-4 sm:px-6" 
-    : "max-w-4xl mx-auto px-4 sm:px-6";
+  const articleClasses = isReadable 
+    ? "max-w-3xl mx-auto prose-lg" 
+    : "max-w-4xl mx-auto";
   
   const textClasses = isReadable 
-    ? "text-lg leading-relaxed tracking-wide" 
-    : "leading-relaxed";
+    ? "text-lg leading-relaxed" 
+    : "";
   
   return (
     <main className={mainClasses}>
-      <div className={containerClasses}>
-        <div className="mb-6 flex justify-end">
-          <div className="flex items-center">
-            <span className="mr-2 text-gray-600 dark:text-gray-300">阅读模式：</span>
-            <Link 
-              href={`/posts/${id}`}
-              className={`px-3 py-1 rounded-sm border ${!isReadable ? 'border-[rgb(var(--matcha-accent))] text-[rgb(var(--matcha-accent))]' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-gray-400 dark:hover:border-gray-500'}`}
-            >
-              标准
-            </Link>
-            <Link 
-              href={`/posts/${id}?mode=readable`}
-              className={`px-3 py-1 rounded-sm border ml-2 ${isReadable ? 'border-[rgb(var(--matcha-accent))] text-[rgb(var(--matcha-accent))]' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-gray-400 dark:hover:border-gray-500'}`}
-            >
-              舒适
-            </Link>
-          </div>
-        </div>
-        
-        <article className="bg-white/80 dark:bg-gray-800/80 p-8 shadow-sm rounded-sm border border-gray-100 dark:border-gray-700">
-          <header className="mb-10 pb-6 border-b border-gray-200 dark:border-gray-700">
-            <h1 className="jp-heading text-3xl mb-4 text-gray-800 dark:text-gray-200">{post.title}</h1>
-            <div className="flex items-center text-gray-600 dark:text-gray-400 text-sm">
-              <time>{post.date}</time>
-              <span className="mx-2">•</span>
-              <Link 
-                href={`/categories/${post.category.id}`}
-                className="text-[rgb(var(--indigo-ink))] dark:text-[rgb(var(--kintsugi-gold))] hover:underline"
-              >
-                {post.category.name}
-              </Link>
-            </div>
-          </header>
-          
-          <div className={`prose prose-lg max-w-none dark:prose-invert ${textClasses}`}>
-            {post.content.split('\n').map((line, index) => {
-              if (line.startsWith('# ')) {
-                return <h1 key={index} className="jp-heading text-2xl mt-8 mb-4 text-gray-800 dark:text-gray-200">{line.substring(2)}</h1>;
-              } else if (line.startsWith('## ')) {
-                return <h2 key={index} className="jp-heading text-xl mt-6 mb-3 text-gray-800 dark:text-gray-200">{line.substring(3)}</h2>;
-              } else if (line.startsWith('### ')) {
-                return <h3 key={index} className="jp-heading text-lg mt-5 mb-3 text-gray-800 dark:text-gray-200">{line.substring(4)}</h3>;
-              } else if (line.trim() === '') {
-                return <div key={index} className="h-4"></div>;
-              } else if (line.startsWith('- ')) {
-                return <li key={index} className="my-1 text-gray-700 dark:text-gray-300">{line.substring(2)}</li>;
-              } else {
-                return <p key={index} className="my-4 text-gray-700 dark:text-gray-300">{line}</p>;
-              }
-            })}
-          </div>
-        </article>
-        
-        <div className="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+      <div className="max-w-4xl mx-auto mb-6 flex justify-end">
+        <div className="flex items-center">
+          <span className="mr-2 text-gray-600 dark:text-gray-300">阅读模式：</span>
           <Link 
-            href="/" 
-            className="zen-button"
+            href={`/posts/${id}`}
+            className={`px-3 py-1 rounded ${!isReadable ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
           >
-            &larr; 返回首页
+            标准
           </Link>
           <Link 
-            href={`/categories/${post.category.id}`} 
-            className="text-[rgb(var(--indigo-ink))] dark:text-[rgb(var(--kintsugi-gold))] hover:underline"
+            href={`/posts/${id}?mode=readable`}
+            className={`px-3 py-1 rounded ml-2 ${isReadable ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
           >
-            浏览更多{post.category.name}文章 &rarr;
+            舒适
           </Link>
         </div>
+      </div>
+      
+      <article className={articleClasses}>
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
+          <div className="flex items-center text-gray-600 dark:text-gray-300 text-sm">
+            <time>{post.date}</time>
+            <span className="mx-2">•</span>
+            <Link 
+              href={`/categories/${post.category.id}`}
+              className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+            >
+              {post.category.name}
+            </Link>
+          </div>
+        </header>
+        
+        <div className={`prose prose-lg max-w-none dark:prose-invert ${textClasses}`}>
+          {post.content.split('\n').map((line, index) => {
+            if (line.startsWith('# ')) {
+              return <h1 key={index} className="text-3xl font-bold mt-6 mb-4">{line.substring(2)}</h1>;
+            } else if (line.startsWith('## ')) {
+              return <h2 key={index} className="text-2xl font-semibold mt-6 mb-3">{line.substring(3)}</h2>;
+            } else if (line.startsWith('### ')) {
+              return <h3 key={index} className="text-xl font-semibold mt-5 mb-3">{line.substring(4)}</h3>;
+            } else if (line.trim() === '') {
+              return <br key={index} />;
+            } else {
+              return <p key={index} className="my-3">{line}</p>;
+            }
+          })}
+        </div>
+      </article>
+      
+      <div className="max-w-4xl mx-auto mt-10 pt-6 border-t border-gray-200 dark:border-gray-700">
+        <Link href="/" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+          &larr; 返回首页
+        </Link>
       </div>
     </main>
   );

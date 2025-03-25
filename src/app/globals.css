@@ -2,120 +2,101 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap');
+
 :root {
-  --foreground-rgb: 64, 64, 64;
-  --background-start-rgb: 245, 242, 238;
-  --background-end-rgb: 249, 247, 244;
-  
-  /* 日式极简风格颜色 */
-  --washi-white: 249, 247, 244;
-  --zen-black: 30, 30, 30;
-  --ikigai-beige: 235, 228, 217;
-  --shoji-cream: 249, 243, 233;
-  --matcha-accent: 134, 151, 121;
-  --kintsugi-gold: 207, 181, 131;
-  --indigo-ink: 43, 56, 86;
-  --cedar-brown: 120, 100, 82;
+  --foreground-rgb: 26, 26, 26;
+  --background-rgb: 245, 245, 245;
 }
 
 .dark {
-  --foreground-rgb: 245, 245, 245;
-  --background-start-rgb: 38, 38, 38;
-  --background-end-rgb: 30, 30, 30;
-  
-  /* 日式极简暗色主题 */
-  --washi-white: 55, 55, 55;
-  --zen-black: 245, 245, 245;
-  --ikigai-beige: 60, 58, 55;
-  --shoji-cream: 48, 46, 44;
-  --matcha-accent: 114, 131, 101;
-  --kintsugi-gold: 187, 161, 111;
-  --indigo-ink: 83, 96, 126;
-  --cedar-brown: 150, 130, 112;
+  --foreground-rgb: 232, 232, 232;
+  --background-rgb: 10, 10, 10;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer base {
+  html {
+    font-family: 'Noto Serif SC', serif;
+  }
+  body {
+    @apply bg-ink-50 dark:bg-ink-900 text-ink-800 dark:text-ink-100;
+    @apply transition-colors duration-300;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-  font-family: 'Noto Sans JP', 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  letter-spacing: 0.01em;
-  line-height: 1.6;
-}
-
-/* 日式极简风格的容器 */
-.washi-container {
-  @apply px-4 py-8 max-w-4xl mx-auto;
-  background-color: rgba(var(--washi-white), 0.7);
-  backdrop-filter: blur(10px);
-  border-radius: 2px;
-}
-
-/* 标题样式 */
-.jp-heading {
-  @apply font-light tracking-wide;
-  letter-spacing: 0.05em;
-}
-
-/* 日式卡片 */
-.washi-card {
-  @apply bg-white dark:bg-gray-800 p-6 rounded-sm shadow-sm border border-gray-100 dark:border-gray-700 transition-all duration-300;
-}
-
-/* 日式按钮 */
-.zen-button {
-  @apply px-5 py-2 bg-transparent border border-gray-300 dark:border-gray-600 rounded-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-300;
+/* 中国水墨风格元素 */
+@layer components {
+  .ink-border {
+    @apply border-ink-300 dark:border-ink-700 border-opacity-60;
+  }
+  
+  .ink-card {
+    @apply bg-white dark:bg-ink-800 shadow-sm border border-ink-200 dark:border-ink-700;
+  }
+  
+  .ink-btn {
+    @apply px-4 py-2 bg-ink-800 text-white hover:bg-ink-900 dark:bg-ink-700 dark:hover:bg-ink-600;
+    @apply transition-colors duration-200;
+  }
+  
+  .ink-btn-outline {
+    @apply px-4 py-2 bg-transparent border border-ink-800 text-ink-800;
+    @apply hover:bg-ink-800 hover:text-white;
+    @apply dark:border-ink-300 dark:text-ink-200 dark:hover:bg-ink-700;
+    @apply transition-colors duration-200;
+  }
+  
+  .rice-paper {
+    @apply bg-rice-50 dark:bg-ink-800;
+  }
 }
 
 /* 添加prose样式以支持文章内容展示 */
 @layer components {
   .prose h1 {
-    @apply text-3xl font-bold mt-8 mb-4;
+    @apply text-3xl font-normal mt-8 mb-6 text-ink-900 dark:text-ink-50;
+    @apply font-calligraphy;
   }
   
   .prose h2 {
-    @apply text-2xl font-semibold mt-6 mb-3;
+    @apply text-2xl font-normal mt-6 mb-4 text-ink-800 dark:text-ink-100;
+    @apply font-calligraphy;
   }
   
   .prose h3 {
-    @apply text-xl font-semibold mt-5 mb-3;
+    @apply text-xl font-normal mt-5 mb-3 text-ink-700 dark:text-ink-200;
+    @apply font-calligraphy;
   }
   
   .prose p {
-    @apply my-4;
+    @apply my-4 text-ink-700 dark:text-ink-200 leading-relaxed;
   }
   
   .prose ul {
-    @apply list-disc pl-6 my-4;
+    @apply list-disc pl-6 my-4 text-ink-700 dark:text-ink-200;
   }
   
   .prose ol {
-    @apply list-decimal pl-6 my-4;
+    @apply list-decimal pl-6 my-4 text-ink-700 dark:text-ink-200;
   }
   
   .prose a {
-    @apply text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300;
+    @apply text-ink-700 hover:text-ink-900 dark:text-ink-300 dark:hover:text-ink-100;
+    @apply underline underline-offset-2 decoration-ink-300 dark:decoration-ink-600;
   }
   
   .prose blockquote {
-    @apply border-l-4 border-gray-300 dark:border-gray-700 pl-4 italic my-4;
+    @apply border-l-4 border-ink-300 dark:border-ink-600 pl-4 italic my-6;
+    @apply text-ink-600 dark:text-ink-300;
   }
   
   .prose code {
-    @apply bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5 font-mono text-sm;
+    @apply bg-ink-100 dark:bg-ink-800 rounded px-1 py-0.5 font-mono text-sm;
+    @apply text-ink-700 dark:text-ink-300;
   }
   
   .prose pre {
-    @apply bg-gray-100 dark:bg-gray-800 p-4 rounded my-4 overflow-x-auto;
+    @apply bg-ink-100 dark:bg-ink-800 p-4 rounded my-4 overflow-x-auto;
+    @apply border border-ink-200 dark:border-ink-700;
   }
 }

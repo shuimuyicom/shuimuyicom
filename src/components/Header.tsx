@@ -40,28 +40,28 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-10">
-      <div className="container mx-auto px-4">
+    <header className="bg-rice-50 dark:bg-ink-800 border-b border-ink-200 dark:border-ink-700 sticky top-0 z-10">
+      <div className="container mx-auto px-6">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <div className="h-8 w-8 mr-2 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
+            <div className="h-10 w-10 mr-3 border border-ink-800 dark:border-ink-200 flex items-center justify-center text-ink-800 dark:text-ink-100 font-medium">
               水
             </div>
-            <span className="text-xl font-bold dark:text-white">水木易</span>
+            <span className="text-xl font-calligraphy text-ink-800 dark:text-ink-100">水木易</span>
           </Link>
 
           {/* 桌面导航 */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-10">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={`${
                   pathname === link.href
-                    ? "text-blue-600 dark:text-blue-400"
-                    : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
-                } transition-colors`}
+                    ? "text-ink-900 border-b-2 border-ink-800 dark:text-ink-50 dark:border-ink-300"
+                    : "text-ink-600 dark:text-ink-300 hover:text-ink-900 dark:hover:text-ink-100"
+                } transition-colors px-1 py-1 font-calligraphy`}
               >
                 {link.label}
               </Link>
@@ -72,7 +72,7 @@ export default function Header() {
             {/* 主题切换按钮 */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none"
+              className="p-2 rounded-full text-ink-600 dark:text-ink-300 hover:bg-ink-100 dark:hover:bg-ink-700 focus:outline-none"
               aria-label={darkMode ? "切换到浅色模式" : "切换到深色模式"}
             >
               {darkMode ? (
@@ -103,7 +103,7 @@ export default function Header() {
             {/* 移动端菜单按钮 */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="ml-4 md:hidden p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none"
+              className="ml-4 md:hidden p-2 rounded-md text-ink-600 dark:text-ink-300 hover:bg-ink-100 dark:hover:bg-ink-700 focus:outline-none"
               aria-label="打开菜单"
             >
               <svg
@@ -126,17 +126,17 @@ export default function Header() {
 
         {/* 移动端导航 */}
         {isOpen && (
-          <div className="md:hidden py-3 pb-5">
-            <nav className="flex flex-col space-y-3">
+          <div className="md:hidden py-4 pb-6 border-t border-ink-200 dark:border-ink-700 mt-2">
+            <nav className="flex flex-col space-y-4">
               {links.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={`${
                     pathname === link.href
-                      ? "text-blue-600 dark:text-blue-400"
-                      : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
-                  } px-2 py-1 rounded transition-colors`}
+                      ? "text-ink-900 dark:text-ink-100 font-medium"
+                      : "text-ink-600 dark:text-ink-300 hover:text-ink-900 dark:hover:text-ink-100"
+                  } px-2 py-1 font-calligraphy transition-colors`}
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
