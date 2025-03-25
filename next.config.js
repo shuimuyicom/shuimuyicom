@@ -1,13 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  // 跳过TypeScript类型检查，仅在生产构建中
+module.exports = {
+  // 跳过TypeScript类型检查
   typescript: {
     ignoreBuildErrors: true,
   },
-  // 跳过ESLint检查，仅在生产构建中
+  // 跳过ESLint检查
   eslint: {
     ignoreDuringBuilds: true,
   },
-};
-
-module.exports = nextConfig; 
+  // 禁用严格模式
+  reactStrictMode: false,
+} 

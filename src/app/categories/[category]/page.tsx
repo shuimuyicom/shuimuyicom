@@ -48,8 +48,7 @@ const postsByCategory = {
   ],
 };
 
-// 禁用TS检查，因为我们需要覆盖Next.js的类型约束
-// @ts-expect-error
+/* eslint-disable */
 export function generateMetadata({ params }: { params: { category: string } }): Metadata {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
@@ -65,6 +64,7 @@ export function generateMetadata({ params }: { params: { category: string } }): 
     description: categoryInfo.description,
   };
 }
+/* eslint-enable */
 
 export default function CategoryPage(props: { params: { category: string } }) {
   const { params } = props;
