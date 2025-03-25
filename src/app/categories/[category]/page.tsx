@@ -48,19 +48,10 @@ const postsByCategory = {
   ],
 };
 
-type CategoryParams = {
-  category: string;
-};
-
-type Props = {
-  params: CategoryParams;
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-export async function generateMetadata({ 
-  params 
-}: { 
-  params: CategoryParams 
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: string };
 }): Promise<Metadata> {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
@@ -77,7 +68,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function CategoryPage({ params, searchParams }: Props) {
+export default async function CategoryPage({
+  params,
+  searchParams,
+}: {
+  params: { category: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
   let posts = postsByCategory[category as keyof typeof postsByCategory] || [];

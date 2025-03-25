@@ -72,19 +72,10 @@ React Server Components代表了Web开发的未来方向，它们提供了更好
   // ... 可以添加更多文章
 };
 
-type PostParams = {
-  id: string;
-};
-
-type Props = {
-  params: PostParams;
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-export async function generateMetadata({ 
-  params 
-}: { 
-  params: PostParams 
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
 }): Promise<Metadata> {
   const id = params.id;
   const post = posts[id as keyof typeof posts];
@@ -101,7 +92,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function PostPage({ params, searchParams }: Props) {
+export default async function PostPage({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const id = params.id;
   const post = posts[id as keyof typeof posts];
   
