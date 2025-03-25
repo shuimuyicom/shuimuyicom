@@ -2,13 +2,6 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-// 类型定义
-type PostParams = {
-  params: {
-    id: string;
-  };
-};
-
 // 临时文章数据
 const posts = {
   "1": {
@@ -79,7 +72,13 @@ React Server Components代表了Web开发的未来方向，它们提供了更好
   // ... 可以添加更多文章
 };
 
-export function generateMetadata({ params }: PostParams): Metadata {
+type Props = {
+  params: {
+    id: string;
+  };
+};
+
+export function generateMetadata({ params }: Props): Metadata {
   const id = params.id;
   const post = posts[id as keyof typeof posts];
   
@@ -95,7 +94,7 @@ export function generateMetadata({ params }: PostParams): Metadata {
   };
 }
 
-export default function PostPage({ params }: PostParams) {
+export default function PostPage({ params }: Props) {
   const id = params.id;
   const post = posts[id as keyof typeof posts];
   

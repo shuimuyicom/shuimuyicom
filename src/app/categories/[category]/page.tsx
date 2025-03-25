@@ -2,13 +2,6 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-// 类型定义
-type CategoryParams = {
-  params: {
-    category: string;
-  };
-};
-
 // 临时分类数据
 const categoryData = {
   tech: {
@@ -55,7 +48,13 @@ const postsByCategory = {
   ],
 };
 
-export function generateMetadata({ params }: CategoryParams): Metadata {
+type Props = {
+  params: {
+    category: string;
+  };
+};
+
+export function generateMetadata({ params }: Props): Metadata {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
   
@@ -71,7 +70,7 @@ export function generateMetadata({ params }: CategoryParams): Metadata {
   };
 }
 
-export default function CategoryPage({ params }: CategoryParams) {
+export default function CategoryPage({ params }: Props) {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
   const posts = postsByCategory[category as keyof typeof postsByCategory] || [];
