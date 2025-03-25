@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPostById, getAllPostIds } from "@/lib/posts";
+import { getPostById } from "@/lib/posts";
 
-// 分类名称映射
-const categoryNames: Record<string, string> = {};
-
-type Props = {
-  params: { id: string };
-  searchParams: Record<string, string | string[] | undefined>;
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPostById(params.id);
+export async function generateMetadata(
+  props: { params: { id: string } }
+): Promise<Metadata> {
+  const id = props.params.id;
+  const post = await getPostById(id);
   
   if (!post) {
     return {
@@ -26,8 +21,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function PostPage({ params, searchParams }: Props) {
-  const post = await getPostById(params.id);
+export default async function PostPage(props: {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const { params, searchParams } = props;
+  const id = params.id;
+  const post = await getPostById(id);
   
   if (!post) {
     notFound();
@@ -38,72 +38,148 @@ export default async function PostPage({ params, searchParams }: Props) {
   const isReadable = readingMode === 'readable';
   
   const mainClasses = isReadable 
-    ? "container mx-auto px-4 py-8 bg-rice-100 dark:bg-ink-900 min-h-screen" 
-    : "container mx-auto px-4 py-8";
+    ? "min-h-screen bg-washi-50 dark:bg-sumi-950" 
+    : "min-h-screen bg-washi-50 dark:bg-sumi-950";
   
-  const articleClasses = isReadable 
-    ? "max-w-3xl mx-auto prose-lg" 
-    : "max-w-4xl mx-auto";
-  
-  const textClasses = isReadable 
-    ? "text-lg leading-relaxed" 
-    : "";
-  
-  // 确保分类是一个字符串
-  const categoryId = typeof post.category === 'object' && post.category !== null 
-    ? (post.category as any).id 
-    : post.category;
-  
-  const categoryName = typeof post.category === 'object' && post.category !== null 
-    ? (post.category as any).name 
-    : categoryNames[categoryId as string] || categoryId;
+  const containerClasses = isReadable 
+    ? "max-w-3xl mx-auto px-6 py-12 md:py-16" 
+    : "max-w-4xl mx-auto px-6 py-12 md:py-20";
   
   return (
     <main className={mainClasses}>
-      <div className="max-w-4xl mx-auto mb-6 flex justify-end">
-        <div className="flex items-center">
-          <span className="mr-2 text-ink-600 dark:text-ink-300">阅读模式：</span>
-          <Link 
-            href={`/posts/${params.id}`}
-            className={`px-3 py-1 border ${!isReadable ? 'bg-white text-ink-800 dark:bg-ink-800 dark:text-ink-100 border-ink-800 dark:border-ink-300' : 'text-ink-600 dark:text-ink-400 border-ink-300 dark:border-ink-700 hover:bg-white dark:hover:bg-ink-800'}`}
-          >
-            标准
-          </Link>
-          <Link 
-            href={`/posts/${params.id}?mode=readable`}
-            className={`px-3 py-1 border ml-2 ${isReadable ? 'bg-white text-ink-800 dark:bg-ink-800 dark:text-ink-100 border-ink-800 dark:border-ink-300' : 'text-ink-600 dark:text-ink-400 border-ink-300 dark:border-ink-700 hover:bg-white dark:hover:bg-ink-800'}`}
-          >
-            舒适
-          </Link>
-        </div>
-      </div>
-      
-      <article className={articleClasses}>
-        <header className="mb-8">
-          <h1 className="text-3xl font-calligraphy mb-3 text-ink-900 dark:text-ink-100">{post.title}</h1>
-          <div className="flex items-center text-ink-500 dark:text-ink-400 text-sm">
-            <time>{post.date}</time>
-            <span className="mx-2">•</span>
-            <Link 
-              href={`/categories/${categoryId}`}
-              className="text-ink-600 hover:text-ink-900 dark:text-ink-300 dark:hover:text-ink-100"
+      <div className={containerClasses}>
+        {/* 页面导航 */}
+        <div className="flex justify-between items-center mb-12 animate-fadeIn">
+          <Link href="/" className="flex items-center text-sumi-600 dark:text-sumi-400 hover:text-wisteria-600 dark:hover:text-wisteria-300 transition-colors group">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-5 w-5 mr-2 group-hover:-translate-x-0.5 transition-transform" 
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round" 
+              strokeLinejoin="round"
             >
-              {categoryName}
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            返回首页
+          </Link>
+          
+          <div className="flex items-center space-x-2">
+            <span className="text-xs text-sumi-500 dark:text-sumi-500 mr-1">阅读模式：</span>
+            <Link 
+              href={`/posts/${id}`}
+              className={`px-3 py-1 text-xs rounded-sm transition-colors ${!isReadable ? 'bg-wisteria-600 text-washi-50 dark:bg-wisteria-600 dark:text-washi-50' : 'text-sumi-600 dark:text-sumi-400 hover:text-wisteria-600 dark:hover:text-wisteria-300'}`}
+            >
+              标准
             </Link>
+            <Link 
+              href={`/posts/${id}?mode=readable`}
+              className={`px-3 py-1 text-xs rounded-sm transition-colors ${isReadable ? 'bg-wisteria-600 text-washi-50 dark:bg-wisteria-600 dark:text-washi-50' : 'text-sumi-600 dark:text-sumi-400 hover:text-wisteria-600 dark:hover:text-wisteria-300'}`}
+            >
+              舒适
+            </Link>
+          </div>
+        </div>
+        
+        {/* 文章头部 */}
+        <header className="mb-16 animate-fadeInUp">
+          <div className="flex items-center justify-center mb-6">
+            <div className="h-px w-16 bg-sumi-300 dark:bg-sumi-700"></div>
+            <Link href={`/categories/${post.category.id}`} className="mx-4">
+              <span className="inline-block text-xs uppercase tracking-wider font-medium text-wisteria-600 dark:text-wisteria-400 hover:text-wisteria-700 dark:hover:text-wisteria-300 transition-colors">
+                {post.category.name}
+              </span>
+            </Link>
+            <div className="h-px w-16 bg-sumi-300 dark:bg-sumi-700"></div>
+          </div>
+          
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-calligraphy mb-8 text-sumi-900 dark:text-washi-50 leading-tight text-center">
+            {post.title}
+          </h1>
+          
+          <div className="flex justify-center items-center">
+            <time className="text-sm text-sumi-500 dark:text-sumi-500 inline-flex items-center">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="h-4 w-4 mr-2" 
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              {post.date}
+            </time>
           </div>
         </header>
         
-        <div
-          className={`prose prose-lg max-w-none dark:prose-invert ${textClasses}`}
-          dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-        />
-      </article>
-      
-      <div className="max-w-4xl mx-auto mt-10 pt-6 border-t border-ink-200 dark:border-ink-700">
-        <Link href="/" className="text-ink-600 hover:text-ink-900 dark:text-ink-300 dark:hover:text-ink-100">
-          &larr; 返回首页
-        </Link>
+        {/* 装饰分隔线 */}
+        <div className="flex justify-center mb-12">
+          <div className="w-16 h-0.5 bg-wisteria-200 dark:bg-wisteria-900 rounded-full"></div>
+        </div>
+        
+        {/* 文章内容 */}
+        <article className="prose prose-lg dark:prose-invert prose-headings:font-calligraphy prose-headings:font-medium prose-headings:text-sumi-900 dark:prose-headings:text-washi-50 prose-p:text-sumi-700 dark:prose-p:text-sumi-300 prose-a:text-wisteria-600 dark:prose-a:text-wisteria-300 prose-a:no-underline mx-auto mb-16">
+          <div dangerouslySetInnerHTML={{ __html: post.contentHtml }}>
+          </div>
+        </article>
+        
+        {/* 文章尾部装饰 */}
+        <div className="flex justify-center mb-12">
+          <div className="relative flex items-center justify-center">
+            <div className="w-24 h-px bg-sumi-300 dark:bg-sumi-700"></div>
+            <div className="mx-4 text-sumi-400 dark:text-sumi-600">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="w-24 h-px bg-sumi-300 dark:bg-sumi-700"></div>
+          </div>
+        </div>
+        
+        {/* 文章导航 */}
+        <div className="border-t border-sumi-200 dark:border-sumi-800 pt-8 flex justify-between">
+          <Link href="/" className="text-sumi-600 dark:text-sumi-400 hover:text-wisteria-600 dark:hover:text-wisteria-300 transition-colors flex items-center text-sm group">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-4 w-4 mr-2 group-hover:-translate-x-0.5 transition-transform" 
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            返回文章列表
+          </Link>
+          
+          <Link href="#top" className="text-sumi-600 dark:text-sumi-400 hover:text-wisteria-600 dark:hover:text-wisteria-300 transition-colors flex items-center text-sm group">
+            返回顶部
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-4 w-4 ml-2 group-hover:-translate-y-0.5 transition-transform" 
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+          </Link>
+        </div>
       </div>
     </main>
   );
-} 
+}

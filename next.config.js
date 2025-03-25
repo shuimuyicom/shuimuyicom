@@ -14,7 +14,7 @@ const nextConfig = {
   typescript: {
     // 打开此项不会完全忽略，只会允许类型警告不阻止构建
     ignoreBuildErrors: true,
-  },
+  }
 };
 
 module.exports = nextConfig; 

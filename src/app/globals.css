@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap');
-
 :root {
   --foreground-rgb: 26, 26, 26;
   --background-rgb: 245, 245, 245;
@@ -16,7 +14,7 @@
 
 @layer base {
   html {
-    font-family: 'Noto Serif SC', serif;
+    font-family: var(--font-noto-serif-sc), serif;
   }
   body {
     @apply bg-ink-50 dark:bg-ink-900 text-ink-800 dark:text-ink-100;
@@ -24,8 +22,8 @@
   }
 }
 
-/* 中国水墨风格元素 */
 @layer components {
+  /* 水墨风格UI元素 */
   .ink-border {
     @apply border-ink-300 dark:border-ink-700 border-opacity-60;
   }
@@ -49,10 +47,8 @@
   .rice-paper {
     @apply bg-rice-50 dark:bg-ink-800;
   }
-}
 
-/* 添加prose样式以支持文章内容展示 */
-@layer components {
+  /* 文章排版样式 */
   .prose h1 {
     @apply text-3xl font-normal mt-8 mb-6 text-ink-900 dark:text-ink-50;
     @apply font-calligraphy;

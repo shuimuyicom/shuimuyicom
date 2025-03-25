@@ -40,28 +40,32 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-rice-50 dark:bg-ink-800 border-b border-ink-200 dark:border-ink-700 sticky top-0 z-10">
-      <div className="container mx-auto px-6">
+    <header className="bg-washi-50 dark:bg-sumi-900 border-b border-sumi-200 dark:border-sumi-800 sticky top-0 z-10">
+      <div className="max-w-5xl mx-auto px-6">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <div className="h-10 w-10 mr-3 border border-ink-800 dark:border-ink-200 flex items-center justify-center text-ink-800 dark:text-ink-100 font-medium">
-              水
+            <div className="h-8 w-8 mr-3 flex items-center justify-center text-sumi-800 dark:text-washi-100 font-medium">
+              <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 3C9 2.44772 9.44772 2 10 2H14C14.5523 2 15 2.44772 15 3V5H9V3Z" fill="currentColor" />
+                <path d="M4 7C4 5.89543 4.89543 5 6 5H18C19.1046 5 20 5.89543 20 7V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V7Z" fill="currentColor" fillOpacity="0.24" />
+                <path fillRule="evenodd" clipRule="evenodd" d="M12 9C13.6569 9 15 10.3431 15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9ZM12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11Z" fill="currentColor" />
+              </svg>
             </div>
-            <span className="text-xl font-calligraphy text-ink-800 dark:text-ink-100">水木易</span>
+            <span className="text-lg font-calligraphy text-sumi-800 dark:text-washi-100">水木易</span>
           </Link>
 
           {/* 桌面导航 */}
-          <nav className="hidden md:flex space-x-10">
+          <nav className="hidden md:flex space-x-8">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={`${
                   pathname === link.href
-                    ? "text-ink-900 border-b-2 border-ink-800 dark:text-ink-50 dark:border-ink-300"
-                    : "text-ink-600 dark:text-ink-300 hover:text-ink-900 dark:hover:text-ink-100"
-                } transition-colors px-1 py-1 font-calligraphy`}
+                    ? "text-wisteria-600 dark:text-wisteria-300 font-medium"
+                    : "text-sumi-600 dark:text-sumi-400 hover:text-sumi-800 dark:hover:text-washi-100"
+                } transition-colors text-sm px-1 py-1 font-calligraphy`}
               >
                 {link.label}
               </Link>
@@ -72,30 +76,42 @@ export default function Header() {
             {/* 主题切换按钮 */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full text-ink-600 dark:text-ink-300 hover:bg-ink-100 dark:hover:bg-ink-700 focus:outline-none"
+              className="p-2 rounded-full text-sumi-500 dark:text-sumi-400 hover:text-sumi-800 dark:hover:text-washi-100 hover:bg-washi-200 dark:hover:bg-sumi-800 transition-colors focus:outline-none"
               aria-label={darkMode ? "切换到浅色模式" : "切换到深色模式"}
             >
               {darkMode ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                    clipRule="evenodd"
-                  />
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                 </svg>
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
               )}
             </button>
@@ -103,20 +119,20 @@ export default function Header() {
             {/* 移动端菜单按钮 */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="ml-4 md:hidden p-2 rounded-md text-ink-600 dark:text-ink-300 hover:bg-ink-100 dark:hover:bg-ink-700 focus:outline-none"
+              className="ml-4 md:hidden p-2 rounded-md text-sumi-500 dark:text-sumi-400 hover:text-sumi-800 dark:hover:text-washi-100 hover:bg-washi-200 dark:hover:bg-sumi-800 transition-colors focus:outline-none"
               aria-label="打开菜单"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
+                className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                strokeWidth="1.5"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={2}
                   d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
                 />
               </svg>
@@ -126,17 +142,17 @@ export default function Header() {
 
         {/* 移动端导航 */}
         {isOpen && (
-          <div className="md:hidden py-4 pb-6 border-t border-ink-200 dark:border-ink-700 mt-2">
-            <nav className="flex flex-col space-y-4">
+          <div className="md:hidden py-4 pb-6 border-t border-sumi-200 dark:border-sumi-800 mt-1 animate-fadeIn">
+            <nav className="flex flex-col space-y-5">
               {links.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={`${
                     pathname === link.href
-                      ? "text-ink-900 dark:text-ink-100 font-medium"
-                      : "text-ink-600 dark:text-ink-300 hover:text-ink-900 dark:hover:text-ink-100"
-                  } px-2 py-1 font-calligraphy transition-colors`}
+                      ? "text-wisteria-600 dark:text-wisteria-300 font-medium"
+                      : "text-sumi-600 dark:text-sumi-400 hover:text-sumi-800 dark:hover:text-washi-100"
+                  } px-2 py-1 font-calligraphy transition-colors text-sm`}
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
