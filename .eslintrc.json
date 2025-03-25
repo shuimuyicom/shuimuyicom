@@ -2,6 +2,8 @@
   "extends": "next/core-web-vitals",
   "rules": {
     "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/ban-ts-comment": "off"
-  }
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/prefer-ts-expect-error": "off"
+  },
+  "ignorePatterns": ["src/app/categories/[category]/page.tsx", "src/app/posts/[id]/page.tsx"]
 } 

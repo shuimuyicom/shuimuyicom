@@ -49,7 +49,7 @@ const postsByCategory = {
 };
 
 // 禁用TS检查，因为我们需要覆盖Next.js的类型约束
-// @ts-ignore
+// @ts-expect-error
 export function generateMetadata({ params }: { params: { category: string } }): Metadata {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];

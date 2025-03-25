@@ -73,7 +73,7 @@ React Server Components代表了Web开发的未来方向，它们提供了更好
 };
 
 // 禁用TS检查，因为我们需要覆盖Next.js的类型约束
-// @ts-ignore
+// @ts-expect-error
 export function generateMetadata({ params }: { params: { id: string } }): Metadata {
   const id = params.id;
   const post = posts[id as keyof typeof posts];
