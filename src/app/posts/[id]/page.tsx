@@ -72,14 +72,13 @@ React Server Components代表了Web开发的未来方向，它们提供了更好
   // ... 可以添加更多文章
 };
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-  searchParams: Record<string, string | string[] | undefined>;
-}
+type PostId = string;
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { id: PostId } 
+}): Promise<Metadata> {
   const id = params.id;
   const post = posts[id as keyof typeof posts];
   
@@ -95,7 +94,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function PostPage({ params, searchParams }: PageProps) {
+export default async function PostPage({ 
+  params,
+  searchParams 
+}: { 
+  params: { id: PostId };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const id = params.id;
   const post = posts[id as keyof typeof posts];
   
@@ -104,7 +109,7 @@ export default async function PostPage({ params, searchParams }: PageProps) {
   }
   
   // 使用searchParams来控制阅读模式
-  const readingMode = searchParams.mode as string | undefined;
+  const readingMode = typeof searchParams.mode === 'string' ? searchParams.mode : undefined;
   const isReadable = readingMode === 'readable';
   
   const mainClasses = isReadable 

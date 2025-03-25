@@ -48,14 +48,13 @@ const postsByCategory = {
   ],
 };
 
-interface PageProps {
-  params: {
-    category: string;
-  };
-  searchParams: Record<string, string | string[] | undefined>;
-}
+type CategoryParam = string;
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { category: CategoryParam } 
+}): Promise<Metadata> {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
   
@@ -71,7 +70,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function CategoryPage({ params, searchParams }: PageProps) {
+export default async function CategoryPage({ 
+  params,
+  searchParams 
+}: { 
+  params: { category: CategoryParam };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
   let posts = postsByCategory[category as keyof typeof postsByCategory] || [];
@@ -81,7 +86,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
   }
   
   // 使用searchParams来处理排序功能
-  const sortBy = searchParams.sort as string | undefined;
+  const sortBy = typeof searchParams.sort === 'string' ? searchParams.sort : undefined;
   
   if (sortBy === 'date-asc') {
     posts = [...posts].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
