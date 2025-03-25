@@ -48,13 +48,7 @@ const postsByCategory = {
   ],
 };
 
-type Props = {
-  params: {
-    category: string;
-  };
-};
-
-export function generateMetadata({ params }: Props): Metadata {
+export async function generateMetadata({ params }: { params: { category: string } }) {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
   
@@ -70,7 +64,7 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function CategoryPage({ params }: Props) {
+export default function CategoryPage({ params }: { params: { category: string } }) {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
   const posts = postsByCategory[category as keyof typeof postsByCategory] || [];
