@@ -3,19 +3,78 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 246, 248, 250;
+  --foreground-rgb: 64, 64, 64;
+  --background-start-rgb: 245, 242, 238;
+  --background-end-rgb: 249, 247, 244;
+  
+  /* 日式极简风格颜色 */
+  --washi-white: 249, 247, 244;
+  --zen-black: 30, 30, 30;
+  --ikigai-beige: 235, 228, 217;
+  --shoji-cream: 249, 243, 233;
+  --matcha-accent: 134, 151, 121;
+  --kintsugi-gold: 207, 181, 131;
+  --indigo-ink: 43, 56, 86;
+  --cedar-brown: 120, 100, 82;
 }
 
 .dark {
-  --foreground-rgb: 255, 255, 255;
-  --background-rgb: 10, 10, 10;
+  --foreground-rgb: 245, 245, 245;
+  --background-start-rgb: 38, 38, 38;
+  --background-end-rgb: 30, 30, 30;
+  
+  /* 日式极简暗色主题 */
+  --washi-white: 55, 55, 55;
+  --zen-black: 245, 245, 245;
+  --ikigai-beige: 60, 58, 55;
+  --shoji-cream: 48, 46, 44;
+  --matcha-accent: 114, 131, 101;
+  --kintsugi-gold: 187, 161, 111;
+  --indigo-ink: 83, 96, 126;
+  --cedar-brown: 150, 130, 112;
 }
 
-@layer base {
-  body {
-    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-family: 'Noto Sans JP', 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+}
+
+/* 日式极简风格的容器 */
+.washi-container {
+  @apply px-4 py-8 max-w-4xl mx-auto;
+  background-color: rgba(var(--washi-white), 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 2px;
+}
+
+/* 标题样式 */
+.jp-heading {
+  @apply font-light tracking-wide;
+  letter-spacing: 0.05em;
+}
+
+/* 日式卡片 */
+.washi-card {
+  @apply bg-white dark:bg-gray-800 p-6 rounded-sm shadow-sm border border-gray-100 dark:border-gray-700 transition-all duration-300;
+}
+
+/* 日式按钮 */
+.zen-button {
+  @apply px-5 py-2 bg-transparent border border-gray-300 dark:border-gray-600 rounded-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-300;
 }
 
 /* 添加prose样式以支持文章内容展示 */

@@ -92,52 +92,76 @@ export default function CategoryPage(props: {
   }
   
   return (
-    <main className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-2">{categoryInfo.name}</h1>
-      <p className="text-gray-600 dark:text-gray-300 mb-4">{categoryInfo.description}</p>
-      
-      <div className="mb-6 flex justify-end">
-        <div className="flex items-center">
-          <span className="mr-2 text-gray-600 dark:text-gray-300">排序：</span>
-          <Link 
-            href={`/categories/${category}?sort=date-desc`}
-            className={`px-3 py-1 rounded ${sortBy === 'date-desc' || !sortBy ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
-          >
-            最新
-          </Link>
-          <Link 
-            href={`/categories/${category}?sort=date-asc`}
-            className={`px-3 py-1 rounded mx-1 ${sortBy === 'date-asc' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
-          >
-            最早
-          </Link>
-          <Link 
-            href={`/categories/${category}?sort=title`}
-            className={`px-3 py-1 rounded ${sortBy === 'title' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
-          >
-            标题
-          </Link>
+    <div className="bg-[rgb(var(--background-start-rgb))] min-h-screen">
+      <div className="relative py-16 mb-8">
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-[rgba(var(--ikigai-beige),0.2)] to-transparent"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="jp-heading text-3xl mb-3 text-center text-[rgb(var(--zen-black))] dark:text-[rgb(var(--zen-black))]">
+              {categoryInfo.name}
+            </h1>
+            <p className="text-gray-700 dark:text-gray-300 text-center mb-0">
+              {categoryInfo.description}
+            </p>
+            <div className="h-px w-12 bg-[rgb(var(--kintsugi-gold))] mx-auto mt-6"></div>
+          </div>
         </div>
       </div>
       
-      <div className="space-y-6">
-        {posts.map((post) => (
-          <article key={post.id} className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-            <Link href={`/posts/${post.id}`}>
-              <h2 className="text-xl font-semibold mb-2 hover:text-blue-600 transition-colors">{post.title}</h2>
+      <div className="container mx-auto px-4 pb-16">
+        <div className="mb-8 flex justify-end">
+          <div className="flex items-center">
+            <span className="mr-2 text-gray-600 dark:text-gray-300">排序：</span>
+            <Link 
+              href={`/categories/${category}?sort=date-desc`}
+              className={`px-3 py-1 rounded-sm border ${sortBy === 'date-desc' || !sortBy ? 'border-[rgb(var(--matcha-accent))] text-[rgb(var(--matcha-accent))]' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-gray-400 dark:hover:border-gray-500'}`}
+            >
+              最新
             </Link>
-            <time className="text-sm text-gray-500 dark:text-gray-400 mb-3 block">{post.date}</time>
-            <p className="text-gray-700 dark:text-gray-300">{post.excerpt}</p>
-            <Link href={`/posts/${post.id}`} className="mt-4 inline-block text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-              阅读更多 &rarr;
+            <Link 
+              href={`/categories/${category}?sort=date-asc`}
+              className={`px-3 py-1 rounded-sm border mx-2 ${sortBy === 'date-asc' ? 'border-[rgb(var(--matcha-accent))] text-[rgb(var(--matcha-accent))]' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-gray-400 dark:hover:border-gray-500'}`}
+            >
+              最早
             </Link>
-          </article>
-        ))}
+            <Link 
+              href={`/categories/${category}?sort=title`}
+              className={`px-3 py-1 rounded-sm border ${sortBy === 'title' ? 'border-[rgb(var(--matcha-accent))] text-[rgb(var(--matcha-accent))]' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-gray-400 dark:hover:border-gray-500'}`}
+            >
+              标题
+            </Link>
+          </div>
+        </div>
+        
+        <div className="space-y-6 max-w-3xl mx-auto">
+          {posts.map((post) => (
+            <article key={post.id} className="washi-card group hover:shadow-md transition-shadow">
+              <Link href={`/posts/${post.id}`}>
+                <h2 className="text-xl font-medium mb-2 text-gray-800 dark:text-gray-200 group-hover:text-[rgb(var(--matcha-accent))] dark:group-hover:text-[rgb(var(--matcha-accent))] transition-colors">
+                  {post.title}
+                </h2>
+              </Link>
+              <time className="text-sm text-gray-500 dark:text-gray-400 mb-3 block">{post.date}</time>
+              <p className="text-gray-700 dark:text-gray-300">{post.excerpt}</p>
+              <Link 
+                href={`/posts/${post.id}`} 
+                className="mt-4 inline-block text-[rgb(var(--indigo-ink))] dark:text-[rgb(var(--kintsugi-gold))] hover:underline"
+              >
+                阅读全文 →
+              </Link>
+            </article>
+          ))}
+        </div>
+        
+        <div className="mt-12 text-center">
+          <Link 
+            href="/categories" 
+            className="zen-button inline-flex items-center"
+          >
+            ← 返回所有分类
+          </Link>
+        </div>
       </div>
-      
-      <Link href="/categories" className="mt-8 inline-block text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-        &larr; 返回所有分类
-      </Link>
-    </main>
+    </div>
   );
 } 

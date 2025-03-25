@@ -16,83 +16,128 @@ const latestPosts = [
   { id: "12", title: "成都美食攻略", date: "2024-03-18", category: { id: "travel", name: "旅行" }, excerpt: "分享成都的特色美食和推荐餐厅..." },
 ];
 
-export default function Home() {
+export default function HomePage() {
+  // 临时文章数据
+  const featuredPosts = [
+    { id: "1", title: "Next.js 15新特性介绍", date: "2024-03-25", category: {id: "tech", name: "技术"}, excerpt: "探索Next.js 15带来的新特性和改进..." },
+    { id: "2", title: "React Server Components详解", date: "2024-03-20", category: {id: "tech", name: "技术"}, excerpt: "深入了解React Server Components的工作原理..." },
+    { id: "11", title: "杭州西湖游记", date: "2024-03-23", category: {id: "travel", name: "旅行"}, excerpt: "记录杭州西湖的旅行经历和美景..." },
+    { id: "9", title: "《原子习惯》读书笔记", date: "2024-03-19", category: {id: "reading", name: "读书"}, excerpt: "记录阅读《原子习惯》一书的心得体会..." },
+  ];
+  
+  // 分类数据
+  const categories = [
+    { id: "tech", name: "技术", count: 5 },
+    { id: "life", name: "生活", count: 3 },
+    { id: "reading", name: "读书", count: 2 },
+    { id: "travel", name: "旅行", count: 4 },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* 博主信息部分 */}
-      <section className="flex flex-col items-center text-center mb-16 bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 p-8 rounded-xl shadow-sm">
-        <div className="w-32 h-32 relative rounded-full overflow-hidden mb-6 border-4 border-white dark:border-gray-700 shadow-md">
-          <svg viewBox="0 0 200 200" className="absolute inset-0 w-full h-full">
-            <circle cx="100" cy="100" r="100" fill="#3b82f6" />
-            <path d="M140,50 C100,150 120,180 80,130 L50,110" stroke="#ffffff" strokeWidth="8" fill="none" />
-            <circle cx="70" cy="80" r="15" fill="#ffffff" />
-            <circle cx="130" cy="80" r="15" fill="#ffffff" />
-          </svg>
-        </div>
-        <h1 className="text-4xl font-bold mb-2">水木易</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300 mb-4">技术爱好者 | 博客作者 | 终身学习者</p>
-        <p className="max-w-2xl text-gray-700 dark:text-gray-300 mb-6">
-          欢迎来到我的博客！这里是我分享技术、生活、阅读心得和旅行经历的地方。
-          我相信知识共享的力量，希望通过这个平台与大家一起成长。
-        </p>
-        <div className="flex space-x-4">
-          <Link 
-            href="/about" 
-            className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full transition-colors shadow-md"
-          >
-            了解更多
-          </Link>
-          <Link 
-            href="/categories" 
-            className="bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium py-2 px-6 rounded-full border border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
-          >
-            浏览分类
-          </Link>
+    <div className="bg-[rgb(var(--background-start-rgb))]">
+      {/* 顶部横幅 */}
+      <section className="relative py-24 overflow-hidden">
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-[rgba(var(--ikigai-beige),0.3)] to-transparent"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="jp-heading text-4xl mb-4 text-[rgb(var(--zen-black))] dark:text-[rgb(var(--zen-black))]">
+              水木易
+            </h1>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
+              分享技术与生活的点滴，记录成长与思考的痕迹
+            </p>
+            <div className="h-px w-16 bg-[rgb(var(--kintsugi-gold))] mx-auto"></div>
+          </div>
         </div>
       </section>
-      
-      {/* 最新文章部分 */}
-      <section>
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold">最新文章</h2>
-          <Link 
-            href="/categories" 
-            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-          >
-            查看所有分类 &rarr;
-          </Link>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {latestPosts.map((post) => (
-            <article 
-              key={post.id} 
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="p-6">
-                <Link href={`/categories/${post.category.id}`}>
-                  <span className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-medium px-2.5 py-0.5 rounded mb-2">
-                    {post.category.name}
-                  </span>
-                </Link>
-                <Link href={`/posts/${post.id}`}>
-                  <h3 className="text-xl font-semibold mb-2 hover:text-blue-600 transition-colors">
-                    {post.title}
-                  </h3>
-                </Link>
-                <time className="text-sm text-gray-500 dark:text-gray-400 mb-3 block">{post.date}</time>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">{post.excerpt}</p>
+
+      <div className="container mx-auto px-4 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* 主要内容区 */}
+          <div className="lg:col-span-2">
+            <section>
+              <h2 className="jp-heading text-2xl mb-6 pb-2 border-b border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">
+                最新文章
+              </h2>
+              <div className="space-y-8">
+                {featuredPosts.map((post) => (
+                  <article key={post.id} className="washi-card group hover:shadow-md">
+                    <Link href={`/posts/${post.id}`}>
+                      <h3 className="text-xl font-medium mb-2 text-gray-800 dark:text-gray-200 group-hover:text-[rgb(var(--matcha-accent))] dark:group-hover:text-[rgb(var(--matcha-accent))] transition-colors">
+                        {post.title}
+                      </h3>
+                    </Link>
+                    <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
+                      <time>{post.date}</time>
+                      <span className="mx-2">·</span>
+                      <Link 
+                        href={`/categories/${post.category.id}`}
+                        className="text-[rgb(var(--indigo-ink))] dark:text-[rgb(var(--kintsugi-gold))] hover:underline"
+                      >
+                        {post.category.name}
+                      </Link>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      {post.excerpt}
+                    </p>
+                    <Link 
+                      href={`/posts/${post.id}`}
+                      className="inline-block text-[rgb(var(--matcha-accent))] dark:text-[rgb(var(--matcha-accent))] hover:underline"
+                    >
+                      阅读全文 →
+                    </Link>
+                  </article>
+                ))}
+              </div>
+              <div className="mt-8 text-center">
                 <Link 
-                  href={`/posts/${post.id}`} 
-                  className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
+                  href="/categories" 
+                  className="zen-button inline-flex items-center"
                 >
-                  阅读全文 &rarr;
+                  查看所有文章
                 </Link>
               </div>
-            </article>
-          ))}
+            </section>
+          </div>
+
+          {/* 侧边栏 */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-20">
+              {/* 关于我 */}
+              <section className="mb-10 p-6 bg-[rgba(var(--shoji-cream),0.7)] dark:bg-[rgba(var(--washi-white),0.7)] rounded-sm">
+                <h2 className="jp-heading text-xl mb-4 text-gray-800 dark:text-gray-200">关于我</h2>
+                <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  你好，我是水木易，热爱技术、阅读和旅行。在这里分享我的所见所学与思考。
+                </p>
+                <Link 
+                  href="/about" 
+                  className="text-[rgb(var(--indigo-ink))] dark:text-[rgb(var(--kintsugi-gold))] hover:underline"
+                >
+                  了解更多 →
+                </Link>
+              </section>
+
+              {/* 分类 */}
+              <section className="p-6 bg-[rgba(var(--shoji-cream),0.7)] dark:bg-[rgba(var(--washi-white),0.7)] rounded-sm">
+                <h2 className="jp-heading text-xl mb-4 text-gray-800 dark:text-gray-200">分类</h2>
+                <ul className="space-y-2">
+                  {categories.map((category) => (
+                    <li key={category.id}>
+                      <Link 
+                        href={`/categories/${category.id}`}
+                        className="flex justify-between items-center py-2 text-gray-700 dark:text-gray-300 hover:text-[rgb(var(--indigo-ink))] dark:hover:text-[rgb(var(--kintsugi-gold))] transition-colors"
+                      >
+                        <span>{category.name}</span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">{category.count}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
