@@ -74,16 +74,52 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function CategoryPage({ params, searchParams }: PageProps) {
   const category = params.category;
   const categoryInfo = categoryData[category as keyof typeof categoryData];
-  const posts = postsByCategory[category as keyof typeof postsByCategory] || [];
+  let posts = postsByCategory[category as keyof typeof postsByCategory] || [];
   
   if (!categoryInfo) {
     notFound();
   }
   
+  // 使用searchParams来处理排序功能
+  const sortBy = searchParams.sort as string | undefined;
+  
+  if (sortBy === 'date-asc') {
+    posts = [...posts].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  } else if (sortBy === 'date-desc' || !sortBy) {
+    // 默认按日期降序排列
+    posts = [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  } else if (sortBy === 'title') {
+    posts = [...posts].sort((a, b) => a.title.localeCompare(b.title));
+  }
+  
   return (
     <main className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-2">{categoryInfo.name}</h1>
-      <p className="text-gray-600 dark:text-gray-300 mb-8">{categoryInfo.description}</p>
+      <p className="text-gray-600 dark:text-gray-300 mb-4">{categoryInfo.description}</p>
+      
+      <div className="mb-6 flex justify-end">
+        <div className="flex items-center">
+          <span className="mr-2 text-gray-600 dark:text-gray-300">排序：</span>
+          <Link 
+            href={`/categories/${category}?sort=date-desc`}
+            className={`px-3 py-1 rounded ${sortBy === 'date-desc' || !sortBy ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+          >
+            最新
+          </Link>
+          <Link 
+            href={`/categories/${category}?sort=date-asc`}
+            className={`px-3 py-1 rounded mx-1 ${sortBy === 'date-asc' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+          >
+            最早
+          </Link>
+          <Link 
+            href={`/categories/${category}?sort=title`}
+            className={`px-3 py-1 rounded ${sortBy === 'title' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+          >
+            标题
+          </Link>
+        </div>
+      </div>
       
       <div className="space-y-6">
         {posts.map((post) => (

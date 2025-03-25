@@ -103,9 +103,43 @@ export default async function PostPage({ params, searchParams }: PageProps) {
     notFound();
   }
   
+  // 使用searchParams来控制阅读模式
+  const readingMode = searchParams.mode as string | undefined;
+  const isReadable = readingMode === 'readable';
+  
+  const mainClasses = isReadable 
+    ? "container mx-auto px-4 py-8 bg-amber-50 dark:bg-gray-900 min-h-screen" 
+    : "container mx-auto px-4 py-8";
+  
+  const articleClasses = isReadable 
+    ? "max-w-3xl mx-auto prose-lg" 
+    : "max-w-4xl mx-auto";
+  
+  const textClasses = isReadable 
+    ? "text-lg leading-relaxed" 
+    : "";
+  
   return (
-    <main className="container mx-auto px-4 py-8">
-      <article className="max-w-4xl mx-auto">
+    <main className={mainClasses}>
+      <div className="max-w-4xl mx-auto mb-6 flex justify-end">
+        <div className="flex items-center">
+          <span className="mr-2 text-gray-600 dark:text-gray-300">阅读模式：</span>
+          <Link 
+            href={`/posts/${id}`}
+            className={`px-3 py-1 rounded ${!isReadable ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+          >
+            标准
+          </Link>
+          <Link 
+            href={`/posts/${id}?mode=readable`}
+            className={`px-3 py-1 rounded ml-2 ${isReadable ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+          >
+            舒适
+          </Link>
+        </div>
+      </div>
+      
+      <article className={articleClasses}>
         <header className="mb-8">
           <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
           <div className="flex items-center text-gray-600 dark:text-gray-300 text-sm">
@@ -120,7 +154,7 @@ export default async function PostPage({ params, searchParams }: PageProps) {
           </div>
         </header>
         
-        <div className="prose prose-lg max-w-none dark:prose-invert">
+        <div className={`prose prose-lg max-w-none dark:prose-invert ${textClasses}`}>
           {post.content.split('\n').map((line, index) => {
             if (line.startsWith('# ')) {
               return <h1 key={index} className="text-3xl font-bold mt-6 mb-4">{line.substring(2)}</h1>;
