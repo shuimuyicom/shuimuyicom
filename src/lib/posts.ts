@@ -144,56 +144,59 @@ export async function getPostById(id: string): Promise<Post | null> {
   }
 }
 
-// 类别数据
-const categories: Category[] = [
-  { id: 'tech', name: '技术', count: 0 },
-  { id: 'life', name: '生活', count: 0 },
-  { id: 'reading', name: '读书', count: 0 },
-  { id: 'travel', name: '旅行', count: 0 },
-  { id: 'uncategorized', name: '未分类', count: 0 },
-];
-
 // 根据id获取类别名称
 function getCategoryNameById(id?: string): string {
   if (!id) return '未分类';
   
-  const category = categories.find(cat => cat.id === id);
-  return category ? category.name : '未分类';
+  // 尝试从所有文章中找到这个类别
+  const posts = getAllPosts();
+  for (const post of posts) {
+    if (post.category.id === id) {
+      return post.category.name;
+    }
+  }
+  
+  // 如果找不到匹配的类别，返回未分类
+  return '未分类';
 }
 
 // 获取所有类别
 export function getAllCategories(): Category[] {
   const posts = getAllPosts();
   
-  // 重置计数
-  categories.forEach(cat => {
-    cat.count = 0;
-  });
+  // 创建一个Map来存储所有类别
+  const categoryMap = new Map<string, Category>();
   
-  // 计算每个类别的帖子数
+  // 从文章中收集所有类别
   posts.forEach(post => {
     const categoryId = post.category.id;
-    const category = categories.find(cat => cat.id === categoryId);
+    const categoryName = post.category.name;
+    
+    if (!categoryMap.has(categoryId)) {
+      // 如果是新类别，添加到Map中
+      categoryMap.set(categoryId, { id: categoryId, name: categoryName, count: 0 });
+    }
+    
+    // 增加该类别的文章计数
+    const category = categoryMap.get(categoryId);
     if (category) {
       category.count++;
     }
   });
   
   // 只返回有文章的类别
-  return categories.filter(cat => cat.count > 0);
+  return Array.from(categoryMap.values()).filter(cat => cat.count > 0);
 }
 
 // 根据ID获取类别
 export function getCategoryById(id: string): Category | null {
-  const category = categories.find(cat => cat.id === id);
+  // 尝试从所有类别中找到匹配的
+  const allCategories = getAllCategories();
+  const category = allCategories.find(cat => cat.id === id);
   
   if (!category) {
     return null;
   }
-  
-  // 更新该类别的文章数量
-  const posts = getAllPosts();
-  category.count = posts.filter(post => post.category.id === id).length;
   
   return category;
 }
