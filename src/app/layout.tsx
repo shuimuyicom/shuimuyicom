@@ -19,6 +19,25 @@ export const metadata: Metadata = {
   },
   description: "水木易的个人博客，分享技术、生活和读书心得",
   authors: [{ name: "水木易" }],
+  icons: {
+    icon: [
+      {
+        url: '/favicon.ico',
+        sizes: 'any',
+      },
+      {
+        url: '/images/avatar.png',
+        type: 'image/png',
+        sizes: '512x512',
+      },
+    ],
+    apple: [
+      {
+        url: '/images/avatar.png',
+        sizes: '512x512',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

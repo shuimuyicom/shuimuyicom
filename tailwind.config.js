@@ -9,116 +9,77 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // 和风配色系列
+        // 和纸色系
         washi: {
-          50: "#FAFAFA",    // 几乎纯白的纸色
-          100: "#F5F5F5",   // 淡和纸色
-          200: "#EEEEEE",   // 浅和纸色
-          300: "#E0E0E0",   // 中浅和纸色
-          900: "#212121",   // 深墨色
+          50: "#FDFBF7",   // 最浅的和纸色
+          100: "#F7F4ED",  // 浅和纸色
+          200: "#EFE9DB",  // 中浅和纸色
+          300: "#E5DBc9",  // 中和纸色
+          400: "#D6C9B3",  // 中深和纸色
+          500: "#C5B59B",  // 深和纸色
         },
+        // 墨色系
         sumi: {
-          50: "#FAFAFA",    // 最浅的墨色
-          100: "#F5F5F5",   // 极淡的墨色
-          200: "#EEEEEE",   // 淡墨色
-          300: "#E0E0E0",   // 浅墨色
-          400: "#BDBDBD",   // 中浅墨色
-          500: "#9E9E9E",   // 中墨色
-          600: "#757575",   // 中深墨色
-          700: "#616161",   // 深墨色
-          800: "#424242",   // 极深墨色
-          900: "#212121",   // 近黑墨色
-          950: "#121212",   // 几乎纯黑的墨色
+          50: "#F9F9F9",   // 最浅的墨色
+          100: "#F2F2F2",  // 极浅墨色
+          200: "#E6E6E6",  // 浅墨色
+          300: "#D1D1D1",  // 中浅墨色
+          400: "#A3A3A3",  // 中墨色
+          500: "#737373",  // 中深墨色
+          600: "#525252",  // 深墨色
+          700: "#404040",  // 很深墨色
+          800: "#262626",  // 极深墨色
+          900: "#171717",  // 近黑墨色
+          950: "#0A0A0A",  // 纯墨色
         },
-        // 新增藤色系列 - 日式淡紫色
-        wisteria: {
-          50: "#F5F3FA",    // 极淡藤色
+        // 黑白灰配色
+        bg: {
+          50: "#FAFAFA",    // 最浅的背景色
+          100: "#F5F5F5",   // 极淡的背景色
+          200: "#EEEEEE",   // 浅背景色
+          300: "#E0E0E0",   // 中浅背景色
+          900: "#212121",   // 深背景色
+          950: "#121212",   // 近黑背景色
+        },
+        card: {
+          50: "#FFFFFF",    // 卡片基础色（亮色模式）
+          100: "#F9F9F9",   // 卡片次级色
+          900: "#1A1A1A",   // 卡片深色（暗色模式）
+          950: "#0F0F0F",   // 卡片最深色
+        },
+        ink: {
+          100: "#E5E5E5",   // 最浅墨色
+          200: "#C9C9C9",   // 浅墨色
+          300: "#A3A3A3",   // 中浅墨色
+          400: "#787878",   // 中墨色
+          500: "#525252",   // 次深墨色
+          600: "#404040",   // 深墨色
+          700: "#2E2E2E",   // 很深墨色
+          800: "#1F1F1F",   // 极深墨色
+          900: "#171717",   // 近黑墨色
+        },
+        accent: {
           100: "#E9E4F4",   // 淡藤色
           200: "#D4CAE9",   // 浅藤色
           300: "#BFB0DE",   // 藤色
-          400: "#A996D3",   // 中藤色
           500: "#937CC8",   // 标准藤色
           600: "#7A62BD",   // 深藤色
           700: "#624AA1",   // 更深藤色
-          800: "#493685",   // 极深藤色
-          900: "#312269",   // 近黑藤色
         },
-        // 日式点缀色
-        matcha: {
-          50: "#F1F8E9",    // 极淡抹茶色
-          100: "#DCEDC8",   // 淡抹茶色
-          200: "#C5E1A5",   // 浅抹茶色
-          600: "#689F38",   // 抹茶色
-          700: "#558B2F",   // 深抹茶色
-        },
-        sakura: {
-          50: "#FCE4EC",    // 极淡樱花色
-          100: "#F8BBD0",   // 淡樱花色
-          200: "#F48FB1",   // 浅樱花色
-          300: "#F06292",   // 樱花色
-        },
-        // 保留原有的color系列作为备用
-        ink: {
-          50: "#F5F5F5",    // 最浅的墨色（几乎是白色）
-          100: "#E8E8E8",   // 极淡的墨色
-          200: "#D1D1D1",   // 淡墨色
-          300: "#B9B9B9",   // 浅墨色
-          400: "#8F8F8F",   // 中浅墨色
-          500: "#666666",   // 中墨色
-          600: "#4D4D4D",   // 中深墨色
-          700: "#333333",   // 深墨色
-          800: "#1A1A1A",   // 极深墨色
-          900: "#0A0A0A",   // 近黑墨色
-          950: "#050505",   // 几乎纯黑的墨色
-        },
-        rice: {
-          50: "#FFFDF5",    // 米白色
-          100: "#FAF5E8",   // 浅米色
-          200: "#F5ECD6",   // 米黄色
-          900: "#A69C77",   // 深米色
-        },
-        cloud: {
-          50: "#F0F5F9",    // 淡青灰色
-          100: "#E1EBF2",   // 浅青灰色
-          200: "#D0E0EA",   // 青灰色
-          300: "#BDD5E3",   // 深青灰色
-        },
-        bamboo: {
-          50: "#F2F7F2",    // 淡竹绿色
-          100: "#E5EFE5",   // 浅竹绿色
-          200: "#D6E6D6",   // 竹绿色
-        },
-        sand: {
-          50: "#F7F6F4",    // 淡沙色
-          100: "#EFEAE5",   // 浅沙色
-          200: "#E6DFD8",   // 沙色
-        },
-      },
-      backgroundImage: {
-        'ink-wash': "url('/images/ink-wash-bg.svg')",
       },
       fontFamily: {
         calligraphy: ['var(--font-noto-serif-sc)', 'serif'],
         sans: ['var(--font-noto-serif-sc)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
-      spacing: {
-        '72': '18rem',
-        '84': '21rem',
-        '96': '24rem',
-      },
-      borderWidth: {
-        '1': '1px',
-      },
       boxShadow: {
-        'washi': '0 1px 3px rgba(0, 0, 0, 0.05)',
-        'washi-md': '0 4px 6px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.03)',
-        'washi-lg': '0 10px 15px rgba(0, 0, 0, 0.03), 0 4px 6px rgba(0, 0, 0, 0.02)',
+        'surface': '0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1)',
+        'elevated': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.1)',
       },
       typography: (theme) => ({
         DEFAULT: {
           css: {
             maxWidth: '65ch',
-            color: theme('colors.sumi.800'),
+            color: theme('colors.ink.500'),
             lineHeight: '1.75',
             '>*': {
               marginTop: '1.5em',
@@ -130,7 +91,7 @@ module.exports = {
               lineHeight: '1.75',
             },
             'h1, h2, h3, h4, h5, h6': {
-              color: theme('colors.sumi.900'),
+              color: theme('colors.ink.700'),
               fontWeight: '500',
             },
             h1: {
@@ -140,7 +101,7 @@ module.exports = {
             h2: {
               fontSize: '1.75em',
               letterSpacing: '-0.025em',
-              borderBottom: `1px solid ${theme('colors.sumi.200')}`,
+              borderBottom: `1px solid ${theme('colors.bg.200')}`,
               paddingBottom: '0.5rem',
             },
             h3: {
@@ -150,16 +111,16 @@ module.exports = {
               fontSize: '1.25em',
             },
             a: {
-              color: theme('colors.wisteria.600'),
+              color: theme('colors.accent.600'),
               textDecoration: 'none',
               transition: 'color 0.2s',
               '&:hover': {
-                color: theme('colors.wisteria.500'),
+                color: theme('colors.accent.500'),
               },
             },
             code: {
-              color: theme('colors.sumi.900'),
-              backgroundColor: theme('colors.washi.100'),
+              color: theme('colors.ink.700'),
+              backgroundColor: theme('colors.bg.100'),
               padding: '0.25rem 0.4rem',
               borderRadius: '0.25rem',
               fontSize: '0.875em',
@@ -171,8 +132,8 @@ module.exports = {
               content: '""',
             },
             pre: {
-              backgroundColor: theme('colors.sumi.900'),
-              color: theme('colors.washi.50'),
+              backgroundColor: theme('colors.ink.800'),
+              color: theme('colors.bg.100'),
               borderRadius: '0.25rem',
               overflowX: 'auto',
               fontSize: '0.875em',
@@ -185,8 +146,8 @@ module.exports = {
             },
             blockquote: {
               fontStyle: 'normal',
-              color: theme('colors.sumi.700'),
-              borderLeftColor: theme('colors.wisteria.500'),
+              color: theme('colors.ink.500'),
+              borderLeftColor: theme('colors.accent.300'),
               quotes: '"\\201C""\\201D""\\2018""\\2019"',
               marginLeft: '0',
               paddingLeft: '1.5em',
@@ -196,9 +157,6 @@ module.exports = {
             },
             'blockquote p:last-of-type::after': {
               content: 'close-quote',
-            },
-            img: {
-              borderRadius: '0.25rem',
             },
             ul: {
               listStyleType: 'disc',
@@ -211,17 +169,27 @@ module.exports = {
               marginTop: '0.5em',
               marginBottom: '0.5em',
             },
+            img: {
+              marginTop: '2em',
+              marginBottom: '2em',
+              borderRadius: '0.25rem',
+            },
+            hr: {
+              marginTop: '2em',
+              marginBottom: '2em',
+              borderColor: theme('colors.bg.200'),
+            },
             table: {
               fontSize: '0.875em',
               lineHeight: '1.5',
             },
             'thead tr': {
               borderBottomWidth: '2px',
-              borderBottomColor: theme('colors.sumi.300'),
+              borderBottomColor: theme('colors.bg.300'),
             },
             'tbody tr': {
               borderBottomWidth: '1px',
-              borderBottomColor: theme('colors.sumi.200'),
+              borderBottomColor: theme('colors.bg.200'),
             },
             'tbody tr:last-child': {
               borderBottomWidth: '0',
@@ -231,46 +199,49 @@ module.exports = {
               textAlign: 'left',
             },
             th: {
-              color: theme('colors.sumi.900'),
               fontWeight: '500',
+              color: theme('colors.ink.700'),
             },
           },
         },
         dark: {
           css: {
-            color: theme('colors.sumi.300'),
+            color: theme('colors.ink.300'),
             'h1, h2, h3, h4, h5, h6': {
-              color: theme('colors.washi.100'),
+              color: theme('colors.bg.100'),
             },
             h2: {
-              borderBottomColor: theme('colors.sumi.700'),
+              borderBottomColor: theme('colors.ink.700'),
             },
             a: {
-              color: theme('colors.wisteria.300'),
+              color: theme('colors.accent.300'),
               '&:hover': {
-                color: theme('colors.wisteria.200'),
+                color: theme('colors.accent.200'),
               },
             },
             code: {
-              color: theme('colors.washi.100'),
-              backgroundColor: theme('colors.sumi.800'),
+              color: theme('colors.bg.100'),
+              backgroundColor: theme('colors.ink.700'),
             },
             pre: {
-              backgroundColor: theme('colors.sumi.900'),
-              color: theme('colors.washi.100'),
+              backgroundColor: theme('colors.ink.800'),
+              color: theme('colors.bg.100'),
             },
             blockquote: {
-              color: theme('colors.sumi.400'),
-              borderLeftColor: theme('colors.wisteria.500'),
+              color: theme('colors.ink.400'),
+              borderLeftColor: theme('colors.accent.600'),
             },
             'thead tr': {
-              borderBottomColor: theme('colors.sumi.700'),
+              borderBottomColor: theme('colors.ink.600'),
             },
             'tbody tr': {
-              borderBottomColor: theme('colors.sumi.800'),
+              borderBottomColor: theme('colors.ink.700'),
             },
             th: {
-              color: theme('colors.washi.100'),
+              color: theme('colors.bg.100'),
+            },
+            hr: {
+              borderColor: theme('colors.ink.700'),
             },
           },
         },
@@ -281,18 +252,12 @@ module.exports = {
           '100%': { opacity: '1' },
         },
         fadeInUp: {
-          '0%': { 
-            opacity: '0',
-            transform: 'translateY(10px)'
-          },
-          '100%': { 
-            opacity: '1',
-            transform: 'translateY(0)'
-          },
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
       animation: {
-        fadeIn: 'fadeIn 0.3s ease-in-out',
+        fadeIn: 'fadeIn 0.3s ease-out',
         fadeInUp: 'fadeInUp 0.4s ease-out',
       },
     },

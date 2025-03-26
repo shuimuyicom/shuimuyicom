@@ -17,7 +17,7 @@
     font-family: var(--font-noto-serif-sc), serif;
   }
   body {
-    @apply bg-ink-50 dark:bg-ink-900 text-ink-800 dark:text-ink-100;
+    @apply bg-bg-50 dark:bg-ink-900 text-ink-600 dark:text-ink-300;
     @apply transition-colors duration-300;
   }
 }
@@ -25,74 +25,76 @@
 @layer components {
   /* 水墨风格UI元素 */
   .ink-border {
-    @apply border-ink-300 dark:border-ink-700 border-opacity-60;
+    @apply border-bg-200 dark:border-ink-700 border-opacity-60;
   }
   
   .ink-card {
-    @apply bg-white dark:bg-ink-800 shadow-sm border border-ink-200 dark:border-ink-700;
+    @apply bg-card-50 dark:bg-ink-800 shadow-surface border border-bg-200 dark:border-ink-700;
   }
   
   .ink-btn {
-    @apply px-4 py-2 bg-ink-800 text-white hover:bg-ink-900 dark:bg-ink-700 dark:hover:bg-ink-600;
+    @apply px-4 py-2 bg-ink-700 text-card-50 hover:bg-ink-800 dark:bg-ink-700 dark:hover:bg-ink-600;
     @apply transition-colors duration-200;
   }
   
   .ink-btn-outline {
-    @apply px-4 py-2 bg-transparent border border-ink-800 text-ink-800;
-    @apply hover:bg-ink-800 hover:text-white;
-    @apply dark:border-ink-300 dark:text-ink-200 dark:hover:bg-ink-700;
+    @apply px-4 py-2 bg-transparent border border-ink-700 text-ink-700;
+    @apply hover:bg-ink-700 hover:text-card-50;
+    @apply dark:border-ink-300 dark:text-ink-300 dark:hover:bg-ink-700;
     @apply transition-colors duration-200;
   }
   
-  .rice-paper {
-    @apply bg-rice-50 dark:bg-ink-800;
+  .accent-btn {
+    @apply px-4 py-2 bg-accent-500 text-card-50 hover:bg-accent-600;
+    @apply dark:bg-accent-600 dark:hover:bg-accent-500;
+    @apply transition-colors duration-200;
   }
 
   /* 文章排版样式 */
   .prose h1 {
-    @apply text-3xl font-normal mt-8 mb-6 text-ink-900 dark:text-ink-50;
+    @apply text-3xl font-normal mt-8 mb-6 text-ink-800 dark:text-bg-100;
     @apply font-calligraphy;
   }
   
   .prose h2 {
-    @apply text-2xl font-normal mt-6 mb-4 text-ink-800 dark:text-ink-100;
+    @apply text-2xl font-normal mt-6 mb-4 text-ink-700 dark:text-bg-100;
     @apply font-calligraphy;
   }
   
   .prose h3 {
-    @apply text-xl font-normal mt-5 mb-3 text-ink-700 dark:text-ink-200;
+    @apply text-xl font-normal mt-5 mb-3 text-ink-600 dark:text-ink-200;
     @apply font-calligraphy;
   }
   
   .prose p {
-    @apply my-4 text-ink-700 dark:text-ink-200 leading-relaxed;
+    @apply my-4 text-ink-500 dark:text-ink-300 leading-relaxed;
   }
   
   .prose ul {
-    @apply list-disc pl-6 my-4 text-ink-700 dark:text-ink-200;
+    @apply list-disc pl-6 my-4 text-ink-500 dark:text-ink-300;
   }
   
   .prose ol {
-    @apply list-decimal pl-6 my-4 text-ink-700 dark:text-ink-200;
+    @apply list-decimal pl-6 my-4 text-ink-500 dark:text-ink-300;
   }
   
   .prose a {
-    @apply text-ink-700 hover:text-ink-900 dark:text-ink-300 dark:hover:text-ink-100;
-    @apply underline underline-offset-2 decoration-ink-300 dark:decoration-ink-600;
+    @apply text-accent-600 hover:text-accent-500 dark:text-accent-300 dark:hover:text-accent-200;
+    @apply underline underline-offset-2 decoration-bg-300 dark:decoration-ink-600;
   }
   
   .prose blockquote {
-    @apply border-l-4 border-ink-300 dark:border-ink-600 pl-4 italic my-6;
-    @apply text-ink-600 dark:text-ink-300;
+    @apply border-l-4 border-accent-300 dark:border-accent-600 pl-4 italic my-6;
+    @apply text-ink-500 dark:text-ink-400;
   }
   
   .prose code {
-    @apply bg-ink-100 dark:bg-ink-800 rounded px-1 py-0.5 font-mono text-sm;
+    @apply bg-bg-100 dark:bg-ink-800 rounded px-1 py-0.5 font-mono text-sm;
     @apply text-ink-700 dark:text-ink-300;
   }
   
   .prose pre {
-    @apply bg-ink-100 dark:bg-ink-800 p-4 rounded my-4 overflow-x-auto;
-    @apply border border-ink-200 dark:border-ink-700;
+    @apply bg-bg-100 dark:bg-ink-800 p-4 rounded my-4 overflow-x-auto;
+    @apply border border-bg-200 dark:border-ink-700;
   }
 }

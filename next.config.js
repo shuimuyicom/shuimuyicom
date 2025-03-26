@@ -8,6 +8,7 @@ const nextConfig = {
   images: {
     domains: [],
     formats: ['image/avif', 'image/webp'],
+    remotePatterns: [],
   },
 
   // 在开发模式下启用完整类型检查，但在构建时只报告严重错误
