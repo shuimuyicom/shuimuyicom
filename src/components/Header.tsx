@@ -41,13 +41,13 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-gray-50/90 dark:bg-ink-900/90 border-b border-gray-200/50 dark:border-gray-700/50 supports-[backdrop-filter]:bg-gray-100/75 supports-[backdrop-filter]:dark:bg-ink-900/75">
+    <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-card-50/90 dark:bg-ink-900/90 supports-[backdrop-filter]:bg-card-50/75 supports-[backdrop-filter]:dark:bg-ink-900/75">
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
-              <div className="h-8 w-8 rounded-lg overflow-hidden relative">
+              <div className="h-8 w-8 rounded-full overflow-hidden relative">
                 <Image
                   src="/images/avatar.png"
                   alt="水木易"

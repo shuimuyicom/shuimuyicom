@@ -35,7 +35,7 @@ export default async function CategoryPage(props: {
   const posts = await getPostsByCategory(categoryId);
   
   return (
-    <main className="min-h-screen bg-washi-50 dark:bg-sumi-950">
+    <main className="min-h-screen bg-gray-50 dark:bg-sumi-950">
       <div className="max-w-6xl mx-auto bg-card-50 dark:bg-ink-900 min-h-screen shadow-xl">
         <div className="px-6 py-16 md:py-20">
           <header className="mb-16">
