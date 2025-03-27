@@ -24,11 +24,11 @@ export default function AboutPage() {
                 />
               </div>
             </div>
-            <h1 className="text-3xl md:text-4xl font-calligraphy mb-6 text-ink-800 dark:text-bg-100">关于水木易</h1>
+            <h1 className="text-3xl md:text-4xl mb-6 text-ink-800 dark:text-bg-100">关于水木易</h1>
             <div className="h-px w-24 bg-bg-300 dark:bg-ink-600 mx-auto"></div>
           </header>
 
-          <div className="prose prose-lg dark:prose-invert prose-headings:font-calligraphy prose-headings:font-medium prose-headings:text-ink-800 dark:prose-headings:text-bg-100 prose-p:text-ink-600 dark:prose-p:text-ink-300 prose-a:text-accent-600 dark:prose-a:text-accent-300 prose-a:no-underline max-w-3xl mx-auto">
+          <div className="prose prose-lg dark:prose-invert prose-headings:font-medium prose-headings:text-ink-800 dark:prose-headings:text-bg-100 prose-p:text-ink-600 dark:prose-p:text-ink-300 prose-a:text-accent-600 dark:prose-a:text-accent-300 prose-a:no-underline max-w-3xl mx-auto">
             <p className="mb-8 text-center">
               欢迎来到我的个人博客。这里是我分享思考、知识和经验的地方。
             </p>

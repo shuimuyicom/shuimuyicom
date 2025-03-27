@@ -68,8 +68,31 @@ module.exports = {
         },
       },
       fontFamily: {
-        calligraphy: ['var(--font-noto-serif-sc)', 'serif'],
-        sans: ['var(--font-noto-serif-sc)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        // 中文字体优先，按不同操作系统优化排序
+        sans: [
+          // 中文字体
+          'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', 'Noto Sans SC', 
+          // 西文字体
+          '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 
+          'Helvetica Neue', 'Arial', 'sans-serif', 
+          // Emoji字体
+          'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'
+        ],
+        // 纯西文字体，需要时可单独使用
+        latin: [
+          '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 
+          'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'
+        ],
+        // 中文衬线字体
+        serif: [
+          'Songti SC', 'Source Han Serif SC', 'Noto Serif SC', 'SimSun', 
+          'Georgia', 'Times New Roman', 'serif'
+        ],
+        // 等宽字体
+        mono: [
+          'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 
+          'Liberation Mono', 'Courier New', 'monospace'
+        ],
       },
       boxShadow: {
         'surface': '0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1)',

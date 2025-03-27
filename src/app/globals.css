@@ -5,6 +5,10 @@
 :root {
   --foreground-rgb: 26, 26, 26;
   --background-rgb: 245, 245, 245;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 .dark {
@@ -13,12 +17,35 @@
 }
 
 @layer base {
+  /* 基础排版规则 */
   html {
-    font-family: var(--font-noto-serif-sc), serif;
+    font-size: 16px;
+    letter-spacing: -0.01em;
   }
+  
   body {
     @apply bg-bg-50 dark:bg-ink-900 text-ink-600 dark:text-ink-300;
     @apply transition-colors duration-300;
+  }
+  
+  /* 中英文混排时的间距处理 */
+  :lang(zh) {
+    text-justify: inter-character;
+  }
+  
+  /* 设置特定元素使用拉丁文字体 */
+  .use-latin {
+    @apply font-latin;
+  }
+  
+  /* 设置使用衬线字体的元素 */
+  .use-serif {
+    @apply font-serif;
+  }
+  
+  /* 设置使用等宽字体的元素 */
+  code, pre, kbd, samp {
+    @apply font-mono;
   }
 }
 
@@ -53,17 +80,14 @@
   /* 文章排版样式 */
   .prose h1 {
     @apply text-3xl font-normal mt-8 mb-6 text-ink-800 dark:text-bg-100;
-    @apply font-calligraphy;
   }
   
   .prose h2 {
     @apply text-2xl font-normal mt-6 mb-4 text-ink-700 dark:text-bg-100;
-    @apply font-calligraphy;
   }
   
   .prose h3 {
     @apply text-xl font-normal mt-5 mb-3 text-ink-600 dark:text-ink-200;
-    @apply font-calligraphy;
   }
   
   .prose p {

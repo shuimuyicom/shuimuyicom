@@ -73,7 +73,7 @@ export default async function PostPage(props: {
                 <article className="w-full max-w-2xl">
                   {/* 文章头部 */}
                   <header className="mb-6 md:mb-8 animate-fadeInUp">
-                    <h1 className="text-xl sm:text-2xl md:text-2xl font-calligraphy font-semibold mb-3 md:mb-4 text-ink-900 dark:text-bg-50 leading-[1.8]">
+                    <h1 className="text-xl sm:text-2xl md:text-2xl font-semibold mb-3 md:mb-4 text-ink-900 dark:text-bg-50 leading-[1.8]">
                       {post.title}
                     </h1>
                     
@@ -104,7 +104,7 @@ export default async function PostPage(props: {
                   </header>
                   
                   {/* 文章内容 */}
-                  <div className="prose prose-lg dark:prose-invert prose-headings:font-calligraphy prose-headings:font-medium prose-headings:text-ink-800 dark:prose-headings:text-bg-100 prose-p:text-ink-600 dark:prose-p:text-ink-300 prose-a:text-accent-600 dark:prose-a:text-accent-300 prose-a:no-underline prose-p:text-justify [&>h2]:text-lg [&>h3]:text-base [&>h4]:text-sm mb-16">
+                  <div className="prose prose-lg dark:prose-invert prose-headings:font-medium prose-headings:text-ink-800 dark:prose-headings:text-bg-100 prose-p:text-ink-600 dark:prose-p:text-ink-300 prose-a:text-accent-600 dark:prose-a:text-accent-300 prose-a:no-underline max-w-3xl mx-auto">
                     <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
                   </div>
                   
@@ -147,7 +147,7 @@ export default async function PostPage(props: {
                   {/* 推荐阅读模块 */}
                   {recommendedPosts.length > 0 && (
                     <div className="mt-16 animate-fadeIn">
-                      <h2 className="text-lg font-calligraphy font-medium mb-6 text-ink-800 dark:text-bg-100 pb-2 border-b border-bg-200 dark:border-ink-700">
+                      <h2 className="text-lg font-medium mb-6 text-ink-800 dark:text-bg-100 pb-2 border-b border-bg-200 dark:border-ink-700">
                         推荐阅读
                       </h2>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -158,7 +158,7 @@ export default async function PostPage(props: {
                             className="group"
                           >
                             <div className="bg-bg-50 dark:bg-ink-800 p-5 border border-bg-200 dark:border-ink-700 hover:border-bg-300 dark:hover:border-ink-600 transition-all shadow-sm hover:shadow-md">
-                              <h3 className="text-base font-calligraphy font-medium mb-2 text-ink-800 dark:text-bg-100 group-hover:text-accent-600 dark:group-hover:text-accent-300 transition-colors line-clamp-2">
+                              <h3 className="text-base font-medium mb-2 text-ink-800 dark:text-bg-100 group-hover:text-accent-600 dark:group-hover:text-accent-300 transition-colors line-clamp-2">
                                 {recommendedPost.title}
                               </h3>
                               <div className="flex items-center space-x-3 text-xs text-ink-400 dark:text-ink-400">

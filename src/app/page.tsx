@@ -31,7 +31,7 @@ export default function Home() {
                 </div>
               </div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-5xl font-calligraphy mb-6 text-ink-800 dark:text-bg-100 leading-tight">水木易</h1>
+              <h1 className="text-4xl md:text-5xl lg:text-5xl mb-6 text-ink-800 dark:text-bg-100 leading-tight">水木易</h1>
               
               <p className="text-lg text-ink-500 dark:text-ink-400 mb-8 font-light">
                 技术爱好者 · 博客作者 · 终身学习者
@@ -45,13 +45,13 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row justify-center gap-5">
                 <Link 
                   href="/about" 
-                  className="px-8 py-2.5 bg-card-50 text-ink-800 dark:bg-ink-800 dark:text-bg-100 border border-ink-200 dark:border-ink-700 hover:bg-bg-50 dark:hover:bg-ink-700 transition-colors font-calligraphy tracking-wide shadow-surface"
+                  className="px-8 py-2.5 bg-card-50 text-ink-800 dark:bg-ink-800 dark:text-bg-100 border border-ink-200 dark:border-ink-700 hover:bg-bg-50 dark:hover:bg-ink-700 transition-colors tracking-wide shadow-surface"
                 >
                   了解更多
                 </Link>
                 <Link 
                   href="/categories" 
-                  className="px-8 py-2.5 bg-accent-500 text-card-50 dark:bg-accent-600 dark:text-card-50 hover:bg-accent-600 dark:hover:bg-accent-500 transition-colors font-calligraphy tracking-wide shadow-surface"
+                  className="px-8 py-2.5 bg-accent-500 text-card-50 dark:bg-accent-600 dark:text-card-50 hover:bg-accent-600 dark:hover:bg-accent-500 transition-colors tracking-wide shadow-surface"
                 >
                   浏览分类
                 </Link>
@@ -66,7 +66,7 @@ export default function Home() {
           
           {/* 最新文章部分 */}
           <section>
-            <h2 className="text-2xl font-calligraphy text-ink-800 dark:text-bg-100 mb-12 text-center">最新文章</h2>
+            <h2 className="text-2xl text-ink-800 dark:text-bg-100 mb-12 text-center">最新文章</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
               {latestPosts.length > 0 ? (
@@ -83,7 +83,7 @@ export default function Home() {
                       </Link>
                       
                       <Link href={`/posts/${post.id}`}>
-                        <h3 className="text-xl font-calligraphy mb-3 text-ink-800 dark:text-bg-100 group-hover:text-accent-600 dark:group-hover:text-accent-300 transition-colors">
+                        <h3 className="text-xl mb-3 text-ink-800 dark:text-bg-100 group-hover:text-accent-600 dark:group-hover:text-accent-300 transition-colors">
                           {post.title}
                         </h3>
                       </Link>
@@ -131,7 +131,7 @@ export default function Home() {
                     <path d="M12 18v-6"></path>
                     <path d="M8 15h8"></path>
                   </svg>
-                  <p className="text-center text-ink-500 dark:text-ink-300 text-lg font-calligraphy">暂无文章</p>
+                  <p className="text-center text-ink-500 dark:text-ink-300 text-lg">暂无文章</p>
                   <p className="text-center text-ink-400 dark:text-ink-500 mt-2 text-sm">敬请期待内容更新</p>
                 </div>
               )}

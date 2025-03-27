@@ -1,16 +1,7 @@
 import type { Metadata } from "next";
-import { Noto_Serif_SC } from 'next/font/google';
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
-// 配置思源宋体作为主字体
-const notoSerifSC = Noto_Serif_SC({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  display: 'swap',
-  variable: '--font-noto-serif-sc',
-});
 
 export const metadata: Metadata = {
   title: {
@@ -46,9 +37,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" className={`h-full ${notoSerifSC.variable}`}>
+    <html lang="zh-CN" className="h-full">
       <body 
-        className={`${notoSerifSC.className} antialiased min-h-screen flex flex-col`}
+        className="font-sans antialiased min-h-screen flex flex-col"
         suppressHydrationWarning
       >
         <Header />

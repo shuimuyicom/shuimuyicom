@@ -57,7 +57,7 @@ export default function Header() {
                   priority
                 />
               </div>
-              <span className="ml-3 text-lg font-calligraphy text-sumi-800 dark:text-bg-100">
+              <span className="ml-3 text-lg text-sumi-800 dark:text-bg-100">
                 水木易
               </span>
             </Link>
@@ -74,7 +74,7 @@ export default function Header() {
                     pathname === link.href
                       ? "text-accent-600 dark:text-accent-300 font-medium"
                       : "text-ink-500 dark:text-ink-300 hover:text-ink-700 dark:hover:text-bg-100"
-                  } transition-colors text-sm px-1 py-1 font-calligraphy`}
+                  } transition-colors text-sm px-1 py-1`}
                 >
                   {link.label}
                 </Link>
@@ -160,7 +160,7 @@ export default function Header() {
                     pathname === link.href
                       ? "text-accent-600 dark:text-accent-300 font-medium"
                       : "text-ink-500 dark:text-ink-300 hover:text-ink-700 dark:hover:text-bg-100"
-                  } px-2 py-1 font-calligraphy transition-colors text-sm`}
+                  } px-2 py-1 transition-colors text-sm`}
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}

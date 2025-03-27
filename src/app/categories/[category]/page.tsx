@@ -58,7 +58,7 @@ export default async function CategoryPage(props: {
               </Link>
             </div>
             
-            <h1 className="text-3xl md:text-4xl font-calligraphy mb-4 text-ink-800 dark:text-bg-100">
+            <h1 className="text-3xl md:text-4xl mb-4 text-ink-800 dark:text-bg-100">
               {category.name}
             </h1>
             
@@ -76,7 +76,7 @@ export default async function CategoryPage(props: {
                 >
                   <div className="p-6 md:p-8">
                     <Link href={`/posts/${post.id}`}>
-                      <h2 className="text-xl font-calligraphy mb-3 text-ink-800 dark:text-bg-100 group-hover:text-accent-600 dark:group-hover:text-accent-300 transition-colors">
+                      <h2 className="text-xl mb-3 text-ink-800 dark:text-bg-100 group-hover:text-accent-600 dark:group-hover:text-accent-300 transition-colors">
                         {post.title}
                       </h2>
                     </Link>
