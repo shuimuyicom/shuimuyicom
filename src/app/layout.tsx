@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     siteName: SITE_TITLE,
     images: [
       {
-        url: `${SITE_URL}/images/og/home.png`,
+        url: `${SITE_URL}/images/og/screenshot.png`,
         width: 1200,
         height: 630,
         alt: SITE_TITLE,
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: `${SITE_URL}/images/og/home.png`,
+        url: `${SITE_URL}/images/og/screenshot.png`,
         width: 1200,
         height: 630,
         alt: SITE_TITLE,

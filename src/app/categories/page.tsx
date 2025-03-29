@@ -4,7 +4,7 @@ import { getAllCategories } from "@/lib/posts";
 
 export const metadata: Metadata = {
   title: "文章分类 | 水木易",
-  description: "水木易的博客文章分类",
+  description: "文章分类",
 };
 
 // 定义分类类型
