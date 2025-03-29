@@ -41,7 +41,7 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-sumi-950">
       <div className="max-w-6xl mx-auto bg-card-50 dark:bg-ink-900 min-h-screen shadow-xl">
-        <div className="relative px-3 sm:px-6 py-16 sm:py-20 md:py-32">
+        <div className="relative px-3 sm:px-6 py-8 sm:py-16 md:py-24">
           
           <div className="max-w-3xl mx-auto">
             <div className="bg-white dark:bg-ink-800 rounded-xl sm:rounded-2xl shadow-lg shadow-violet-100 dark:shadow-none p-5 sm:p-8 md:p-10 mb-6 sm:mb-12">
