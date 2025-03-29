@@ -52,7 +52,16 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: [`${SITE_URL}/api/og?title=${encodeURIComponent(SITE_TITLE)}&subtitle=${encodeURIComponent(SITE_DESCRIPTION)}`],
+    images: [
+      {
+        url: `${SITE_URL}/api/og?title=${encodeURIComponent(SITE_TITLE)}&subtitle=${encodeURIComponent(SITE_DESCRIPTION)}`,
+        width: 1200,
+        height: 630,
+        alt: SITE_TITLE,
+        type: "image/png",
+      }
+    ],
+    site: "@shuimuyi",
     creator: "@shuimuyi",
   },
   alternates: {

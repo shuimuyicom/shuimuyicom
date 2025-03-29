@@ -38,7 +38,17 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt || post.title,
-      images: [`${SITE_URL}/api/og?title=${encodeURIComponent(post.title)}&subtitle=${encodeURIComponent(post.excerpt || "")}&type=article&date=${encodeURIComponent(post.date || "")}&category=${encodeURIComponent(post.category?.name || "")}`],
+      images: [
+        {
+          url: `${SITE_URL}/api/og?title=${encodeURIComponent(post.title)}&subtitle=${encodeURIComponent(post.excerpt || "")}&type=article&date=${encodeURIComponent(post.date || "")}&category=${encodeURIComponent(post.category?.name || "")}`,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+          type: "image/png",
+        }
+      ],
+      site: "@shuimuyi",
+      creator: "@shuimuyi",
     },
   };
 }

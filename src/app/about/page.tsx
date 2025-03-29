@@ -23,7 +23,17 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "关于 | 水木易",
     description: "了解关于水木易更多信息",
-    images: [`${SITE_URL}/api/og?title=${encodeURIComponent("关于 | 水木易")}&subtitle=${encodeURIComponent("了解关于水木易更多信息")}`],
+    images: [
+      {
+        url: `${SITE_URL}/api/og?title=${encodeURIComponent("关于 | 水木易")}&subtitle=${encodeURIComponent("了解关于水木易更多信息")}`,
+        width: 1200,
+        height: 630,
+        alt: "关于 | 水木易",
+        type: "image/png",
+      }
+    ],
+    site: "@shuimuyi",
+    creator: "@shuimuyi",
   },
 };
 
