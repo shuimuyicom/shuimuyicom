@@ -41,10 +41,11 @@ export const metadata: Metadata = {
     siteName: SITE_TITLE,
     images: [
       {
-        url: `${SITE_URL}/api/og?title=${encodeURIComponent(SITE_TITLE)}&subtitle=${encodeURIComponent(SITE_DESCRIPTION)}`,
+        url: `${SITE_URL}/images/og/home.png`,
         width: 1200,
         height: 630,
         alt: SITE_TITLE,
+        type: "image/png",
       },
     ],
   },
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: `${SITE_URL}/api/og?title=${encodeURIComponent(SITE_TITLE)}&subtitle=${encodeURIComponent(SITE_DESCRIPTION)}`,
+        url: `${SITE_URL}/images/og/home.png`,
         width: 1200,
         height: 630,
         alt: SITE_TITLE,

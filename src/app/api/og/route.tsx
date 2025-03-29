@@ -147,7 +147,7 @@ export async function GET(request: NextRequest): Promise<ImageResponse | Respons
             }
           ]
         }),
-        // 添加缓存控制头
+        // 添加明确的缓存控制和内容类型头
         headers: {
           'Cache-Control': 'public, max-age=3600, s-maxage=86400',
           'Content-Type': 'image/png',
