@@ -1,6 +1,4 @@
 import { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import SocialLinks from "@/components/SocialLinks";
 
 export const metadata: Metadata = {
