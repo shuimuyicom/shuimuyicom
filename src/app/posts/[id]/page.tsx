@@ -6,18 +6,6 @@ import { getPostById, getAllPosts } from "@/lib/posts";
 // 使用www子域名确保与重定向一致
 const SITE_URL = "https://www.shuimuyi.com";
 
-/**
- * 截取字符串到指定长度，并添加省略号
- * @param text 要截取的文本
- * @param maxLength 最大长度
- * @returns 截取后的文本
- */
-function truncateText(text: string, maxLength: number): string {
-  if (text.length <= maxLength) return text;
-  // 确保不会在字中间截断
-  return text.slice(0, maxLength) + '...';
-}
-
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const post = await getPostById(params.id);
   
