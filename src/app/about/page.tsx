@@ -15,11 +15,6 @@ export default function AboutPage() {
         <div className="relative px-6 py-20 md:py-32">
           <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-violet-100/70 to-transparent dark:from-violet-900/20 dark:to-transparent"></div>
           
-          <header className="relative mb-16 text-center">
-            <h1 className="text-3xl md:text-4xl mb-3 font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-700 to-purple-600 dark:from-violet-400 dark:to-purple-400">关于水木易</h1>
-            <div className="h-px w-32 bg-gradient-to-r from-transparent via-violet-400 dark:via-violet-500 to-transparent mx-auto mb-6"></div>
-          </header>
-
           <div className="max-w-3xl mx-auto">
             <div className="bg-white dark:bg-ink-800 rounded-2xl shadow-lg shadow-violet-100 dark:shadow-none p-8 md:p-10 mb-12">
               <h2 className="text-2xl md:text-3xl font-bold mb-8 text-ink-800 dark:text-bg-100 flex items-center">
