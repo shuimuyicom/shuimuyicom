@@ -1,0 +1,47 @@
+{
+  "name": "水木易",
+  "short_name": "水木易",
+  "description": "水木易 - 总是站在科技与人文的十字路口",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#8B5CF6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/avatar.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "categories": ["blog", "education", "lifestyle"],
+  "screenshots": [
+    {
+      "src": "/images/screenshot.png",
+      "type": "image/png",
+      "sizes": "1280x720",
+      "form_factor": "wide",
+      "label": "水木易博客首页"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "关于水木易",
+      "short_name": "关于",
+      "url": "/about",
+      "description": "了解更多关于水木易的信息",
+      "icons": [
+        {
+          "src": "/images/avatar.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+} 

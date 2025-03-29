@@ -1,32 +1,53 @@
 import { ImageResponse } from 'next/og'
+import { NextRequest } from 'next/server'
 
+// 设置运行时环境为Edge，充分利用Edge运行时的性能优势
 export const runtime = 'edge'
 
-// 定义字体文件路径，确保中文显示正常
-const fontRegular = fetch(
-  new URL('../../../assets/fonts/NotoSansSC-Regular.ttf', import.meta.url)
-).then((res) => res.arrayBuffer())
+// 设置路由段配置，优化重新验证策略
+export const revalidate = 3600 // 1小时重新验证一次
 
-const fontBold = fetch(
-  new URL('../../../assets/fonts/NotoSansSC-Bold.ttf', import.meta.url)
-).then((res) => res.arrayBuffer())
+// 为中文网站优化的字体加载，使用可变字体以减少文件大小
+const loadFont = async (url: string): Promise<ArrayBuffer> => {
+  const res = await fetch(url, {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+    },
+  })
+  if (!res.ok) {
+    throw new Error(`Failed to load font: ${res.status} ${res.statusText}`)
+  }
+  return await res.arrayBuffer()
+}
 
-export async function GET(request: Request) {
+// 使用 JSDoc 增强类型安全和文档化
+/**
+ * 生成OG图片
+ * @param {NextRequest} request - 请求对象
+ * @returns {Promise<ImageResponse>} 生成的图片响应
+ */
+export async function GET(request: NextRequest): Promise<ImageResponse | Response> {
   try {
+    // 使用Next.js 15推荐的URL解析方式
     const { searchParams } = new URL(request.url)
     
-    // 从查询参数中获取自定义值
-    const title = searchParams.get('title') || '水木易'
-    const subtitle = searchParams.get('subtitle') || '总是站在科技与人文的十字路口'
-    const type = searchParams.get('type') || 'default'
+    // 使用严格类型断言和默认值
+    const title = searchParams.get('title')?.slice(0, 100) || '水木易'
+    const subtitle = searchParams.get('subtitle')?.slice(0, 200) || '总是站在科技与人文的十字路口'
+    const type = searchParams.has('type') ? searchParams.get('type') : 'default'
+    const date = searchParams.get('date') || ''
+    const category = searchParams.get('category') || ''
     
-    // 加载字体
-    const [regularFont, boldFont] = await Promise.all([
-      fontRegular,
-      fontBold,
-    ])
-
-    return new ImageResponse(
+    // 并行加载字体，使用CDN以减少项目大小
+    const fontData = await loadFont(
+      'https://cdn.jsdelivr.net/gh/googlefonts/noto-cjk@main/Sans/Variable/OTF/NotoSansSC-VF.otf'
+    ).catch(() => {
+      console.warn('Failed to load font, falling back to system fonts')
+      return new ArrayBuffer(0)
+    })
+    
+    // 使用更多Next.js 15支持的CSS特性
+    const imageResponse = new ImageResponse(
       (
         <div
           style={{
@@ -38,9 +59,32 @@ export async function GET(request: Request) {
             justifyContent: 'center',
             backgroundColor: '#F5F7FA',
             background: 'linear-gradient(to bottom right, #EBF4FF, #F3E8FF, #FCE7F3)',
+            fontFamily: '"NotoSansSC", ui-sans-serif, system-ui, -apple-system, sans-serif',
+            overflow: 'hidden',
+            position: 'relative',
           }}
         >
-          {/* 白色卡片容器 */}
+          {/* 背景装饰图案 - 利用Next.js 15改进的SVG支持 */}
+          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0.05 }}>
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div
+                key={i}
+                style={{
+                  position: 'absolute',
+                  borderRadius: '50%',
+                  background: 'linear-gradient(120deg, #8B5CF6, #EC4899)',
+                  width: `${200 + i * 100}px`,
+                  height: `${200 + i * 100}px`,
+                  top: `${Math.sin(i * 0.5) * 100 + 50}px`,
+                  left: `${Math.cos(i * 0.5) * 100 + i * 200}px`,
+                  opacity: 0.1,
+                  transform: `rotate(${i * 20}deg)`,
+                }}
+              />
+            ))}
+          </div>
+          
+          {/* 白色卡片容器 - 优化阴影和圆角 */}
           <div
             style={{
               display: 'flex',
@@ -49,15 +93,17 @@ export async function GET(request: Request) {
               alignItems: 'center',
               textAlign: 'center',
               backgroundColor: 'white',
-              borderRadius: '10px',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+              borderRadius: '24px',
+              boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
               margin: '80px',
               padding: '60px',
               width: '90%',
               maxWidth: '900px',
+              position: 'relative',
+              overflow: 'hidden',
             }}
           >
-            {/* 网站标识 */}
+            {/* 网站标识 - 使用Next.js 15支持的更多CSS功能 */}
             <div
               style={{
                 display: 'flex',
@@ -66,7 +112,11 @@ export async function GET(request: Request) {
                 top: '40px',
                 fontSize: '24px',
                 color: '#6B7280',
-                opacity: 0.8,
+                opacity: 0.9,
+                background: 'rgba(255, 255, 255, 0.7)',
+                backdropFilter: 'blur(6px)',
+                padding: '8px 16px',
+                borderRadius: '9999px',
               }}
             >
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
@@ -77,7 +127,7 @@ export async function GET(request: Request) {
               <span style={{ marginLeft: '8px' }}>shuimuyi.com</span>
             </div>
             
-            {/* 标题 */}
+            {/* 标题 - 优化文字大小和行高 */}
             <h1
               style={{
                 fontSize: type === 'article' ? '60px' : '72px',
@@ -86,36 +136,41 @@ export async function GET(request: Request) {
                 color: '#8B5CF6',
                 lineHeight: 1.2,
                 maxWidth: '800px',
+                // 添加文字阴影增强可读性
+                textShadow: '0px 2px 4px rgba(139, 92, 246, 0.1)',
               }}
             >
               {title}
             </h1>
             
-            {/* 副标题 */}
+            {/* 副标题 - 使用更好的文字渲染 */}
             <p
               style={{
                 fontSize: '30px',
-                marginTop: '0',
+                margin: '0',
                 color: '#4B5563',
                 lineHeight: 1.5,
                 maxWidth: '800px',
+                fontWeight: '400',
               }}
             >
               {subtitle}
             </p>
             
             {/* 如果是文章类型，添加日期和类别标签 */}
-            {type === 'article' && searchParams.get('date') && (
+            {type === 'article' && date && (
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  marginTop: '28px',
-                  padding: '8px 16px',
+                  marginTop: '32px',
+                  padding: '10px 20px',
                   borderRadius: '9999px',
                   backgroundColor: '#F3E8FF',
                   color: '#8B5CF6',
                   fontSize: '24px',
+                  fontWeight: '500',
+                  boxShadow: '0 2px 6px rgba(139, 92, 246, 0.15)',
                 }}
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ marginRight: '8px' }}>
@@ -126,7 +181,7 @@ export async function GET(request: Request) {
                   <path d="M16 3v4" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round"/>
                   <path d="M3 9h18" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
-                {searchParams.get('date')} · {searchParams.get('category') || '博客'}
+                {date} {category && `· ${category}`}
               </div>
             )}
           </div>
@@ -135,26 +190,35 @@ export async function GET(request: Request) {
       {
         width: 1200,
         height: 630,
-        fonts: [
+        // 使用加载的字体，如果没有则回退到系统字体
+        fonts: fontData.byteLength > 0 ? [
           {
             name: 'NotoSansSC',
-            data: regularFont,
+            data: fontData,
+            style: 'normal',
             weight: 400,
-            style: 'normal',
-          },
-          {
-            name: 'NotoSansSC',
-            data: boldFont,
-            weight: 700,
-            style: 'normal',
-          },
-        ],
+          }
+        ] : undefined,
+        // 添加缓存控制头
+        headers: {
+          'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+          'Content-Type': 'image/png',
+          'Content-Disposition': 'inline',
+        },
       },
     )
-  } catch (error: any) {
-    console.log(`${error.message}`)
-    return new Response(`Failed to generate the OG image`, {
+    
+    return imageResponse
+  } catch (error: unknown) {
+    // 增强错误处理，提供更详细信息
+    console.error('Error generating image:', error instanceof Error ? error.message : String(error))
+    
+    // 返回带有详细错误信息的响应
+    return new Response(`Failed to generate the OG image: ${error instanceof Error ? error.message : 'Unknown error'}`, {
       status: 500,
+      headers: {
+        'Content-Type': 'text/plain',
+      }
     })
   }
 } 

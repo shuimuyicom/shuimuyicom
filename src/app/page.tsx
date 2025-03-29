@@ -10,12 +10,31 @@ export const metadata: Metadata = {
   openGraph: {
     title: "水木易 | 总是站在科技与人文的十字路口",
     description: "用智慧帮你渡过困境，用格局助你站得更高",
-    images: ['/images/og/default-og.svg'],
+    images: [
+      {
+        url: `/api/og?title=${encodeURIComponent("水木易")}&subtitle=${encodeURIComponent("总是站在科技与人文的十字路口")}`,
+        width: 1200,
+        height: 630,
+        alt: '水木易 - 个人网站首页',
+        type: 'image/png',
+      }
+    ],
+    locale: 'zh_CN',
+    type: 'website',
   },
   twitter: {
+    card: 'summary_large_image',
     title: "水木易 | 总是站在科技与人文的十字路口",
     description: "用智慧帮你渡过困境，用格局助你站得更高",
-    images: ['/images/og/default-og.svg'],
+    images: [
+      {
+        url: `/api/og?title=${encodeURIComponent("水木易")}&subtitle=${encodeURIComponent("总是站在科技与人文的十字路口")}`,
+        width: 1200,
+        height: 630,
+        alt: '水木易 - 个人网站首页',
+      }
+    ],
+    creator: '@shuimuyi',
   }
 };
 

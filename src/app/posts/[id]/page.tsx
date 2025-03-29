@@ -15,36 +15,52 @@ export async function generateMetadata(
     };
   }
   
+  // 安全处理描述，确保不为空
+  const safeExcerpt = post.excerpt || "水木易的博客文章";
+  const safeDate = post.date || new Date().toISOString().split('T')[0];
+  const safeCategory = post.category?.name || "博客";
+  
   return {
     title: `${post.title} | 水木易`,
-    description: post.excerpt,
+    description: safeExcerpt,
     openGraph: {
       title: post.title,
-      description: post.excerpt,
+      description: safeExcerpt,
       type: 'article',
-      publishedTime: post.date,
+      publishedTime: safeDate,
       authors: ['水木易'],
       images: [
         {
-          url: `/api/og?title=${encodeURIComponent(post.title)}&subtitle=${encodeURIComponent(post.excerpt || '')}&type=article&date=${encodeURIComponent(post.date)}&category=${encodeURIComponent(post.category.name)}`,
+          url: `/api/og?title=${encodeURIComponent(post.title)}&subtitle=${encodeURIComponent(safeExcerpt)}&type=article&date=${encodeURIComponent(safeDate)}&category=${encodeURIComponent(safeCategory)}`,
           width: 1200,
           height: 630,
           alt: post.title,
+          type: 'image/png',
         }
       ],
+      locale: 'zh_CN',
+      modifiedTime: safeDate,
+      section: safeCategory,
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
-      description: post.excerpt,
+      description: safeExcerpt,
       images: [
         {
-          url: `/api/og?title=${encodeURIComponent(post.title)}&subtitle=${encodeURIComponent(post.excerpt || '')}&type=article&date=${encodeURIComponent(post.date)}&category=${encodeURIComponent(post.category.name)}`,
+          url: `/api/og?title=${encodeURIComponent(post.title)}&subtitle=${encodeURIComponent(safeExcerpt)}&type=article&date=${encodeURIComponent(safeDate)}&category=${encodeURIComponent(safeCategory)}`,
           width: 1200,
           height: 630,
           alt: post.title,
         }
       ],
+      creator: '@shuimuyi',
+    },
+    // Next.js 15新增：添加结构化数据
+    other: {
+      'og:locale:alternate': ['en_US'],
+      'article:author': 'https://shuimuyi.com/about',
+      'article:publisher': 'https://shuimuyi.com',
     }
   };
 }

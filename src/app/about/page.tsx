@@ -11,24 +11,29 @@ export const metadata: Metadata = {
     description: "计算机本科和哲学硕士的跨学科学习背景，七年产品经理的实战经验。致力于国学命理领域的研究与应用。",
     images: [
       {
-        url: '/api/og?title=关于水木易&subtitle=了解我的经历、专业和兴趣',
+        url: `/api/og?title=${encodeURIComponent("关于水木易")}&subtitle=${encodeURIComponent("了解我的经历、专业和兴趣")}`,
         width: 1200,
         height: 630,
         alt: '关于水木易 - 个人简介页面',
+        type: 'image/png',
       }
     ],
+    locale: 'zh_CN',
+    type: 'profile',
   },
   twitter: {
+    card: 'summary_large_image',
     title: "关于水木易 | 个人简介",
     description: "计算机本科和哲学硕士的跨学科学习背景，七年产品经理的实战经验。致力于国学命理领域的研究与应用。",
     images: [
       {
-        url: '/api/og?title=关于水木易&subtitle=了解我的经历、专业和兴趣',
+        url: `/api/og?title=${encodeURIComponent("关于水木易")}&subtitle=${encodeURIComponent("了解我的经历、专业和兴趣")}`,
         width: 1200,
         height: 630,
         alt: '关于水木易 - 个人简介页面',
       }
     ],
+    creator: '@shuimuyi',
   }
 };
 
