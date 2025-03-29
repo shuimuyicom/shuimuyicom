@@ -16,22 +16,6 @@ export default function AboutPage() {
           <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-violet-100/70 to-transparent dark:from-violet-900/20 dark:to-transparent"></div>
           
           <header className="relative mb-16 text-center">
-            <div className="mb-6 relative">
-              <div className="w-28 h-28 md:w-32 md:h-32 mx-auto rounded-full overflow-hidden shadow-xl relative bg-white dark:bg-ink-800 p-0.5">
-                <div className="w-full h-full rounded-full overflow-hidden relative">
-                  <Image
-                    src="/images/avatar.png"
-                    alt="水木易"
-                    fill
-                    sizes="(max-width: 768px) 112px, 128px"
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-              </div>
-              <div className="absolute -inset-1.5 border-2 border-violet-200 dark:border-violet-800/50 rounded-full opacity-70 -z-10"></div>
-              <div className="absolute -inset-3 border border-violet-100 dark:border-violet-900/30 rounded-full opacity-50 -z-10"></div>
-            </div>
             <h1 className="text-3xl md:text-4xl mb-3 font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-700 to-purple-600 dark:from-violet-400 dark:to-purple-400">关于水木易</h1>
             <div className="h-px w-32 bg-gradient-to-r from-transparent via-violet-400 dark:via-violet-500 to-transparent mx-auto mb-6"></div>
           </header>
