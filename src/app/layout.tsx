@@ -10,6 +10,30 @@ export const metadata: Metadata = {
   },
   description: "水木易的个人博客，分享技术、生活和读书心得",
   authors: [{ name: "水木易" }],
+  metadataBase: new URL('https://shuimuyi.com'),
+  openGraph: {
+    type: 'website',
+    locale: 'zh_CN',
+    url: '/',
+    siteName: '水木易',
+    title: '水木易 | 总是站在科技与人文的十字路口',
+    description: '用智慧帮你渡过困境，用格局助你站得更高',
+    images: [
+      {
+        url: '/images/og/default-og.svg',
+        width: 1200,
+        height: 630,
+        alt: '水木易 - 个人网站',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '水木易 | 总是站在科技与人文的十字路口',
+    description: '用智慧帮你渡过困境，用格局助你站得更高',
+    images: ['/images/og/default-og.svg'],
+    creator: '@shuimuyi',
+  },
   icons: {
     icon: [
       {

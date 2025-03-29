@@ -7,6 +7,16 @@ import SocialLinks from "@/components/SocialLinks";
 export const metadata: Metadata = {
   title: "水木易 | 总是站在科技与人文的十字路口",
   description: "用智慧帮你渡过困境，用格局助你站得更高",
+  openGraph: {
+    title: "水木易 | 总是站在科技与人文的十字路口",
+    description: "用智慧帮你渡过困境，用格局助你站得更高",
+    images: ['/images/og/default-og.svg'],
+  },
+  twitter: {
+    title: "水木易 | 总是站在科技与人文的十字路口",
+    description: "用智慧帮你渡过困境，用格局助你站得更高",
+    images: ['/images/og/default-og.svg'],
+  }
 };
 
 export default function Home() {

@@ -6,6 +6,16 @@ import SocialLinks from "@/components/SocialLinks";
 export const metadata: Metadata = {
   title: "关于 | 水木易",
   description: "了解关于水木易更多信息",
+  openGraph: {
+    title: "关于水木易 | 个人简介",
+    description: "计算机本科和哲学硕士的跨学科学习背景，七年产品经理的实战经验。致力于国学命理领域的研究与应用。",
+    images: ['/images/og/default-og.svg'],
+  },
+  twitter: {
+    title: "关于水木易 | 个人简介",
+    description: "计算机本科和哲学硕士的跨学科学习背景，七年产品经理的实战经验。致力于国学命理领域的研究与应用。",
+    images: ['/images/og/default-og.svg'],
+  }
 };
 
 export default function AboutPage() {
