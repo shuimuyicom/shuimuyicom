@@ -94,7 +94,7 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="text-gray-700 dark:text-gray-200">
-                    虽喜命理，但拒绝故弄玄虚、故作高深；
+                    虽喜命理学，但拒绝故弄玄虚、故作高深；
                   </div>
                 </div>
                 

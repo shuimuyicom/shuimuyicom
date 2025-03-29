@@ -61,7 +61,7 @@ export default function AboutPage() {
                 </p>
                 
                 <p className="leading-relaxed">
-                  得益于AI的大发展，正致力于成为一名国学命理领域的独立开发者，期望将传统文化与现代技术完美融合。
+                  正所谓“命由天造，运自己求”。得益于AI的大发展，正致力于成为一名国学命理学领域的独立开发者，希望将传统文化与现代AI技术完美融合，创造一些工具，帮助更多人掌握自己的命运，改变自己的生活。
                 </p>
                 
                 <p className="leading-relaxed">
