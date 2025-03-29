@@ -7,7 +7,6 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
  * 主题提供者组件
  * 用于管理应用的主题状态（明亮/暗黑模式）
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function ThemeProvider({ 
   children, 
   ...props 

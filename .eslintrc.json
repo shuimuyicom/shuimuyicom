@@ -5,5 +5,13 @@
       "argsIgnorePattern": "^(_|searchParams)",
       "varsIgnorePattern": "^_"
     }]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["src/components/ThemeProvider.tsx"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    }
+  ]
 } 

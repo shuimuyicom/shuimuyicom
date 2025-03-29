@@ -179,7 +179,7 @@ export async function GET(request: NextRequest): Promise<ImageResponse | Respons
           },
         }
       )
-    } catch (_) {
+    } catch {
       // 如果备用图片也失败，返回错误文本
       return new Response(`Failed to generate OG image: ${error instanceof Error ? error.message : 'Unknown error'}`, {
         status: 500,
