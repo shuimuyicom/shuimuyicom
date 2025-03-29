@@ -3,6 +3,18 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPostById, getAllPosts } from "@/lib/posts";
 
+/**
+ * 截取字符串到指定长度，并添加省略号
+ * @param text 要截取的文本
+ * @param maxLength 最大长度
+ * @returns 截取后的文本
+ */
+function truncateText(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text;
+  // 确保不会在字中间截断
+  return text.slice(0, maxLength) + '...';
+}
+
 export async function generateMetadata(
   props: { params: { id: string } }
 ): Promise<Metadata> {
@@ -15,8 +27,8 @@ export async function generateMetadata(
     };
   }
   
-  // 安全处理描述，确保不为空
-  const safeExcerpt = post.excerpt || "水木易的博客文章";
+  // 安全处理描述，确保不为空，并限制长度为30个字
+  const safeExcerpt = truncateText(post.excerpt || "水木易的博客文章", 30);
   const safeDate = post.date || new Date().toISOString().split('T')[0];
   const safeCategory = post.category?.name || "博客";
   
