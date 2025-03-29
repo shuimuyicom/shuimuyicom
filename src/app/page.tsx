@@ -4,6 +4,9 @@ import Image from "next/image";
 import { getAllPosts } from "@/lib/posts";
 import SocialLinks from "@/components/SocialLinks";
 
+// 定义网站URL常量，确保使用与layout.tsx相同的配置
+const SITE_URL = "https://www.shuimuyi.com";
+
 export const metadata: Metadata = {
   title: "水木易 | 总是站在科技与人文的十字路口",
   description: "用智慧帮你渡过困境，用格局助你站得更高",
@@ -12,7 +15,7 @@ export const metadata: Metadata = {
     description: "用智慧帮你渡过困境，用格局助你站得更高",
     images: [
       {
-        url: `/api/og?title=${encodeURIComponent("水木易")}&subtitle=${encodeURIComponent("总是站在科技与人文的十字路口")}`,
+        url: `${SITE_URL}/images/og/screenshot.png`,
         width: 1200,
         height: 630,
         alt: '水木易 - 个人网站首页',
@@ -28,7 +31,7 @@ export const metadata: Metadata = {
     description: "用智慧帮你渡过困境，用格局助你站得更高",
     images: [
       {
-        url: `/api/og?title=${encodeURIComponent("水木易")}&subtitle=${encodeURIComponent("总是站在科技与人文的十字路口")}`,
+        url: `${SITE_URL}/images/og/screenshot.png`,
         width: 1200,
         height: 630,
         alt: '水木易 - 个人网站首页',
