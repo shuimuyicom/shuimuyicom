@@ -1,6 +1,6 @@
 # 水木易
 
-这是一个使用Next.js 15和Tailwind CSS构建的个人博客网站。
+这是一个使用Next.js 15和Tailwind CSS构建的个人网站。
 
 ## 功能特点
 
