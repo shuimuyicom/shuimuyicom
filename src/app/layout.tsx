@@ -51,19 +51,17 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: SITE_TITLE,
-    description: SITE_DESCRIPTION,
-    images: [
-      {
-        url: `${SITE_URL}/images/og/screenshot.png`,
-        width: 1200,
-        height: 630,
-        alt: SITE_TITLE,
-        type: "image/png",
-      }
-    ],
-    site: "@shuimuyi",
-    creator: "@shuimuyi",
+    title: `${SITE_TITLE} | ${SITE_DESCRIPTION}`,
+    description: "用智慧帮你渡过困境，用格局助你站得更高",
+    images: [{
+      url: `${SITE_URL}/images/og/screenshot.png`,
+      width: 1200,
+      height: 630,
+      alt: `${SITE_TITLE} - 个人网站首页`,
+      type: "image/png",
+    }],
+    site: "@shuimuyicom",
+    creator: "@shuimuyicom",
   },
   alternates: {
     canonical: SITE_URL,
