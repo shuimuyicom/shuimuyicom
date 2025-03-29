@@ -3,6 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPostById, getAllPosts } from "@/lib/posts";
 
+// 使用www子域名确保与重定向一致
+const SITE_URL = "https://www.shuimuyi.com";
+
 /**
  * 截取字符串到指定长度，并添加省略号
  * @param text 要截取的文本
@@ -15,65 +18,40 @@ function truncateText(text: string, maxLength: number): string {
   return text.slice(0, maxLength) + '...';
 }
 
-export async function generateMetadata(
-  props: { params: { id: string } }
-): Promise<Metadata> {
-  const id = props.params.id;
-  const post = await getPostById(id);
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const post = await getPostById(params.id);
   
   if (!post) {
     return {
-      title: "文章不存在 | 水木易",
+      title: "文章不存在",
+      description: "找不到您请求的文章",
     };
   }
   
-  // 安全处理描述，确保不为空，并限制长度为30个字
-  const safeExcerpt = truncateText(post.excerpt || "水木易的博客文章", 30);
-  const safeDate = post.date || new Date().toISOString().split('T')[0];
-  const safeCategory = post.category?.name || "博客";
-  
   return {
-    title: `${post.title} | 水木易`,
-    description: safeExcerpt,
+    title: post.title,
+    description: post.excerpt || post.title,
     openGraph: {
       title: post.title,
-      description: safeExcerpt,
-      type: 'article',
-      publishedTime: safeDate,
-      authors: ['水木易'],
+      description: post.excerpt || post.title,
+      type: "article",
+      publishedTime: post.date,
+      authors: ["水木易"],
       images: [
         {
-          url: `/api/og?title=${encodeURIComponent(post.title)}&subtitle=${encodeURIComponent(safeExcerpt)}&type=article&date=${encodeURIComponent(safeDate)}&category=${encodeURIComponent(safeCategory)}`,
+          url: `${SITE_URL}/api/og?title=${encodeURIComponent(post.title)}&subtitle=${encodeURIComponent(post.excerpt || "")}&type=article&date=${encodeURIComponent(post.date || "")}&category=${encodeURIComponent(post.category?.name || "")}`,
           width: 1200,
           height: 630,
           alt: post.title,
-          type: 'image/png',
-        }
+        },
       ],
-      locale: 'zh_CN',
-      modifiedTime: safeDate,
-      section: safeCategory,
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: post.title,
-      description: safeExcerpt,
-      images: [
-        {
-          url: `/api/og?title=${encodeURIComponent(post.title)}&subtitle=${encodeURIComponent(safeExcerpt)}&type=article&date=${encodeURIComponent(safeDate)}&category=${encodeURIComponent(safeCategory)}`,
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        }
-      ],
-      creator: '@shuimuyi',
+      description: post.excerpt || post.title,
+      images: [`${SITE_URL}/api/og?title=${encodeURIComponent(post.title)}&subtitle=${encodeURIComponent(post.excerpt || "")}&type=article&date=${encodeURIComponent(post.date || "")}&category=${encodeURIComponent(post.category?.name || "")}`],
     },
-    // Next.js 15新增：添加结构化数据
-    other: {
-      'og:locale:alternate': ['en_US'],
-      'article:author': 'https://shuimuyi.com/about',
-      'article:publisher': 'https://shuimuyi.com',
-    }
   };
 }
 

@@ -1,38 +1,30 @@
 import { Metadata } from "next";
 import SocialLinks from "@/components/SocialLinks";
 
+// 使用www子域名确保与重定向一致
+const SITE_URL = "https://www.shuimuyi.com";
+
 export const metadata: Metadata = {
   title: "关于 | 水木易",
   description: "了解关于水木易更多信息",
   openGraph: {
-    title: "关于水木易 | 个人简介",
-    description: "计算机本科和哲学硕士的跨学科学习背景，七年产品经理的实战经验。致力于国学命理领域的研究与应用。",
+    title: "关于 | 水木易",
+    description: "了解关于水木易更多信息",
     images: [
       {
-        url: `/api/og?title=${encodeURIComponent("关于水木易")}&subtitle=${encodeURIComponent("了解我的经历、专业和兴趣")}`,
+        url: `${SITE_URL}/api/og?title=${encodeURIComponent("关于 | 水木易")}&subtitle=${encodeURIComponent("了解关于水木易更多信息")}`,
         width: 1200,
         height: 630,
-        alt: '关于水木易 - 个人简介页面',
-        type: 'image/png',
-      }
+        alt: "关于 | 水木易",
+      },
     ],
-    locale: 'zh_CN',
-    type: 'profile',
   },
   twitter: {
-    card: 'summary_large_image',
-    title: "关于水木易 | 个人简介",
-    description: "计算机本科和哲学硕士的跨学科学习背景，七年产品经理的实战经验。致力于国学命理领域的研究与应用。",
-    images: [
-      {
-        url: `/api/og?title=${encodeURIComponent("关于水木易")}&subtitle=${encodeURIComponent("了解我的经历、专业和兴趣")}`,
-        width: 1200,
-        height: 630,
-        alt: '关于水木易 - 个人简介页面',
-      }
-    ],
-    creator: '@shuimuyi',
-  }
+    card: "summary_large_image",
+    title: "关于 | 水木易",
+    description: "了解关于水木易更多信息",
+    images: [`${SITE_URL}/api/og?title=${encodeURIComponent("关于 | 水木易")}&subtitle=${encodeURIComponent("了解关于水木易更多信息")}`],
+  },
 };
 
 export default function AboutPage() {
