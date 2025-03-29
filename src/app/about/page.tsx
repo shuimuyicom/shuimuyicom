@@ -9,12 +9,26 @@ export const metadata: Metadata = {
   openGraph: {
     title: "关于水木易 | 个人简介",
     description: "计算机本科和哲学硕士的跨学科学习背景，七年产品经理的实战经验。致力于国学命理领域的研究与应用。",
-    images: ['/images/og/default-og.svg'],
+    images: [
+      {
+        url: '/api/og?title=关于水木易&subtitle=了解我的经历、专业和兴趣',
+        width: 1200,
+        height: 630,
+        alt: '关于水木易 - 个人简介页面',
+      }
+    ],
   },
   twitter: {
     title: "关于水木易 | 个人简介",
     description: "计算机本科和哲学硕士的跨学科学习背景，七年产品经理的实战经验。致力于国学命理领域的研究与应用。",
-    images: ['/images/og/default-og.svg'],
+    images: [
+      {
+        url: '/api/og?title=关于水木易&subtitle=了解我的经历、专业和兴趣',
+        width: 1200,
+        height: 630,
+        alt: '关于水木易 - 个人简介页面',
+      }
+    ],
   }
 };
 
