@@ -13,7 +13,6 @@ export default function AboutPage() {
     <main className="min-h-screen bg-gray-50 dark:bg-sumi-950">
       <div className="max-w-6xl mx-auto bg-card-50 dark:bg-ink-900 min-h-screen shadow-xl">
         <div className="relative px-6 py-20 md:py-32">
-          <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-violet-100/70 to-transparent dark:from-violet-900/20 dark:to-transparent"></div>
           
           <div className="max-w-3xl mx-auto">
             <div className="bg-white dark:bg-ink-800 rounded-2xl shadow-lg shadow-violet-100 dark:shadow-none p-8 md:p-10 mb-12">
@@ -24,7 +23,7 @@ export default function AboutPage() {
                     <circle cx="12" cy="7" r="4"></circle>
                   </svg>
                 </span>
-                关于我
+                关于水木易
               </h2>
               
               <div className="space-y-6 text-ink-600 dark:text-ink-300 text-lg">
