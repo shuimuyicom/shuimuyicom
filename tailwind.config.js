@@ -102,7 +102,7 @@ module.exports = {
         DEFAULT: {
           css: {
             maxWidth: '65ch',
-            color: theme('colors.ink.500'),
+            color: theme('colors.ink.700'),
             lineHeight: '1.75',
             '>*': {
               marginTop: '1.5em',
@@ -120,8 +120,8 @@ module.exports = {
               },
             },
             'h1, h2, h3, h4, h5, h6': {
-              color: theme('colors.ink.700'),
-              fontWeight: '500',
+              color: theme('colors.ink.800'),
+              fontWeight: '600',
               '@media (max-width: 640px)': {
                 lineHeight: '1.4',
               },
@@ -184,8 +184,8 @@ module.exports = {
             },
             blockquote: {
               fontStyle: 'normal',
-              color: theme('colors.ink.500'),
-              borderLeftColor: theme('colors.accent.300'),
+              color: theme('colors.ink.600'),
+              borderLeftColor: theme('colors.accent.400'),
               quotes: '"\\201C""\\201D""\\2018""\\2019"',
               marginLeft: '0',
               paddingLeft: '1.5em',
@@ -209,6 +209,7 @@ module.exports = {
             'ul li, ol li': {
               marginTop: '0.5em',
               marginBottom: '0.5em',
+              color: theme('colors.ink.700'),
               '@media (max-width: 640px)': {
                 fontSize: '1rem',
               },
@@ -243,16 +244,16 @@ module.exports = {
               textAlign: 'left',
             },
             th: {
-              fontWeight: '500',
-              color: theme('colors.ink.700'),
+              fontWeight: '600',
+              color: theme('colors.ink.800'),
             },
           },
         },
         dark: {
           css: {
-            color: theme('colors.ink.300'),
+            color: theme('colors.bg.100'),
             'h1, h2, h3, h4, h5, h6': {
-              color: theme('colors.bg.100'),
+              color: theme('colors.bg.50'),
             },
             h2: {
               borderBottomColor: theme('colors.ink.700'),
@@ -264,16 +265,16 @@ module.exports = {
               },
             },
             code: {
-              color: theme('colors.bg.100'),
+              color: theme('colors.bg.50'),
               backgroundColor: theme('colors.ink.700'),
             },
             pre: {
               backgroundColor: theme('colors.ink.800'),
-              color: theme('colors.bg.100'),
+              color: theme('colors.bg.50'),
             },
             blockquote: {
-              color: theme('colors.ink.400'),
-              borderLeftColor: theme('colors.accent.600'),
+              color: theme('colors.bg.200'),
+              borderLeftColor: theme('colors.accent.500'),
             },
             'thead tr': {
               borderBottomColor: theme('colors.ink.600'),
@@ -282,10 +283,14 @@ module.exports = {
               borderBottomColor: theme('colors.ink.700'),
             },
             th: {
-              color: theme('colors.bg.100'),
+              color: theme('colors.bg.50'),
+              fontWeight: '600',
             },
             hr: {
               borderColor: theme('colors.ink.700'),
+            },
+            'ul li, ol li': {
+              color: theme('colors.bg.100'),
             },
           },
         },

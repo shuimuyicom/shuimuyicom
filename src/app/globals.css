@@ -78,16 +78,23 @@
   }
 
   /* 文章排版样式 */
+  .prose h1, .prose h2, .prose h3 {
+    @apply font-serif tracking-tight;
+  }
+  
   .prose h1 {
-    @apply text-3xl font-normal mt-8 mb-6 text-ink-800 dark:text-bg-100;
+    @apply text-3xl font-semibold mt-12 mb-8 text-ink-800 dark:text-bg-50;
+    @apply leading-tight;
   }
   
   .prose h2 {
-    @apply text-2xl font-normal mt-6 mb-4 text-ink-700 dark:text-bg-100;
+    @apply text-2xl font-medium mt-8 mb-6 text-ink-700 dark:text-bg-100;
+    @apply leading-snug;
   }
   
   .prose h3 {
-    @apply text-xl font-normal mt-5 mb-3 text-ink-600 dark:text-ink-200;
+    @apply text-xl font-normal mt-6 mb-4 text-ink-600 dark:text-bg-200;
+    @apply leading-relaxed;
   }
   
   .prose p {
@@ -120,6 +127,59 @@
   .prose pre {
     @apply bg-bg-100 dark:bg-ink-800 p-4 rounded my-4 overflow-x-auto;
     @apply border border-bg-200 dark:border-ink-700;
+  }
+  
+  /* 表格样式 - 水墨风格 */
+  .prose table {
+    @apply w-full my-8 border-separate border-spacing-0 overflow-hidden;
+    @apply border-2 border-accent-500/30 dark:border-accent-500/40;
+    @apply rounded-lg shadow-md;
+    @apply text-base;
+  }
+  
+  .prose thead {
+    @apply bg-bg-100 dark:bg-ink-800;
+  }
+  
+  .prose th {
+    @apply py-3 px-4 text-left font-extrabold text-ink-700 dark:text-ink-200;
+    @apply border-b-2 border-bg-300 dark:border-ink-600;
+    @apply border-r border-bg-200 dark:border-ink-700;
+  }
+  
+  .prose th:last-child {
+    @apply border-r-0;
+  }
+  
+  .prose td {
+    @apply py-3 px-4 border-b border-bg-200 dark:border-ink-700;
+    @apply border-r border-bg-200 dark:border-ink-700;
+    @apply text-ink-700 dark:text-ink-200 font-normal;
+  }
+  
+  .prose td:last-child {
+    @apply border-r-0;
+  }
+  
+  .prose tr:hover {
+    @apply bg-bg-50 dark:bg-ink-800/80 transition-colors duration-150;
+  }
+  
+  /* 表格圆角样式 */
+  .prose tr:first-child th:first-child {
+    @apply rounded-tl-md;
+  }
+  
+  .prose tr:first-child th:last-child {
+    @apply rounded-tr-md;
+  }
+  
+  .prose tr:last-child td:first-child {
+    @apply rounded-bl-md;
+  }
+  
+  .prose tr:last-child td:last-child {
+    @apply rounded-br-md;
   }
 }
 

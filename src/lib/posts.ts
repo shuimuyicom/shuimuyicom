@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
+import gfm from 'remark-gfm';
 
 // 内容目录路径
 const postsDirectory = path.join(process.cwd(), 'src/content/posts');
@@ -105,6 +106,7 @@ export async function getPostById(id: string): Promise<Post | null> {
     
     // 使用remark将markdown处理为HTML字符串
     const processedContent = await remark()
+      .use(gfm)
       .use(html)
       .process(matterResult.content);
     const contentHtml = processedContent.toString();

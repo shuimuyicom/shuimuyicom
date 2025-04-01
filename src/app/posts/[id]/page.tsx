@@ -82,25 +82,6 @@ export default async function PostPage(props: {
           <div className="max-w-4xl mx-auto">
             {/* 文章布局容器 */}
             <div className="flex flex-col md:flex-row">
-              {/* 左侧导航区 - 在移动端改为顶部显示 */}
-              <div className="md:hidden flex justify-start mb-4">
-                <Link href="/" className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-bg-100/80 dark:bg-ink-800/80 text-ink-600 dark:text-bg-200 hover:text-accent-600 dark:hover:text-accent-300 transition-all hover:bg-bg-200/80 dark:hover:bg-ink-700/80 group">
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    className="h-5 w-5 group-hover:-translate-x-1 transition-transform duration-300" 
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  >
-                    <line x1="19" y1="12" x2="5" y2="12"></line>
-                    <polyline points="12 19 5 12 12 5"></polyline>
-                  </svg>
-                </Link>
-              </div>
-              
               {/* 桌面端左侧导航区 */}
               <div className="hidden md:flex md:w-12 justify-center">
                 <Link href="/" className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-bg-100/80 dark:bg-ink-800/80 text-ink-600 dark:text-bg-200 hover:text-accent-600 dark:hover:text-accent-300 transition-all hover:bg-bg-200/80 dark:hover:bg-ink-700/80 group sticky top-24">
@@ -155,9 +136,9 @@ export default async function PostPage(props: {
                     </div>
                   </header>
                   
-                  {/* 文章内容 - 添加两端对齐和字间距优化 */}
-                  <div className="prose prose-lg dark:prose-invert prose-headings:font-medium prose-headings:text-ink-800 dark:prose-headings:text-bg-100 prose-p:text-ink-600 dark:prose-p:text-ink-300 prose-a:text-accent-600 dark:prose-a:text-accent-300 prose-a:no-underline prose-p:text-justify prose-li:text-justify prose-p:tracking-normal prose-li:tracking-normal max-w-3xl mx-auto sm:px-0 px-1">
-                    <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+                  {/* 文章内容 - 优化文字灰度和排版 */}
+                  <div className="prose prose-lg dark:prose-invert prose-headings:font-medium prose-headings:text-ink-800 dark:prose-headings:text-bg-50 prose-p:text-ink-700 dark:prose-p:text-bg-100/90 prose-a:text-accent-600 dark:prose-a:text-accent-300 prose-a:no-underline prose-p:text-justify prose-li:text-justify prose-li:text-ink-700 dark:prose-li:text-bg-100/90 prose-p:tracking-normal prose-li:tracking-normal prose-p:leading-relaxed prose-li:leading-relaxed prose-img:rounded-md prose-img:shadow-md dark:prose-img:shadow-none prose-headings:font-serif prose-strong:text-ink-800 dark:prose-strong:text-bg-50 max-w-3xl mx-auto sm:px-0 px-1">
+                    <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} className="animate-[fadeIn_0.5s_ease-in-out]" />
                   </div>
                   
                   {/* 文章导航 */}
