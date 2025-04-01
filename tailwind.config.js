@@ -112,20 +112,35 @@ module.exports = {
               marginTop: '1.5em',
               marginBottom: '1.5em',
               lineHeight: '1.75',
+              textAlign: 'justify',
+              hyphens: 'auto',
+              '@media (max-width: 640px)': {
+                fontSize: '1rem',
+                lineHeight: '1.7',
+              },
             },
             'h1, h2, h3, h4, h5, h6': {
               color: theme('colors.ink.700'),
               fontWeight: '500',
+              '@media (max-width: 640px)': {
+                lineHeight: '1.4',
+              },
             },
             h1: {
               fontSize: '2.25em',
               letterSpacing: '-0.025em',
+              '@media (max-width: 640px)': {
+                fontSize: '1.75em',
+              },
             },
             h2: {
               fontSize: '1.75em',
               letterSpacing: '-0.025em',
               borderBottom: `1px solid ${theme('colors.bg.200')}`,
               paddingBottom: '0.5rem',
+              '@media (max-width: 640px)': {
+                fontSize: '1.5em',
+              },
             },
             h3: {
               fontSize: '1.5em',
@@ -174,6 +189,9 @@ module.exports = {
               quotes: '"\\201C""\\201D""\\2018""\\2019"',
               marginLeft: '0',
               paddingLeft: '1.5em',
+              '@media (max-width: 640px)': {
+                fontSize: '0.95em',
+              },
             },
             'blockquote p:first-of-type::before': {
               content: 'open-quote',
@@ -191,6 +209,9 @@ module.exports = {
             'ul li, ol li': {
               marginTop: '0.5em',
               marginBottom: '0.5em',
+              '@media (max-width: 640px)': {
+                fontSize: '1rem',
+              },
             },
             img: {
               marginTop: '2em',
