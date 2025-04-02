@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 import gfm from 'remark-gfm';
-import { getCategoryById, getCategoryNameById, Category } from './categories';
+import { getCategoryNameById } from './categories';
 
 // 内容目录路径
 const postsDirectory = path.join(process.cwd(), 'src/content/posts');

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { getAllCategories, Category } from "@/lib/categories";
+import { getAllCategories } from "@/lib/categories";
 
 export const metadata: Metadata = {
   title: "文章分类 | 水木易",

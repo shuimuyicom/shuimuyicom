@@ -79,6 +79,25 @@ export default function AboutPage() {
                     <p>
                     如果你对我在AI与传统文化交融领域的探索感兴趣，诚挚欢迎与我交流切磋，期待能与你一同探讨如何让AI技术为中华传统文化注入新的活力。
                     </p>
+                    
+                    <p className="text-center mt-6">
+                      <a href="/categories/AboutMe" className="inline-flex items-center text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300 transition-colors duration-300 no-underline font-medium group">
+                        了解更多
+                        <svg 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          className="h-4 w-4 ml-2 group-hover:translate-x-0.5 transition-transform duration-300" 
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                          <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                      </a>
+                    </p>
                   </div>
                 </div>
                 

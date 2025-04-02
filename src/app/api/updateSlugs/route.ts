@@ -16,7 +16,7 @@ function generateSlug(text: string): string {
     .trim();                   // 移除首尾空格
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // 获取文章目录下的所有文件
     if (!fs.existsSync(postsDirectory)) {
