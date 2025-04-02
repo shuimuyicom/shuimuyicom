@@ -17,7 +17,7 @@ export default function Categories() {
           <header className="mb-16 text-center">
             <h1 className="text-3xl md:text-4xl mb-6 text-ink-800 dark:text-bg-100">所有分类</h1>
             <p className="max-w-2xl mx-auto text-ink-500 dark:text-ink-400">
-              探索不同主题的文章，点击分类以浏览相关内容
+              探索不同主题的文章，点击以浏览相关内容
             </p>
           </header>
 

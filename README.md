@@ -62,3 +62,31 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## 文章Slug自动生成
+
+项目包含一个专门用于为文章自动生成slug的脚本，确保所有文章都有有效的URL友好标识符。
+
+### 使用方法
+
+```bash
+npm run slugs
+```
+
+该命令会扫描所有文章，为没有有效slug的文章自动生成，支持中英文标题。
+
+### 功能特点
+
+- 自动检测并跳过已有有效slug的文章
+- 智能处理中文标题，转换为拼音形式的slug
+- 支持使用标题生成语义化的URL
+- 多种备选方案确保每篇文章都能获得有效的slug
+- 详细的执行日志，便于追踪处理过程
+
+### 自定义与扩展
+
+脚本位于`scripts/generate-slugs.js`，可根据需要自定义拼音转换词汇表，增强特定领域术语的识别能力。如果安装了`pinyin`库，脚本将自动使用更精确的拼音转换。
+
+```bash
+npm install pinyin@3.0.0-alpha.5
+```

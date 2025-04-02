@@ -97,16 +97,26 @@
     @apply leading-relaxed;
   }
   
+  /* 统一正文样式 */
+  .prose p, .prose ul, .prose ol, .prose li {
+    @apply text-ink-700 dark:text-bg-100/90;
+    @apply text-base tracking-normal leading-relaxed;
+  }
+  
   .prose p {
-    @apply my-4 text-ink-500 dark:text-ink-300 leading-relaxed;
+    @apply my-6;
   }
   
   .prose ul {
-    @apply list-disc pl-6 my-4 text-ink-500 dark:text-ink-300;
+    @apply list-disc pl-6 my-6;
   }
   
   .prose ol {
-    @apply list-decimal pl-6 my-4 text-ink-500 dark:text-ink-300;
+    @apply list-decimal pl-6 my-6;
+  }
+  
+  .prose li + li {
+    @apply mt-1.5;
   }
   
   .prose a {
@@ -116,7 +126,7 @@
   
   .prose blockquote {
     @apply border-l-4 border-accent-300 dark:border-accent-600 pl-4 italic my-6;
-    @apply text-ink-500 dark:text-ink-400;
+    @apply text-ink-600 dark:text-ink-400;
   }
   
   .prose code {
@@ -228,4 +238,38 @@
 .dark .qr-placeholder {
   background-image: linear-gradient(45deg, #374151 25%, #1f2937 25%, #1f2937 50%, #374151 50%, #374151 75%, #1f2937 75%, #1f2937 100%);
   background-size: 8px 8px;
+}
+
+/* 增强Markdown元素样式一致性 */
+.prose strong, .prose b {
+  @apply font-semibold text-ink-800 dark:text-bg-50;
+}
+
+.prose em, .prose i {
+  @apply text-ink-700 dark:text-bg-100 italic;
+}
+
+.prose code:not(pre code) {
+  @apply bg-bg-100 dark:bg-ink-800 text-ink-700 dark:text-bg-100/90 px-1.5 py-0.5 rounded text-sm font-mono;
+}
+
+.prose pre {
+  @apply my-6 rounded-md;
+}
+
+.prose hr {
+  @apply my-8 border-bg-200 dark:border-ink-700;
+}
+
+.prose img {
+  @apply my-6 rounded-md shadow-md dark:shadow-none mx-auto;
+  @apply border border-bg-200 dark:border-ink-700;
+}
+
+/* 嵌套列表样式 */
+.prose ul ul, 
+.prose ul ol, 
+.prose ol ul, 
+.prose ol ol {
+  @apply my-2 ml-4;
 }

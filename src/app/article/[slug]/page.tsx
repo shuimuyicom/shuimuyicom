@@ -143,7 +143,7 @@ export default async function ArticlePage(props: {
                   </header>
                   
                   {/* 文章内容 - 优化文字灰度和排版 */}
-                  <div className="prose prose-lg dark:prose-invert prose-headings:font-medium prose-headings:text-ink-800 dark:prose-headings:text-bg-50 prose-p:text-ink-700 dark:prose-p:text-bg-100/90 prose-a:text-accent-600 dark:prose-a:text-accent-300 prose-a:no-underline prose-p:text-justify prose-li:text-justify prose-li:text-ink-700 dark:prose-li:text-bg-100/90 prose-p:tracking-normal prose-li:tracking-normal prose-p:leading-relaxed prose-li:leading-relaxed prose-img:rounded-md prose-img:shadow-md dark:prose-img:shadow-none prose-headings:font-serif prose-strong:text-ink-800 dark:prose-strong:text-bg-50 max-w-3xl mx-auto sm:px-0 px-1">
+                  <div className="prose prose-lg dark:prose-invert prose-headings:font-medium prose-headings:font-serif prose-strong:text-ink-800 dark:prose-strong:text-bg-50 prose-img:rounded-md prose-img:shadow-md dark:prose-img:shadow-none prose-p:text-justify prose-li:text-justify max-w-3xl mx-auto sm:px-0 px-1">
                     <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} className="animate-[fadeIn_0.5s_ease-in-out]" />
                   </div>
                   
