@@ -1,21 +1,14 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { getAllCategories } from "@/lib/posts";
+import { getAllCategories, Category } from "@/lib/categories";
 
 export const metadata: Metadata = {
   title: "文章分类 | 水木易",
   description: "文章分类",
 };
 
-// 定义分类类型
-interface Category {
-  id: string;
-  name: string;
-  count: number;
-}
-
 export default function Categories() {
-  const categories = getAllCategories() as Category[];
+  const categories = getAllCategories();
 
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-sumi-950">
@@ -41,8 +34,13 @@ export default function Categories() {
                   </h2>
                   <p className="text-sm text-ink-400 dark:text-ink-500">
                     {category.count} 
-                    {category.count > 1 ? " 篇文章" : " 篇文章"}
+                    {category.count !== 1 ? " 篇文章" : " 篇文章"}
                   </p>
+                  {category.description && (
+                    <p className="mt-3 text-sm text-ink-500 dark:text-ink-400 line-clamp-2">
+                      {category.description}
+                    </p>
+                  )}
                 </Link>
               ))}
             </div>

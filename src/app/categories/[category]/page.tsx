@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCategoryById, getPostsByCategory } from "@/lib/posts";
+import { getCategoryById } from "@/lib/categories";
+import { getPostsByCategory } from "@/lib/posts";
 
 export async function generateMetadata(
   props: { params: { category: string } }
 ): Promise<Metadata> {
   const category = props.params.category;
-  const categoryData = await getCategoryById(category);
+  const categoryData = getCategoryById(category);
   
   if (!categoryData) {
     return {
@@ -17,7 +18,7 @@ export async function generateMetadata(
   
   return {
     title: `${categoryData.name} | 水木易`,
-    description: `${categoryData.name}分类下的所有文章`,
+    description: `${categoryData.name}分类下的所有文章${categoryData.description ? `：${categoryData.description}` : ''}`,
   };
 }
 
@@ -26,13 +27,13 @@ export default async function CategoryPage(props: {
 }) {
   const { params } = props;
   const categoryId = params.category;
-  const category = await getCategoryById(categoryId);
+  const category = getCategoryById(categoryId);
   
   if (!category) {
     notFound();
   }
   
-  const posts = await getPostsByCategory(categoryId);
+  const posts = getPostsByCategory(categoryId);
   
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-sumi-950">
@@ -61,6 +62,12 @@ export default async function CategoryPage(props: {
             <h1 className="text-3xl md:text-4xl mb-4 text-ink-800 dark:text-bg-100">
               {category.name}
             </h1>
+            
+            {category.description && (
+              <p className="text-ink-600 dark:text-ink-300 mb-4">
+                {category.description}
+              </p>
+            )}
             
             <p className="text-ink-500 dark:text-ink-400">
               该分类下有 {posts.length} 篇文章

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "uncategorized",
+    "name": "未分类",
+    "description": "未分类的文章",
+    "order": 9999
+  },
+  {
+    "id": "SevenTruths",
+    "name": "七层真相",
+    "description": "探索生活中的七个层次真相",
+    "order": 10
+  },
+  {
+    "id": "ChineseNumerology",
+    "name": "命理杂谈",
+    "description": "探讨中国传统命理学的各种流派，包括紫微斗数、八字、六爻、奇门遁甲等相关理论与实践的文章",
+    "order": 20
+  },
+  {
+    "id": "BaZi",
+    "name": "子平八字",
+    "description": "探讨八字命理的文章",
+    "order": 30 
+  },
+  {
+    "id": "DouShu",
+    "name": "紫微斗数",
+    "description": "探讨紫微斗数命理的文章",
+    "order": 40
+  },
+  {
+    "id": "Astrology",
+    "name": "星座占星",
+    "description": "关于星座和占星术的文章",
+    "order": 50
+  }
+] 

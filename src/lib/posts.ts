@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 import gfm from 'remark-gfm';
+import { getCategoryById, getCategoryNameById, Category } from './categories';
 
 // 内容目录路径
 const postsDirectory = path.join(process.cwd(), 'src/content/posts');
@@ -19,15 +20,6 @@ export interface Post {
     name: string;
   };
 }
-
-export interface Category {
-  id: string;
-  name: string;
-  count: number;
-}
-
-// 分类描述
-export const categoryDescriptions: Record<string, string> = {};
 
 // 获取所有文章数据
 export function getAllPosts(): Post[] {
@@ -144,63 +136,6 @@ export async function getPostById(id: string): Promise<Post | null> {
     console.error(`Error getting post by id ${id}:`, error);
     return null;
   }
-}
-
-// 根据id获取类别名称
-function getCategoryNameById(id?: string): string {
-  if (!id) return '未分类';
-  
-  // 尝试从所有文章中找到这个类别
-  const posts = getAllPosts();
-  for (const post of posts) {
-    if (post.category.id === id) {
-      return post.category.name;
-    }
-  }
-  
-  // 如果找不到匹配的类别，返回未分类
-  return '未分类';
-}
-
-// 获取所有类别
-export function getAllCategories(): Category[] {
-  const posts = getAllPosts();
-  
-  // 创建一个Map来存储所有类别
-  const categoryMap = new Map<string, Category>();
-  
-  // 从文章中收集所有类别
-  posts.forEach(post => {
-    const categoryId = post.category.id;
-    const categoryName = post.category.name;
-    
-    if (!categoryMap.has(categoryId)) {
-      // 如果是新类别，添加到Map中
-      categoryMap.set(categoryId, { id: categoryId, name: categoryName, count: 0 });
-    }
-    
-    // 增加该类别的文章计数
-    const category = categoryMap.get(categoryId);
-    if (category) {
-      category.count++;
-    }
-  });
-  
-  // 只返回有文章的类别
-  return Array.from(categoryMap.values()).filter(cat => cat.count > 0);
-}
-
-// 根据ID获取类别
-export function getCategoryById(id: string): Category | null {
-  // 尝试从所有类别中找到匹配的
-  const allCategories = getAllCategories();
-  const category = allCategories.find(cat => cat.id === id);
-  
-  if (!category) {
-    return null;
-  }
-  
-  return category;
 }
 
 // 获取特定类别的所有文章
