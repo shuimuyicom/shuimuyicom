@@ -62,15 +62,15 @@ export default function AboutPage() {
                   
                   <div className="prose prose-lg dark:prose-invert prose-headings:font-medium prose-headings:text-ink-800 dark:prose-headings:text-bg-100 prose-p:text-ink-600 dark:prose-p:text-ink-300 prose-a:text-accent-600 dark:prose-a:text-accent-300 prose-a:no-underline prose-p:text-justify prose-li:text-justify prose-p:tracking-normal prose-li:tracking-normal max-w-3xl mx-auto sm:px-0 px-1">
                     <p>
-                      拥有计算机本科和哲学硕士的跨领域知识背景，并积累了七年多产品经理的丰富实战经验。这样独特的知识结构让我能够从多维度思考问题，将技术创新与人文思维完美结合。
+                      <strong>关于我：</strong>拥有计算机本科和哲学硕士的跨领域知识背景，并积累了七年多产品经理的丰富实战经验。
                     </p>
                     
                     <p>
-                      正所谓：命由天造，运由己求。在AI技术蓬勃发展的今天，我正致力于成为一名专注国学命理领域的独立开发者。
+                      <strong>正在探索：</strong>正所谓命由天造，运由己求。在AI技术蓬勃发展的今天，我正致力于成为一名专注国学命理与中医养生领域的独立开发者。
                     </p>
 
                     <p>
-                    我期望能够将源远流长的传统文化与前沿AI技术完美融合，打造出更多实用工具，帮助更多人洞悉天机、把握命运，从而开创更美好的人生。
+                    <strong>我深信中华传统文化中蕴含着丰富的智慧宝藏，</strong>尤其在命理学说与中医养生体系中，包含了对人与自然、身与心和谐共生的深刻洞察。我期望能够将源远流长的传统文化与前沿AI技术完美融合，打造出更多实用工具，帮助更多人把握自身命运，开创更健康、更和谐的人生。
                     </p>
                     
                     <p>
@@ -78,7 +78,7 @@ export default function AboutPage() {
                     </p>
                     
                     <p>
-                    如果你对我在AI与传统文化交融领域的探索感兴趣，诚挚欢迎与我交流切磋，期待能与你一同探讨如何让AI技术为中华传统文化注入新的活力。
+                    <strong>如果你对我在AI与传统文化交融领域的探索感兴趣，</strong>特别是在命理分析或中医养生方面有所思考，诚挚欢迎与我交流切磋。期待能与你一同探讨如何让AI技术为中华传统文化注入新的活力，共同传承和创新这份宝贵的文化遗产。
                     </p>
                     
                     <p className="text-center mt-6">
