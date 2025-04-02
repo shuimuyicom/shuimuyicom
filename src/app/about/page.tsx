@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import SocialLinks from "@/components/SocialLinks";
+import Link from "next/link";
 
 // 使用www子域名确保与重定向一致
 const SITE_URL = "https://www.shuimuyi.com";
@@ -81,7 +82,7 @@ export default function AboutPage() {
                     </p>
                     
                     <p className="text-center mt-6">
-                      <a href="/categories/AboutMe" className="inline-flex items-center text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300 transition-colors duration-300 no-underline font-medium group">
+                      <Link href="/categories/AboutMe" className="inline-flex items-center text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300 transition-colors duration-300 no-underline font-medium group">
                         了解更多
                         <svg 
                           xmlns="http://www.w3.org/2000/svg" 
@@ -96,7 +97,7 @@ export default function AboutPage() {
                           <line x1="5" y1="12" x2="19" y2="12"></line>
                           <polyline points="12 5 19 12 12 19"></polyline>
                         </svg>
-                      </a>
+                      </Link>
                     </p>
                   </div>
                 </div>
