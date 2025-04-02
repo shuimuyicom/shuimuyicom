@@ -9,12 +9,23 @@ import { getCategoryById, getCategoryNameById, Category } from './categories';
 // 内容目录路径
 const postsDirectory = path.join(process.cwd(), 'src/content/posts');
 
+// 生成友好的URL slug
+function generateSlug(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '') // 移除特殊字符
+    .replace(/\s+/g, '-')     // 空格替换为连字符
+    .replace(/-+/g, '-')      // 多个连字符替换为一个
+    .trim();                   // 移除首尾空格
+}
+
 export interface Post {
   id: string;
   title: string;
   date: string;
   excerpt: string;
   contentHtml: string;
+  slug: string;  // 用于URL的友好字符串
   category: {
     id: string;
     name: string;
@@ -58,6 +69,19 @@ export function getAllPosts(): Post[] {
       }
     }
     
+    // 获取或生成slug
+    let slug = '';
+    if (matterResult.data.slug) {
+      // 如果frontmatter中指定了slug，直接使用
+      slug = matterResult.data.slug;
+    } else if (matterResult.data.title) {
+      // 否则从标题生成slug
+      slug = generateSlug(matterResult.data.title);
+    } else {
+      // 如果没有标题，使用ID作为slug
+      slug = id;
+    }
+    
     // 组合数据与id
     return {
       id,
@@ -65,6 +89,7 @@ export function getAllPosts(): Post[] {
       date: matterResult.data.date || '',
       excerpt: matterResult.data.excerpt || '',
       contentHtml: '',
+      slug,
       category: {
         id: categoryId,
         name: categoryName,
@@ -120,6 +145,19 @@ export async function getPostById(id: string): Promise<Post | null> {
       }
     }
     
+    // 获取或生成slug
+    let slug = '';
+    if (matterResult.data.slug) {
+      // 如果frontmatter中指定了slug，直接使用
+      slug = matterResult.data.slug;
+    } else if (matterResult.data.title) {
+      // 否则从标题生成slug
+      slug = generateSlug(matterResult.data.title);
+    } else {
+      // 如果没有标题，使用ID作为slug
+      slug = id;
+    }
+    
     // 组合数据与id
     return {
       id,
@@ -127,6 +165,7 @@ export async function getPostById(id: string): Promise<Post | null> {
       date: matterResult.data.date || '',
       excerpt: matterResult.data.excerpt || '',
       contentHtml,
+      slug,
       category: {
         id: categoryId,
         name: categoryName,
@@ -136,6 +175,25 @@ export async function getPostById(id: string): Promise<Post | null> {
     console.error(`Error getting post by id ${id}:`, error);
     return null;
   }
+}
+
+// 通过slug获取文章
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+  const allPosts = getAllPosts();
+  const post = allPosts.find(post => post.slug === slug);
+  
+  if (!post) {
+    return null;
+  }
+  
+  // 获取完整的文章内容
+  return await getPostById(post.id);
+}
+
+// 获取所有文章的slugs
+export function getAllPostSlugs(): string[] {
+  const posts = getAllPosts();
+  return posts.map(post => post.slug);
 }
 
 // 获取特定类别的所有文章

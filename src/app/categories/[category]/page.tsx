@@ -82,7 +82,7 @@ export default async function CategoryPage(props: {
                   className="bg-card-50 dark:bg-ink-800 border border-bg-200 dark:border-ink-700 shadow-surface dark:shadow-none overflow-hidden group hover:border-bg-300 dark:hover:border-ink-600 transition-all"
                 >
                   <div className="p-6 md:p-8">
-                    <Link href={`/posts/${post.id}`}>
+                    <Link href={`/article/${post.slug}`}>
                       <h2 className="text-xl mb-3 text-ink-800 dark:text-bg-100 group-hover:text-accent-600 dark:group-hover:text-accent-300 transition-colors">
                         {post.title}
                       </h2>
@@ -93,7 +93,7 @@ export default async function CategoryPage(props: {
                     <p className="text-ink-500 dark:text-ink-300 mb-5">{post.excerpt}</p>
                     
                     <Link 
-                      href={`/posts/${post.id}`} 
+                      href={`/article/${post.slug}`} 
                       className="inline-flex items-center text-sm text-accent-600 dark:text-accent-300 font-medium group-hover:translate-x-0.5 transition-transform"
                     >
                       阅读全文

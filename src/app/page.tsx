@@ -154,7 +154,7 @@ export default function Home() {
                         </span>
                       </Link>
                       
-                      <Link href={`/posts/${post.id}`}>
+                      <Link href={`/article/${post.slug}`}>
                         <h3 className="text-xl mb-3 text-ink-800 dark:text-bg-100 group-hover:text-accent-600 dark:group-hover:text-accent-300 transition-colors">
                           {post.title}
                         </h3>
@@ -165,7 +165,7 @@ export default function Home() {
                       <p className="text-ink-500 dark:text-ink-300 mb-5 line-clamp-2">{post.excerpt}</p>
                       
                       <Link 
-                        href={`/posts/${post.id}`} 
+                        href={`/article/${post.slug}`} 
                         className="inline-flex items-center text-sm text-accent-600 dark:text-accent-300 font-medium group-hover:translate-x-0.5 transition-transform"
                       >
                         阅读全文

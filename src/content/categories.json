@@ -34,5 +34,11 @@
     "name": "星座占星",
     "description": "关于星座和占星术的文章",
     "order": 50
+  },
+  {
+    "id": "AboutMe",
+    "name": "关于我",
+    "description": "关于我的近况",
+    "order": 8888
   }
 ] 
