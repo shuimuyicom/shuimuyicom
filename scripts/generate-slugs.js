@@ -8,96 +8,179 @@
 const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
-
-// 尝试导入pinyin库（如果已安装）
-let pinyin;
-try {
-  pinyin = require('pinyin');
-  console.log('已加载pinyin库，将使用更精确的拼音转换');
-} catch (e) {
-  console.log('未检测到pinyin库，将使用简化拼音转换（建议安装pinyin库获取更好的效果）');
-  pinyin = null;
-}
+const https = require('https');
 
 // 内容目录路径
 const postsDirectory = path.join(process.cwd(), 'src/content/posts');
 
 /**
- * 将中文文本转换为拼音
- * @param {string} text 中文文本
- * @return {string} 拼音文本
+ * 使用术语映射将中文标题翻译为英文
+ * 这是一个高效的方法，无需依赖外部API
  */
-function convertToPinyin(text) {
-  // 如果有pinyin库，优先使用
-  if (pinyin) {
-    try {
-      const result = pinyin(text, {
-        style: pinyin.STYLE_NORMAL,
-        segment: true,
-        group: true
-      }).flat().join(' ');
-      console.log(`   pinyin库转换结果: "${result}"`);
-      return result;
-    } catch (e) {
-      console.log(`   pinyin库转换失败: ${e.message}，回退到简易转换`);
+async function translateToEnglish(chineseTitle) {
+  // 首先尝试从映射表中获取完整标题的翻译
+  const smartTitle = getSmartEnglishTitle(chineseTitle);
+  
+  // 如果能获取到比较完整的智能映射，直接使用
+  if (smartTitle.split('-').length > 3) {
+    console.log(`   智能匹配翻译结果: "${smartTitle}"`);
+    return cleanupSlug(smartTitle);
+  }
+  
+  // 尝试递归分解长句子
+  if (chineseTitle.length > 8) {
+    const segments = segmentChineseText(chineseTitle);
+    if (segments.length > 1) {
+      // 尝试翻译各部分并组合
+      const translatedSegments = segments.map(segment => {
+        const smartSegment = getSmartEnglishTitle(segment);
+        return smartSegment;
+      });
+      
+      // 过滤掉空结果，并组合
+      const combinedResult = translatedSegments
+        .filter(seg => seg && seg.length > 0)
+        .join('-');
+        
+      if (combinedResult && combinedResult.split('-').length > 3) {
+        console.log(`   分段智能翻译结果: "${combinedResult}"`);
+        return cleanupSlug(combinedResult);
+      }
     }
   }
   
-  // 简易转换（有限词汇表）
-  const pinyinMap = {
+  // 如果分段翻译也不理想，返回原始智能匹配结果
+  return cleanupSlug(smartTitle);
+}
+
+/**
+ * 基于常见中文术语的智能英文映射
+ */
+function getSmartEnglishTitle(chineseText) {
+  // 扩展映射表，特别针对易经相关术语
+  const termMapping = {
     // 紫微斗数相关
-    '紫微': 'ziwei',
-    '斗数': 'doushu',
-    '命宫': 'minggong',
-    '身宫': 'shengong',
-    '运势': 'yunshi',
-    '推演': 'tuiyan',
-    '浅谈': 'qiantan',
-    '深宫': 'shengong',
-    '及': 'ji',
-    '论': 'lun',
-    '流年': 'liunian',
-    '大限': 'daxian',
+    '紫微斗数': 'zi-wei-dou-shu',
+    '紫微': 'zi-wei-astrology',
+    '斗数': 'dou-shu',
+    '命宫': 'life-palace',
+    '身宫': 'body-palace',
+    '命盘': 'horoscope',
+    '排盘': 'astrology-chart',
+    '运势': 'destiny',
+    '推演': 'calculation',
+    '浅谈': 'introduction-to',
+    '深宫': 'palace',
+    '天干地支': 'heavenly-stems-earthly-branches',
+    '六十甲子': 'sixty-jiazi-cycle',
     
-    // 易经与五行相关
-    '易经': 'yijing',
+    // 八字命理
+    '八字': 'bazi',
+    '命理学': 'destiny-analysis',
+    '命理': 'destiny-analysis',
+    '生辰': 'birth-time',
+    
+    // 五行与易学
+    '易经': 'i-ching',
     '八卦': 'bagua',
-    '阴阳': 'yinyang',
-    '五行': 'wuxing',
-    '金木水火土': 'jinmushuituhuo',
-    '乾坤': 'qiankun',
-    '震巽': 'zhenzun',
-    '坎离': 'kanli',
-    '艮兑': 'gendui',
-    '关系': 'guanxi',
+    '阴阳': 'yin-yang',
+    '五行': 'five-elements',
+    '易学': 'chinese-metaphysics',
+    
+    // 中医相关
+    '中医': 'chinese-medicine',
+    '理论': 'theory',
+    '结合': 'integration',
+    '应用': 'application',
     
     // 通用
-    '中国': 'china',
+    '中国': 'chinese',
     '传统': 'traditional',
     '文化': 'culture',
     '哲学': 'philosophy',
     '思想': 'thought',
     '研究': 'research',
-    '探索': 'explore',
+    '探索': 'exploration',
     '分析': 'analysis',
+    '关于': 'about',
+    '如何': 'how-to',
+    '为什么': 'why',
+    '何时': 'when',
+    '何地': 'where',
+    '方法': 'method',
+    '原理': 'principle',
+    '系统': 'system',
+    '天文': 'astronomy',
+    '历法': 'calendar',
+    '早晚子时': 'early-late-zi-hour',
+    '子时': 'zi-hour',
+    '生人': 'person-born',
     
-    // 常见连接词
+    // 连接词
     '与': 'and',
     '和': 'and',
-    '的': 'of',
-    '在': 'in',
     '对': 'to',
-    '从': 'from',
-    '关于': 'about'
+    '在': 'in',
+    '的': 'of',
+    '之间': 'between',
+    
+    // 易经相关
+    "六十四卦": "sixty-four-hexagrams",
+    "卦象": "hexagram-symbols",
+    "爻辞": "line-statements",
+    "卦辞": "hexagram-statements",
+    "周易": "book-of-changes",
+    "太极": "tai-chi",
+    "乾": "qian-heaven",
+    "坤": "kun-earth",
+    "震": "zhen-thunder",
+    "艮": "gen-mountain",
+    "离": "li-fire",
+    "坎": "kan-water",
+    "兑": "dui-lake",
+    "巽": "xun-wind",
+    "复卦": "return-hexagram",
+    "坎卦": "water-hexagram",
+    "需卦": "waiting-hexagram",
+    "蒙卦": "youthful-folly-hexagram",
+    "师卦": "army-hexagram",
+    "未济": "not-yet-completed",
+    "既济": "already-completed",
+    
+    // 心理学相关
+    "心理学": "psychology",
+    "映射关系": "mapping-relationship",
+    "心理分析": "psychological-analysis",
+    "荣格": "jung",
+    "弗洛伊德": "freud",
+    "集体无意识": "collective-unconscious",
+    "原型": "archetypes",
+    "个体化": "individuation",
+    "阿尼玛": "anima",
+    "阿尼姆斯": "animus",
+    "同时性原理": "synchronicity",
+    "投射": "projection",
+    "现代心理学": "modern-psychology",
+    
+    // 新增复合词映射
+    "易经与心理学": "i-ching-and-psychology",
+    "六十四卦与心理学": "sixty-four-hexagrams-and-psychology",
+    "易经六十四卦与现代心理学": "i-ching-sixty-four-hexagrams-and-modern-psychology",
+    "六十四卦与现代心理学的映射关系": "mapping-between-sixty-four-hexagrams-and-modern-psychology",
+    "易经六十四卦与现代心理学的映射关系": "mapping-between-i-ching-hexagrams-and-modern-psychology",
   };
   
-  // 替换中文关键词为拼音
-  let pinyinTitle = text;
-  Object.keys(pinyinMap).forEach(cn => {
-    pinyinTitle = pinyinTitle.replace(new RegExp(cn, 'g'), pinyinMap[cn] + ' ');
+  // 替换所有匹配的术语
+  let englishTitle = chineseText;
+  Object.keys(termMapping).forEach(key => {
+    englishTitle = englishTitle.replace(new RegExp(key, 'g'), termMapping[key] + ' ');
   });
   
-  return pinyinTitle;
+  // 移除剩余的中文字符
+  englishTitle = englishTitle.replace(/[\u4e00-\u9fa5]/g, '');
+  
+  // 清理和格式化
+  return formatSlug(englishTitle) || 'untitled';
 }
 
 /**
@@ -106,7 +189,7 @@ function convertToPinyin(text) {
  * @param {string} fileName 文件名，作为备选
  * @return {string} 生成的slug
  */
-function generateSlug(text, fileName) {
+async function generateSlug(text, fileName) {
   console.log(`   生成slug源文本: "${text}"`);
   
   // 默认备选slug - 使用文件名
@@ -120,70 +203,50 @@ function generateSlug(text, fileName) {
   
   // 处理中文标题
   if (/[\u4e00-\u9fa5]/.test(text)) {
-    console.log(`   检测到中文标题，进行特殊处理`);
+    console.log(`   检测到中文标题，尝试翻译为英文`);
     
-    // 转换为拼音
-    const pinyinTitle = convertToPinyin(text);
-    
-    // 如果替换后仍有中文
-    if (/[\u4e00-\u9fa5]/.test(pinyinTitle)) {
-      console.log(`   部分中文未能转换为拼音，尝试使用其他方法`);
-      
-      // 尝试提取英文和数字部分
-      const nonChineseChars = text.replace(/[\u4e00-\u9fa5]/g, ' ').trim();
-      if (nonChineseChars && nonChineseChars.replace(/[^\w\s-]/g, '').trim()) {
-        const fallbackSlug = nonChineseChars
-          .toLowerCase()
-          .replace(/[^\w\s-]/g, '')
-          .replace(/\s+/g, '-')
-          .replace(/-+/g, '-')
-          .replace(/-+$/, '')
-          .trim();
-        console.log(`   使用非中文部分生成slug: "${fallbackSlug}"`);
-        
-        if (fallbackSlug) {
-          return fallbackSlug;
-        }
+    // 使用术语映射将中文翻译为英文
+    try {
+      const translatedTitle = await translateToEnglish(text);
+      if (translatedTitle && translatedTitle.trim() !== '') {
+        console.log(`   翻译生成的slug: "${translatedTitle}"`);
+        return translatedTitle;
       }
-      
-      // 如果没有有效的非中文部分，则检查文件名和类别
-      if (/^\d{6}/.test(defaultSlug)) {
-        const category = getCategoryFromFile(fileName);
-        if (category) {
-          const dateBasedSlug = `${category.toLowerCase()}-${defaultSlug}`;
-          console.log(`   使用类别+文件名生成slug: "${dateBasedSlug}"`);
-          return dateBasedSlug;
-        }
-      }
-      
-      console.log(`   回退到使用文件名: "${defaultSlug}"`);
-      return defaultSlug;
+    } catch (error) {
+      console.log(`   翻译处理失败: ${error.message}，尝试使用备选方案`);
     }
     
-    // 处理拼音结果为slug格式
-    const slug = pinyinTitle
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/-+$/, '')   // 移除结尾的连字符
-      .trim();              
+    // 备选：使用类别+文件名
+    if (/^\d{6}/.test(defaultSlug)) {
+      const category = getCategoryFromFile(fileName);
+      if (category) {
+        const dateBasedSlug = `${category.toLowerCase()}-${defaultSlug}`;
+        console.log(`   使用类别+文件名生成slug: "${dateBasedSlug}"`);
+        return dateBasedSlug;
+      }
+    }
     
-    console.log(`   生成的拼音slug: "${slug}"`);
-    return slug || defaultSlug;
+    console.log(`   回退到使用文件名: "${defaultSlug}"`);
+    return defaultSlug;
   }
   
   // 英文标题处理
-  const slug = text
+  const slug = formatSlug(text);
+  console.log(`   生成的原始slug: "${slug}"`);
+  return slug || defaultSlug;
+}
+
+/**
+ * 将文本格式化为有效的slug
+ */
+function formatSlug(text) {
+  return text
     .toLowerCase()
     .replace(/[^\w\s-]/g, '') // 移除特殊字符
     .replace(/\s+/g, '-')     // 空格替换为连字符
     .replace(/-+/g, '-')      // 多个连字符替换为一个
     .replace(/-+$/, '')       // 移除结尾的连字符
-    .trim();                  
-  
-  console.log(`   生成的原始slug: "${slug}"`);
-  return slug || defaultSlug;
+    .trim();                   // 移除首尾空格
 }
 
 /**
@@ -208,8 +271,39 @@ function isValidSlug(slug) {
   return slug && typeof slug === 'string' && slug.trim() !== '' && !/^[\d-]+$/.test(slug);
 }
 
+// 辅助函数：分割中文文本为更小的有意义片段
+function segmentChineseText(text) {
+  // 使用常见分隔符切分文本
+  const segments = text.split(/[与和及、，。：；！？()（）【】]/);
+  
+  // 过滤掉空字符串并去除多余空格
+  return segments
+    .map(segment => segment.trim())
+    .filter(segment => segment.length > 0);
+}
+
+// 辅助函数：优化生成的slug，去除不必要的连接词，并限制长度
+function cleanupSlug(slug) {
+  // 过滤掉常见的虚词和连接词
+  const wordsToFilter = ['of', 'to', 'the', 'and', 'in', 'on', 'at', 'by', 'for', 'with'];
+  
+  // 分解slug
+  let parts = slug.split('-');
+  
+  // 过滤掉不需要的词
+  parts = parts.filter(part => !wordsToFilter.includes(part));
+  
+  // 限制slug长度（保留最重要的4-5个部分）
+  if (parts.length > 6) {
+    parts = parts.slice(0, 5);
+  }
+  
+  // 重组slug
+  return parts.join('-');
+}
+
 // 处理所有文章
-function updateAllSlugs() {
+async function updateAllSlugs() {
   console.log('开始处理文章slug...');
   
   if (!fs.existsSync(postsDirectory)) {
@@ -224,7 +318,7 @@ function updateAllSlugs() {
     errors: []
   };
   
-  fileNames.forEach(fileName => {
+  for (const fileName of fileNames) {
     try {
       const fullPath = path.join(postsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -240,7 +334,7 @@ function updateAllSlugs() {
           slug: data.slug,
           title: data.title || ''
         });
-        return;
+        continue;
       }
       
       // 如果slug存在但无效（如空字符串），记录
@@ -251,7 +345,7 @@ function updateAllSlugs() {
       // 生成slug
       let slug = '';
       if (data.title) {
-        slug = generateSlug(data.title, fileName);
+        slug = await generateSlug(data.title, fileName);
       } else {
         slug = fileName.replace(/\.md$/, '');
         console.log(`   无标题，使用文件名 '${slug}' 作为slug`);
@@ -283,7 +377,7 @@ function updateAllSlugs() {
         error: error.message
       });
     }
-  });
+  }
   
   // 输出统计信息
   console.log(`\n处理完成！共处理 ${fileNames.length} 个文件:`);
