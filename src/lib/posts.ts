@@ -39,7 +39,8 @@ export function getAllPosts(): Post[] {
     return [];
   }
   
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = fs.readdirSync(postsDirectory)
+    .filter(fileName => fileName.endsWith('.md')); // 只处理.md文件
   
   const allPostsData = fileNames.map(fileName => {
     // 从文件名中删除".md"以获取id
@@ -199,5 +200,14 @@ export function getAllPostSlugs(): string[] {
 // 获取特定类别的所有文章
 export function getPostsByCategory(categoryId: string): Post[] {
   const posts = getAllPosts();
-  return posts.filter(post => post.category.id === categoryId);
+  
+  // 检查是否存在该分类下的文章
+  const categoryPosts = posts.filter(post => post.category.id === categoryId);
+  
+  // 如果是uncategorized分类且没有文章，返回空数组
+  if (categoryId === 'uncategorized' && categoryPosts.length === 0) {
+    return [];
+  }
+  
+  return categoryPosts;
 } 

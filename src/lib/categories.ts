@@ -106,36 +106,47 @@ export function getAllCategories(): Category[] {
   
   // 获取所有文章
   if (!fs.existsSync(postsDirectory)) {
-    return categories.map(cat => ({ ...cat, count: 0 }));
+    return categories.map(cat => ({ ...cat, count: 0 })).filter(cat => cat.count > 0);
   }
   
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = fs.readdirSync(postsDirectory)
+    .filter(fileName => fileName.endsWith('.md')); // 只处理.md文件
+  
   const categoryCounts = new Map<string, number>();
   
   // 计算每个分类的文章数量
   fileNames.forEach(fileName => {
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const matterResult = matter(fileContents);
-    
-    let categoryId = 'uncategorized';
-    
-    if (matterResult.data.category) {
-      if (typeof matterResult.data.category === 'string') {
-        categoryId = matterResult.data.category;
-      } else if (typeof matterResult.data.category === 'object') {
-        categoryId = matterResult.data.category.id || 'uncategorized';
+    try {
+      const fullPath = path.join(postsDirectory, fileName);
+      const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const matterResult = matter(fileContents);
+      
+      let categoryId = 'uncategorized';
+      
+      if (matterResult.data.category) {
+        if (typeof matterResult.data.category === 'string') {
+          categoryId = matterResult.data.category;
+        } else if (typeof matterResult.data.category === 'object') {
+          categoryId = matterResult.data.category.id || 'uncategorized';
+        }
       }
+      
+      categoryCounts.set(categoryId, (categoryCounts.get(categoryId) || 0) + 1);
+    } catch (error) {
+      console.error(`Error processing file ${fileName}:`, error);
+      // 出错时继续处理下一个文件
     }
-    
-    categoryCounts.set(categoryId, (categoryCounts.get(categoryId) || 0) + 1);
   });
   
-  // 更新分类的文章计数
-  return categories.map(category => ({
+  // 更新分类的文章计数并严格过滤掉没有文章的分类
+  const categoriesWithCounts = categories.map(category => ({
     ...category,
     count: categoryCounts.get(category.id) || 0
-  })).filter(cat => cat.count > 0)
+  }));
+  
+  // 严格过滤掉没有文章的分类
+  return categoriesWithCounts
+    .filter(cat => cat.count > 0)
     .sort((a, b) => {
       // 如果没有order字段，默认给一个非常大的值，保证它排在后面
       const orderA = a.order !== undefined ? a.order : 1000;

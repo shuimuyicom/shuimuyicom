@@ -35,6 +35,10 @@ export default async function CategoryPage(props: {
   
   const posts = getPostsByCategory(categoryId);
   
+  if (categoryId === 'uncategorized' && posts.length === 0) {
+    notFound();
+  }
+  
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-sumi-950">
       <div className="max-w-6xl mx-auto bg-card-50 dark:bg-ink-900 min-h-screen shadow-xl">
