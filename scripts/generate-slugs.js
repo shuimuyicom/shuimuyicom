@@ -70,7 +70,6 @@ function getSmartEnglishTitle(chineseText) {
     '运势': 'destiny',
     '推演': 'calculation',
     '浅谈': 'introduction-to',
-    '深宫': 'palace',
     '天干地支': 'heavenly-stems-earthly-branches',
     '六十甲子': 'sixty-jiazi-cycle',
     

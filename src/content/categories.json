@@ -1,38 +1,32 @@
 [
   {
-    "id": "uncategorized",
-    "name": "未分类",
-    "description": "未分类的文章",
-    "order": 9999
-  },
-  {
-    "id": "MuyiChatter",
-    "name": "木易杂谈",
-    "description": "一方探寻国学智慧与命理玄机的心灵栖所",
-    "order": 20
-  },
-  {
     "id": "BaZi",
     "name": "子平八字",
     "description": "探讨八字命理的文章",
-    "order": 30 
+    "order": 10 
   },
   {
     "id": "DouShu",
     "name": "紫微斗数",
     "description": "探讨紫微斗数命理的文章",
-    "order": 40
+    "order": 20
   },
   {
     "id": "Astrology",
     "name": "星座占星",
     "description": "关于星座和占星术的文章",
-    "order": 50
+    "order": 30
   },
   {
     "id": "SevenTruths",
     "name": "七层真相",
     "description": "正所谓「旁观者清」，本专栏借助前沿AI智能体技术，带您深入探索生活中不同主题的七层真相，旨在帮助您更透彻地理解自我与生活本质。备注：所有文章均由木易师傅亲自审校，确保内容质量。",
+    "order": 6666
+  },
+  {
+    "id": "MuyiChatter",
+    "name": "木易杂谈",
+    "description": "一方探寻国学智慧与命理玄机的心灵栖所",
     "order": 7777
   },
   {
@@ -40,5 +34,11 @@
     "name": "关于我",
     "description": "关于我的近况",
     "order": 8888
+  },
+  {
+    "id": "uncategorized",
+    "name": "未分类",
+    "description": "未分类的文章",
+    "order": 9999
   }
 ] 
