@@ -83,7 +83,7 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="text-gray-700 dark:text-gray-200">
-                    研习中国传统文化、国学、命理学多年；
+                    热爱中国传统文化，研习易学命理学多年；
                   </div>
                 </div>
                 
@@ -94,7 +94,7 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="text-gray-700 dark:text-gray-200">
-                    虽喜命理学，但拒绝故弄玄虚、故作高深；
+                    虽喜玄学，但拒绝故弄玄虚、故作高深；
                   </div>
                 </div>
                 
