@@ -42,7 +42,27 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const latestPosts = getAllPosts();
+  // 获取所有文章
+  const allPosts = getAllPosts();
+  
+  // 按分类分组文章
+  const postsByCategory = allPosts.reduce((acc, post) => {
+    if (!acc[post.category.id]) {
+      acc[post.category.id] = [];
+    }
+    
+    // 每个分类最多保留2篇文章
+    if (acc[post.category.id].length < 2) {
+      acc[post.category.id].push(post);
+    }
+    
+    return acc;
+  }, {} as Record<string, typeof allPosts>);
+  
+  // 从分组后的文章中获取最终显示的文章列表，最多6篇
+  const latestPosts = Object.values(postsByCategory)
+    .flat()
+    .slice(0, 6);
 
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-sumi-950">
