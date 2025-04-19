@@ -79,21 +79,21 @@
 
   /* 文章排版样式 */
   .prose h1, .prose h2, .prose h3 {
-    @apply font-serif tracking-tight;
+    @apply tracking-tight;
   }
   
   .prose h1 {
-    @apply text-3xl font-semibold mt-12 mb-8 text-ink-800 dark:text-bg-50;
+    @apply text-2xl font-semibold mt-12 mb-8 text-ink-800 dark:text-bg-50;
     @apply leading-tight;
   }
   
   .prose h2 {
-    @apply text-2xl font-medium mt-8 mb-6 text-ink-700 dark:text-bg-100;
+    @apply text-[22px] font-medium mt-8 mb-6 text-ink-700 dark:text-bg-100;
     @apply leading-snug;
   }
   
   .prose h3 {
-    @apply text-xl font-normal mt-6 mb-4 text-ink-600 dark:text-bg-200;
+    @apply text-xl font-medium mt-6 mb-4 text-ink-600 dark:text-bg-200;
     @apply leading-relaxed;
   }
   

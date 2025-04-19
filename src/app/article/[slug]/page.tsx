@@ -112,7 +112,7 @@ export default async function ArticlePage(props: {
                 <article className="w-full max-w-2xl">
                   {/* 文章头部 */}
                   <header className="mb-6 md:mb-8 animate-fadeInUp">
-                    <h1 className="text-xl sm:text-2xl md:text-2xl font-semibold mb-3 md:mb-4 text-ink-900 dark:text-bg-50 leading-[1.8] tracking-tight">
+                    <h1 className="text-2xl sm:text-2xl md:text-2xl font-semibold mb-3 md:mb-4 text-ink-900 dark:text-bg-50 leading-[1.8] tracking-tight">
                       {post.title}
                     </h1>
                     
@@ -143,7 +143,7 @@ export default async function ArticlePage(props: {
                   </header>
                   
                   {/* 文章内容 - 优化文字灰度和排版 */}
-                  <div className="prose prose-lg dark:prose-invert prose-headings:font-medium prose-headings:font-serif prose-strong:text-ink-800 dark:prose-strong:text-bg-50 prose-img:rounded-md prose-img:shadow-md dark:prose-img:shadow-none prose-p:text-justify prose-li:text-justify max-w-3xl mx-auto sm:px-0 px-1">
+                  <div className="prose prose-lg dark:prose-invert prose-headings:font-medium prose-strong:text-ink-800 dark:prose-strong:text-bg-50 prose-img:rounded-md prose-img:shadow-md dark:prose-img:shadow-none prose-p:text-justify prose-li:text-justify max-w-3xl mx-auto sm:px-0 px-1">
                     <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} className="animate-[fadeIn_0.5s_ease-in-out]" />
                   </div>
                   
