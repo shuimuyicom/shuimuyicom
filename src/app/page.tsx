@@ -8,11 +8,11 @@ import SocialLinks from "@/components/SocialLinks";
 const SITE_URL = "https://www.shuimuyi.com";
 
 export const metadata: Metadata = {
-  title: "水木易 | 总是站在科技与人文的十字路口",
-  description: "用智慧帮你渡过困境，用格局助你站得更高",
+  title: "水木易 | 科学搞玄，哲学命理学研究",
+  description: "科学搞玄，哲学命理学研究",
   openGraph: {
-    title: "水木易 | 总是站在科技与人文的十字路口",
-    description: "用智慧帮你渡过困境，用格局助你站得更高",
+    title: "水木易 | 科学搞玄，哲学命理学研究",
+    description: "科学搞玄，哲学命理学研究",
     images: [
       {
         url: `${SITE_URL}/images/og/screenshot.png`,
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "水木易 | 总是站在科技与人文的十字路口",
-    description: "用智慧帮你渡过困境，用格局助你站得更高",
+    title: "水木易 | 科学搞玄，哲学命理学研究",
+    description: "科学搞玄，哲学命理学研究",
     images: [
       {
         url: `${SITE_URL}/images/og/screenshot.png`,
