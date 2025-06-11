@@ -91,7 +91,7 @@ export default function Home() {
               </h1>
               
               <div className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10 text-center md:text-left">
-                哲学硕士&产品经理&独立开发 | 总是站在科技与人文的十字路口
+                📚 终身学习者｜🚀 创业者｜🧩 产品经理 ｜🤔 哲学硕士
               </div>
               
               {/* 成就/标签列表 */}
@@ -103,7 +103,7 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="text-gray-700 dark:text-gray-200">
-                    热爱中华国学，研习易学数术多年；
+                    热爱中华国学，研习中医养生、玄学命理多年；
                   </div>
                 </div>
                 
@@ -114,7 +114,7 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="text-gray-700 dark:text-gray-200">
-                    虽喜术数，但拒绝故弄玄虚、故作高深；
+                    致力于将东方智慧（中医养生、玄学命理）科学化、产品化；
                   </div>
                 </div>
                 
