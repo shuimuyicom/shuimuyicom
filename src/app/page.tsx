@@ -103,7 +103,7 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="text-gray-700 dark:text-gray-200">
-                    研习中医传统养生、玄学命理学多年；
+                    研习中医养生、玄学命理多年；
                   </div>
                 </div>
                 
@@ -114,7 +114,7 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="text-gray-700 dark:text-gray-200">
-                    致力于将东方智慧科学化、产品化；
+                    致力于将东方智慧科学产品化；
                   </div>
                 </div>
                 
