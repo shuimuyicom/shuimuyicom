@@ -44,7 +44,7 @@ export default function Categories() {
       <div className="max-w-6xl mx-auto bg-card-50 dark:bg-ink-900 min-h-screen shadow-xl">
         <div className="px-6 py-16 md:py-24">
           <header className="mb-16 text-center">
-            <h1 className="text-3xl md:text-4xl mb-6 text-ink-800 dark:text-bg-100">所有分类</h1>
+            <h1 className="text-3xl md:text-4xl mb-6 text-ink-800 dark:text-bg-100">所有文章</h1>
             <p className="max-w-2xl mx-auto text-ink-500 dark:text-ink-400">
               探索不同主题的文章，点击以浏览相关内容
             </p>

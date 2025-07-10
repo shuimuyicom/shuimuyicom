@@ -36,7 +36,7 @@ export default function Header() {
   // 导航链接
   const links = [
     { href: "/", label: "首页" },
-    { href: "/categories", label: "分类" },
+    { href: "/categories", label: "博客" },
     { href: "/about", label: "关于" },
   ];
 
