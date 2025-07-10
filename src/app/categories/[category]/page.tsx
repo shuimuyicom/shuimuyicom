@@ -75,9 +75,9 @@ export default async function CategoryPage(props: {
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-sumi-950">
       <div className="max-w-6xl mx-auto bg-card-50 dark:bg-ink-900 min-h-screen shadow-xl">
-        <div className="px-6 py-16 md:py-20">
-          <header className="mb-16">
-            <div className="flex items-center mb-8">
+        <div className="px-6 py-12 md:py-16">
+          <header className="mb-12">
+            <div className="flex items-center mb-6">
               <Link href="/categories" className="text-ink-500 dark:text-ink-400 hover:text-accent-600 dark:hover:text-accent-300 transition-colors flex items-center text-sm group">
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
@@ -96,38 +96,38 @@ export default async function CategoryPage(props: {
               </Link>
             </div>
             
-            <h1 className="text-3xl md:text-4xl mb-4 text-ink-800 dark:text-bg-100">
+            <h1 className="text-3xl md:text-4xl mb-3 text-ink-800 dark:text-bg-100">
               {category.name}
             </h1>
             
             {category.description && (
-              <p className="text-ink-600 dark:text-ink-300 mb-4">
+              <p className="text-ink-600 dark:text-ink-300 mb-3 leading-relaxed">
                 {category.description}
               </p>
             )}
             
-            <p className="text-ink-500 dark:text-ink-400">
-              该分类下有 {posts.length} 篇文章
+            <p className="text-sm text-ink-500 dark:text-ink-400">
+              共 {posts.length} 篇文章
             </p>
           </header>
           
           {posts.length > 0 ? (
-            <div className="grid grid-cols-1 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {posts.map((post) => (
                 <article 
                   key={post.id} 
                   className="bg-card-50 dark:bg-ink-800 border border-bg-200 dark:border-ink-700 shadow-surface dark:shadow-none overflow-hidden group hover:border-bg-300 dark:hover:border-ink-600 transition-all"
                 >
-                  <div className="p-6 md:p-8">
+                  <div className="p-6">
                     <Link href={`/article/${post.slug}`}>
-                      <h2 className="text-xl mb-3 text-ink-800 dark:text-bg-100 group-hover:text-accent-600 dark:group-hover:text-accent-300 transition-colors">
+                      <h2 className="text-xl mb-3 text-ink-800 dark:text-bg-100 group-hover:text-accent-600 dark:group-hover:text-accent-300 transition-colors leading-snug">
                         {post.title}
                       </h2>
                     </Link>
                     
-                    <time className="text-sm text-ink-400 dark:text-ink-500 mb-4 block">{post.date}</time>
+                    <time className="text-sm text-ink-400 dark:text-ink-500 mb-3 block">{post.date}</time>
                     
-                    <p className="text-ink-500 dark:text-ink-300 mb-5">{post.excerpt}</p>
+                    <p className="text-ink-500 dark:text-ink-300 mb-4 leading-relaxed">{post.excerpt}</p>
                     
                     <Link 
                       href={`/article/${post.slug}`} 
